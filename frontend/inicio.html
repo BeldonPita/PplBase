@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - PplBase</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .welcome-section {
+            padding: 40px 0;
+        }
+        
+        .welcome-section h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .welcome-section .subtitle {
+            color: #a0a4b8;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: #161926;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #1a1d2e;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+        
+        .stat-card .label {
+            color: #a0a4b8;
+            font-size: 14px;
+        }
+        
+        .dashboard-grid-inicio {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .card-inicio {
+            background: #161926;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #1a1d2e;
+        }
+        
+        .card-inicio h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .card-inicio .item {
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1d2e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-inicio .item:last-child {
+            border-bottom: none;
+        }
+        
+        .card-inicio .item .name {
+            color: #fff;
+        }
+        
+        .card-inicio .item .username {
+            color: #8b5cf6;
+            font-size: 13px;
+        }
+        
+        .empty-state-small {
+            color: #5a5e72;
+            font-size: 14px;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .sugestao-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1d2e;
+        }
+        
+        .sugestao-item:last-child {
+            border-bottom: none;
+        }
+        
+        .sugestao-item .info .name {
+            color: #fff;
+        }
+        
+        .sugestao-item .info .username {
+            color: #a0a4b8;
+            font-size: 13px;
+        }
+        
+        .btn-seguir {
+            padding: 6px 16px;
+            background: #8b5cf6;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+        
+        .btn-seguir:hover {
+            background: #6d28d9;
+            transform: scale(1.05);
+        }
+        
+        .btn-seguir.seguindo {
+            background: #2a2d3e;
+            color: #a0a4b8;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dashboard-grid-inicio {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
+            </div>
+           <div class="nav-links">
+    <a href="inicio.html">Início</a>
+    <a href="busca.html">🔍 Buscar</a>
+    <a href="dashboard.html">Dashboard</a>
+    <button class="btn btn-outline" id="btnLogout">Sair</button>
+</div>
+        </div>
+    </nav>
+
+    <section class="welcome-section">
+        <div class="container">
+            <h1>👋 Bem-vindo de volta, <span class="highlight" id="welcomeNome">Usuário</span></h1>
+            <p class="subtitle">Aqui está o resumo da sua rede profissional.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number" id="statSeguidores">0</div>
+                    <div class="label">Seguidores</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statSeguindo">0</div>
+                    <div class="label">Seguindo</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statHabilidades">0</div>
+                    <div class="label">Habilidades</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statExperiencias">0</div>
+                    <div class="label">Experiências</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid-inicio">
+                <div class="card-inicio">
+                    <h3>🚀 Pessoas sugeridas</h3>
+                    <div id="sugestoesContainer">
+                        <div class="empty-state-small">Carregando sugestões...</div>
+                    </div>
+                </div>
+                <div class="card-inicio">
+                    <h3>📊 Atividades recentes</h3>
+                    <div id="atividadesContainer">
+                        <div class="empty-state-small">Nenhuma atividade recente.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="inicio.js"></script>
+</body>
+</html>

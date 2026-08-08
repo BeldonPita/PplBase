@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+*.db
+*.sqlite3
+
+# Backend
+backend/venv/
+backend/pplbase.db
+backend/alembic/versions/*.py
+!backend/alembic/versions/__init__.py
+backend/.env
+backend/migrate.load
+
+# Frontend
+frontend/.vscode/
+frontend/*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
