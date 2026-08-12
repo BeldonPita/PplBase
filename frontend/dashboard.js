@@ -3,25 +3,18 @@ const token = localStorage.getItem('pplbase_token');
 
 if (!token) window.location.href = '/';
 
-// =========================================================
-// HEADERS
-// =========================================================
-
 function getHeaders() {
     return { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
 }
 
-// =========================================================
-// CARREGAR PERFIL
-// =========================================================
-
+// ===== CARREGAR PERFIL =====
 async function carregarPerfil() {
     try {
         const response = await fetch(`${API_URL}/usuarios/me`, { headers: getHeaders() });
         if (!response.ok) throw new Error('Erro');
         const user = await response.json();
 
-        document.getElementById('userName').textContent = user.nome || 'Usuário';
+        document.getElementById('userName').textContent = `Olá, ${user.nome || 'Usuário'}`;
 
         document.getElementById('profileInfo').innerHTML = `
             <p><strong>Nome:</strong> ${user.nome || '-'}</p>
@@ -30,6 +23,14 @@ async function carregarPerfil() {
             <p><strong>Localização:</strong> ${user.localizacao || 'Não definida'}</p>
             <p><strong>Bio:</strong> ${user.bio || 'Sem bio'}</p>
         `;
+
+        // Foto
+        if (user.foto_url) {
+            document.getElementById('avatarPlaceholder').style.display = 'none';
+            const img = document.getElementById('avatarImage');
+            img.src = user.foto_url;
+            img.style.display = 'block';
+        }
 
         // Habilidades
         const habList = document.getElementById('habilidadesList');
@@ -44,12 +45,7 @@ async function carregarPerfil() {
         if (user.experiencias?.length) {
             expList.innerHTML = user.experiencias.map(exp => `
                 <div class="exp-item">
-                    <div class="info">
-                        <h4>${exp.titulo}</h4>
-                        ${exp.empresa ? `<p>${exp.empresa}</p>` : ''}
-                        ${exp.descricao ? `<p>${exp.descricao}</p>` : ''}
-                        ${exp.localizacao ? `<p>📍 ${exp.localizacao}</p>` : ''}
-                    </div>
+                    <div><strong>${exp.titulo}</strong> ${exp.empresa ? `- ${exp.empresa}` : ''} ${exp.localizacao ? `📍 ${exp.localizacao}` : ''}</div>
                     <div class="exp-actions">
                         <button onclick="editarExperiencia(${exp.id})">✏️</button>
                         <button onclick="removerExperiencia(${exp.id})">🗑️</button>
@@ -68,10 +64,7 @@ async function carregarPerfil() {
     }
 }
 
-// =========================================================
-// EXPERIÊNCIAS
-// =========================================================
-
+// ===== EXPERIÊNCIAS =====
 document.getElementById('btnAddExperiencia').addEventListener('click', () => {
     document.getElementById('modalExpTitle').textContent = 'Adicionar Experiência';
     document.getElementById('expId').value = '';
@@ -100,9 +93,7 @@ window.editarExperiencia = async (id) => {
         document.getElementById('expDescricao').value = exp.descricao || '';
         document.getElementById('expLocalizacao').value = exp.localizacao || '';
         document.getElementById('modalExperiencia').classList.add('active');
-    } catch (error) {
-        console.error('Erro:', error);
-    }
+    } catch (error) { console.error('Erro:', error); }
 };
 
 window.removerExperiencia = async (id) => {
@@ -129,11 +120,7 @@ document.getElementById('formExperiencia').addEventListener('submit', async (e) 
     const method = id ? 'PUT' : 'POST';
 
     try {
-        const response = await fetch(url, {
-            method,
-            headers: getHeaders(),
-            body: JSON.stringify({ titulo, empresa, descricao, localizacao })
-        });
+        const response = await fetch(url, { method, headers: getHeaders(), body: JSON.stringify({ titulo, empresa, descricao, localizacao }) });
         if (response.ok) {
             document.getElementById('modalExperiencia').classList.remove('active');
             await carregarPerfil();
@@ -144,10 +131,7 @@ document.getElementById('formExperiencia').addEventListener('submit', async (e) 
     } catch (error) { message.textContent = 'Erro de conexão'; }
 });
 
-// =========================================================
-// HABILIDADES
-// =========================================================
-
+// ===== HABILIDADES =====
 document.getElementById('btnAddHabilidade').addEventListener('click', async () => {
     const input = document.getElementById('novaHabilidade');
     const nome = input.value.trim();
@@ -166,10 +150,7 @@ document.getElementById('btnAddHabilidade').addEventListener('click', async () =
     } catch (error) { console.error('Erro:', error); }
 });
 
-// =========================================================
-// EDITAR PERFIL
-// =========================================================
-
+// ===== EDITAR PERFIL =====
 document.getElementById('btnEditarPerfil').addEventListener('click', () => {
     const user = window.usuarioAtual;
     if (!user) return;
@@ -206,37 +187,60 @@ document.getElementById('formEditarPerfil').addEventListener('submit', async (e)
     } catch (error) { message.textContent = 'Erro de conexão'; }
 });
 
-// =========================================================
-// LOGOUT
-// =========================================================
+// ===== FOTO PERFIL =====
+document.getElementById('avatarUpload').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
+    const formData = new FormData();
+    formData.append('foto', file);
+
+    try {
+        const response = await fetch(`${API_URL}/usuarios/upload-foto`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+        });
+        if (response.ok) await carregarPerfil();
+    } catch (error) { console.error('Erro:', error); }
+});
+
+// ===== MENU 3 BARRAS =====
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('menuDropdown').classList.toggle('active');
+});
+
+document.getElementById('menuEditarPerfil').addEventListener('click', () => {
+    document.getElementById('menuDropdown').classList.remove('active');
+    document.getElementById('btnEditarPerfil').click();
+});
+
+document.getElementById('menuAtividades').addEventListener('click', () => {
+    document.getElementById('menuDropdown').classList.remove('active');
+    window.location.href = '/inicio.html';
+});
+
+document.getElementById('menuDarkMode').addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    document.getElementById('menuDropdown').classList.remove('active');
+});
+
+document.getElementById('menuLightMode').addEventListener('click', () => {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('theme', 'light');
+    document.getElementById('menuDropdown').classList.remove('active');
+});
+
+// ===== LOGOUT =====
 document.getElementById('btnLogout').addEventListener('click', () => {
     localStorage.removeItem('pplbase_token');
     window.location.href = '/';
 });
 
-// =========================================================
-// TEMA
-// =========================================================
-
-document.querySelectorAll('.toggle-option').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const theme = this.dataset.theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        localStorage.setItem('theme', theme);
-    });
-});
-
+// ===== TEMA =====
 const savedTheme = localStorage.getItem('theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
-document.querySelectorAll('.toggle-option').forEach(b => {
-    b.classList.toggle('active', b.dataset.theme === savedTheme);
-});
 
-// =========================================================
-// INICIALIZAR
-// =========================================================
-
+// ===== INICIALIZAR =====
 carregarPerfil();

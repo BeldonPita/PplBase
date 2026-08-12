@@ -9,6 +9,7 @@
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -27,50 +28,45 @@
             </div>
             <div class="nav-links">
                 <a href="index.html" class="active">Início</a>
-                <a href="busca.html">Buscar</a>
-                <a href="dashboard.html">Dashboard</a>
                 <button class="btn btn-primary" id="btnAbrirModal">Entrar</button>
-                <div class="theme-toggle" id="themeToggle">
-                    <button class="toggle-option active" data-theme="dark">🌙</button>
-                    <button class="toggle-option" data-theme="light">☀️</button>
-                </div>
             </div>
         </div>
     </nav>
 
-    <section class="hero" style="padding:60px 0;">
-        <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
             <div>
-                <h1 style="font-size:48px; font-weight:800; line-height:1.1;">Conecte-se com <span class="highlight">pessoas incríveis</span></h1>
-                <p style="font-size:18px; color:var(--text-secondary); margin:20px 0;">Encontre talentos, compartilhe habilidades e construa sua rede profissional.</p>
-                <div style="display:flex; gap:16px; flex-wrap:wrap;">
-                    <button class="btn btn-primary" id="btnHeroCadastro">🚀 Começar</button>
+                <h1>Conecte-se com <span class="highlight">pessoas incríveis</span></h1>
+                <p>Encontre talentos, compartilhe habilidades e construa sua rede profissional.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="btnHeroCadastro">Começar</button>
                     <button class="btn btn-outline">Saiba mais</button>
                 </div>
-                <div style="display:flex; gap:40px; margin-top:40px;">
-                    <div><div style="font-size:28px; font-weight:700; color:var(--color-primary);">1.200+</div><div style="color:var(--text-muted);">Profissionais</div></div>
-                    <div><div style="font-size:28px; font-weight:700; color:var(--color-primary);">300+</div><div style="color:var(--text-muted);">Empresas</div></div>
-                    <div><div style="font-size:28px; font-weight:700; color:var(--color-primary);">95%</div><div style="color:var(--text-muted);">Satisfação</div></div>
+                <div class="hero-stats">
+                    <div><div class="stat-number">1.200+</div><div class="stat-label">Profissionais</div></div>
+                    <div><div class="stat-number">300+</div><div class="stat-label">Empresas</div></div>
+                    <div><div class="stat-number">95%</div><div class="stat-label">Satisfação</div></div>
                 </div>
             </div>
             <div style="display:flex; justify-content:center; align-items:center;">
-                <div style="width:300px; height:300px; border-radius:50%; background:var(--color-gradient); display:flex; align-items:center; justify-content:center; font-size:100px; color:#fff; box-shadow:0 20px 60px rgba(139,92,246,0.3);">🧠</div>
+                <div style="width:280px; height:280px;">
+                    <svg viewBox="0 0 100 100" style="width:100%; height:100%; animation: girarLogo 12s linear infinite;">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#8B5CF6" stroke-width="3" opacity="0.3" />
+                        <circle cx="50" cy="50" r="32" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="6 12" />
+                        <circle cx="50" cy="5" r="5" fill="#8B5CF6" />
+                        <circle cx="50" cy="95" r="5" fill="#8B5CF6" />
+                        <circle cx="5" cy="50" r="5" fill="#8B5CF6" />
+                        <circle cx="95" cy="50" r="5" fill="#8B5CF6" />
+                        <circle cx="50" cy="50" r="16" fill="#8B5CF6" opacity="0.15" />
+                        <text x="50" y="56" text-anchor="middle" fill="#fff" font-size="40" font-weight="700" font-family="Inter">P</text>
+                    </svg>
+                </div>
             </div>
         </div>
     </section>
 
-    <section style="padding:40px 0;">
-        <div class="container">
-            <h2 style="text-align:center; font-size:32px; margin-bottom:40px;">Explore o que <span class="highlight">importa</span></h2>
-            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
-                <div class="card" style="text-align:center;"><div style="font-size:40px;">📍</div><h3>Vida Local</h3><p style="color:var(--text-secondary);">Notícias e histórias da comunidade.</p></div>
-                <div class="card" style="text-align:center;"><div style="font-size:40px;">📚</div><h3>Educação</h3><p style="color:var(--text-secondary);">Dicas de estudo, bolsas, cursos.</p></div>
-                <div class="card" style="text-align:center;"><div style="font-size:40px;">💼</div><h3>Trabalho</h3><p style="color:var(--text-secondary);">Vagas e carreira profissional.</p></div>
-                <div class="card" style="text-align:center;"><div style="font-size:40px;">💻</div><h3>Tecnologia</h3><p style="color:var(--text-secondary);">Novidades e oportunidades digitais.</p></div>
-            </div>
-        </div>
-    </section>
-
+    <!-- FOOTER -->
     <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
 
     <!-- MODAL LOGIN/CADASTRO -->

@@ -8,22 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         .dashboard-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .welcome { margin-bottom: 24px; }
-        .welcome h1 { font-size: 28px; }
-        .welcome p { color: var(--text-secondary); }
+        .profile-header { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--color-gradient); display: flex; align-items: center; justify-content: center; font-size: 32px; color: #fff; flex-shrink: 0; overflow: hidden; position: relative; }
+        .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-avatar .upload-btn { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: #fff; padding: 4px; font-size: 10px; text-align: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; }
+        .profile-avatar:hover .upload-btn { opacity: 1; }
+        .profile-info p { padding: 4px 0; border-bottom: 1px solid var(--border-color); }
+        .profile-info p:last-child { border-bottom: none; }
         .exp-item { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .exp-item .info h4 { font-size: 16px; color: var(--text-primary); }
-        .exp-item .info p { color: var(--text-secondary); font-size: 14px; margin: 2px 0; }
         .exp-actions button { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px 8px; }
         .exp-actions button:hover { color: #EF4444; }
         .input-row { display: flex; gap: 8px; margin-top: 12px; }
         .input-row input { flex: 1; padding: 8px 12px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
-        .profile-info p { padding: 4px 0; border-bottom: 1px solid var(--border-color); }
-        .profile-info p:last-child { border-bottom: none; }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -41,79 +42,80 @@
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
             <div class="nav-links">
-                <a href="inicio.html">Início</a>
-                <a href="busca.html">Buscar</a>
-                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="index.html">Início</a>
                 <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
-                <div class="theme-toggle" id="themeToggle">
-                    <button class="toggle-option active" data-theme="dark">🌙</button>
-                    <button class="toggle-option" data-theme="light">☀️</button>
-                </div>
             </div>
         </div>
     </nav>
 
+    <!-- MENU 3 BARRAS -->
+    <div class="side-menu" id="sideMenu">
+        <button class="menu-icon" id="menuToggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="menu-dropdown" id="menuDropdown">
+            <button id="menuEditarPerfil">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Editar Perfil
+            </button>
+            <button id="menuAtividades">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Atividades
+            </button>
+            <div class="divider"></div>
+            <button id="menuDarkMode">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Dark Mode
+            </button>
+            <button id="menuLightMode">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                Light Mode
+            </button>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
     <div class="dashboard-container">
-        <div class="welcome">
-            <h1>Olá, <span id="userName">Usuário</span> 👋</h1>
-            <p>Bem-vindo ao seu dashboard.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:20px;">
+            <h1>Dashboard</h1>
+            <span style="color:var(--text-secondary);" id="userName">Olá, Usuário</span>
         </div>
 
         <div class="card">
-            <h3>👤 Meu Perfil</h3>
-            <div class="profile-info" id="profileInfo"><div class="empty">Carregando...</div></div>
-            <button class="btn btn-primary btn-small" id="btnEditarPerfil" style="margin-top:12px;">✏️ Editar Perfil</button>
+            <h3>Perfil</h3>
+            <div class="profile-header">
+                <div class="profile-avatar" id="avatarContainer">
+                    <span id="avatarPlaceholder">P</span>
+                    <img id="avatarImage" style="display:none;" alt="Foto">
+                    <label class="upload-btn" for="avatarUpload">Upload</label>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
+                </div>
+                <div id="profileInfo"><div class="empty">Carregando...</div></div>
+            </div>
+            <button class="btn btn-primary btn-small" id="btnEditarPerfil" style="margin-top:12px;">Editar Perfil</button>
         </div>
 
         <div class="grid-2">
             <div class="card">
-                <h3>🧠 Habilidades</h3>
+                <h3>Habilidades</h3>
                 <div id="habilidadesList"><div class="empty">Nenhuma habilidade</div></div>
                 <div class="input-row">
                     <input type="text" id="novaHabilidade" placeholder="Ex: Python">
                     <button class="btn btn-primary btn-small" id="btnAddHabilidade">+</button>
                 </div>
             </div>
-
             <div class="card">
-                <h3>💼 Experiências</h3>
+                <h3>Experiências</h3>
                 <div id="experienciasList"><div class="empty">Nenhuma experiência</div></div>
                 <button class="btn btn-primary btn-small" id="btnAddExperiencia" style="margin-top:12px; width:100%;">+ Adicionar</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL EDITAR PERFIL -->
-    <div class="modal" id="modalEditarPerfil">
-        <div class="modal-content">
-            <button class="modal-close" id="fecharModalEditar">&times;</button>
-            <h2>✏️ Editar Perfil</h2>
-            <form id="formEditarPerfil">
-                <div class="form-group"><label>Nome</label><input type="text" id="editNome" required></div>
-                <div class="form-group"><label>Bio</label><input type="text" id="editBio" placeholder="Sobre você..."></div>
-                <div class="form-group"><label>Localização</label><input type="text" id="editLocalizacao" placeholder="Cidade, País"></div>
-                <button type="submit" class="btn btn-primary btn-full">Salvar</button>
-                <p class="form-message" id="editMessage"></p>
-            </form>
-        </div>
-    </div>
+    <!-- MODAIS -->
+    <div class="modal" id="modalEditarPerfil"><div class="modal-content"><button class="modal-close" id="fecharModalEditar">&times;</button><h2>Editar Perfil</h2><form id="formEditarPerfil"><div class="form-group"><label>Nome</label><input type="text" id="editNome" required></div><div class="form-group"><label>Bio</label><input type="text" id="editBio" placeholder="Sobre você..."></div><div class="form-group"><label>Localização</label><input type="text" id="editLocalizacao" placeholder="Cidade, País"></div><button type="submit" class="btn btn-primary btn-full">Salvar</button><p class="form-message" id="editMessage"></p></form></div></div>
 
-    <!-- MODAL EXPERIÊNCIA -->
-    <div class="modal" id="modalExperiencia">
-        <div class="modal-content">
-            <button class="modal-close" id="fecharModalExp">&times;</button>
-            <h2 id="modalExpTitle">Adicionar Experiência</h2>
-            <form id="formExperiencia">
-                <input type="hidden" id="expId">
-                <div class="form-group"><label>Título</label><input type="text" id="expTitulo" required></div>
-                <div class="form-group"><label>Empresa</label><input type="text" id="expEmpresa"></div>
-                <div class="form-group"><label>Descrição</label><input type="text" id="expDescricao"></div>
-                <div class="form-group"><label>Localização</label><input type="text" id="expLocalizacao"></div>
-                <button type="submit" class="btn btn-primary btn-full">Salvar</button>
-                <p class="form-message" id="expMessage"></p>
-            </form>
-        </div>
-    </div>
+    <div class="modal" id="modalExperiencia"><div class="modal-content"><button class="modal-close" id="fecharModalExp">&times;</button><h2 id="modalExpTitle">Adicionar Experiência</h2><form id="formExperiencia"><input type="hidden" id="expId"><div class="form-group"><label>Título</label><input type="text" id="expTitulo" required></div><div class="form-group"><label>Empresa</label><input type="text" id="expEmpresa"></div><div class="form-group"><label>Descrição</label><input type="text" id="expDescricao"></div><div class="form-group"><label>Localização</label><input type="text" id="expLocalizacao"></div><button type="submit" class="btn btn-primary btn-full">Salvar</button><p class="form-message" id="expMessage"></p></form></div></div>
 
     <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
     <script src="dashboard.js"></script>

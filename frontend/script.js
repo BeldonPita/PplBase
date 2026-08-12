@@ -1,9 +1,6 @@
 const API_URL = 'https://pplbase.onrender.com';
 
-// =========================================================
-// MODAL
-// =========================================================
-
+// ===== MODAL =====
 const modal = document.getElementById('modalLogin');
 const btnAbrirModal = document.getElementById('btnAbrirModal');
 const btnHeroCadastro = document.getElementById('btnHeroCadastro');
@@ -46,30 +43,7 @@ tabs.forEach(tab => {
     });
 });
 
-// =========================================================
-// TOGGLE THEME
-// =========================================================
-
-document.querySelectorAll('.toggle-option').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const theme = this.dataset.theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        localStorage.setItem('theme', theme);
-    });
-});
-
-const savedTheme = localStorage.getItem('theme') || 'dark';
-document.documentElement.setAttribute('data-theme', savedTheme);
-document.querySelectorAll('.toggle-option').forEach(b => {
-    b.classList.toggle('active', b.dataset.theme === savedTheme);
-});
-
-// =========================================================
-// AUXILIARES
-// =========================================================
-
+// ===== AUXILIARES =====
 function mostrarMensagem(el, msg, tipo = 'error') {
     if (!el) return;
     el.textContent = msg;
@@ -80,10 +54,7 @@ function mostrarMensagem(el, msg, tipo = 'error') {
 function salvarToken(token) { localStorage.setItem('pplbase_token', token); }
 function getToken() { return localStorage.getItem('pplbase_token'); }
 
-// =========================================================
-// LOGIN
-// =========================================================
-
+// ===== LOGIN =====
 if (formLogin) {
     formLogin.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -113,10 +84,7 @@ if (formLogin) {
     });
 }
 
-// =========================================================
-// CADASTRO
-// =========================================================
-
+// ===== CADASTRO =====
 if (formCadastro) {
     formCadastro.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -158,11 +126,6 @@ if (formCadastro) {
     });
 }
 
-// =========================================================
-// VERIFICAR LOGIN
-// =========================================================
-
-if (window.location.pathname.includes('dashboard.html')) {
-    const token = getToken();
-    if (!token) window.location.href = '/';
-}
+// ===== TEMA =====
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);

@@ -1,29 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - PplBase</title>
+    <title>Atividades - PplBase</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .feed-container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+        .feed-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .feed-item .user { display: flex; align-items: center; gap: 12px; }
+        .feed-item .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--color-gradient); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; }
+        .feed-item .content { margin-top: 8px; }
+        .feed-item .content p { color: var(--text-secondary); }
+        .feed-item .time { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+    </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Ppl<span class="highlight">Base</span></div>
+            <div class="logo">
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
+            </div>
             <div class="nav-links">
-                <a href="inicio.html" class="active">Início</a>
-                <a href="busca.html">Buscar</a>
-                <a href="dashboard.html">Dashboard</a>
+                <a href="index.html">Início</a>
                 <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
             </div>
         </div>
     </nav>
 
-    <div style="max-width:800px; margin:30px auto; padding:0 20px;">
-        <h1 style="margin-bottom:20px;">📰 Atividades Recentes</h1>
-        <div id="feedContent" style="color:#94A3B8; text-align:center; padding:40px 0;">
-            Carregando...
-        </div>
+    <div class="feed-container">
+        <h1 style="margin-bottom:20px;">Atividades Recentes</h1>
+        <div id="feedContent"><div class="empty">Carregando...</div></div>
     </div>
 
     <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
