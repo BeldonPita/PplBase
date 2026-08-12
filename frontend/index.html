@@ -1,220 +1,201 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PplBase - Conectando Talentos</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- ========================================================= -->
-    <!-- NAVBAR -->
-    <!-- ========================================================= -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
                 <div class="logo-avatar">
-                    <svg class="logo-svg" viewBox="0 0 100 100">
-                        <circle class="logo-ring" cx="50" cy="50" r="42" />
-                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
-                        <circle class="logo-dot" cx="50" cy="8" r="4" />
-                        <circle class="logo-dot" cx="50" cy="92" r="4" />
-                        <circle class="logo-dot" cx="8" cy="50" r="4" />
-                        <circle class="logo-dot" cx="92" cy="50" r="4" />
-                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                 </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-           <div class="nav-links">
-    <a href="index.html">Início</a>
-    <a href="#features">Recursos</a>
-    <a href="#como-funciona">Como Funciona</a>
-    <button class="btn btn-primary" id="btnAbrirModal">Entrar</button>
-</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Início</a>
+                <a href="busca.html">Buscar</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button class="btn btn-primary" id="btnAbrirModal">Entrar</button>
+                <div class="theme-toggle" id="themeToggle">
+                    <button class="toggle-option active" data-theme="dark">🌙</button>
+                    <button class="toggle-option" data-theme="light">☀️</button>
+                </div>
+            </div>
         </div>
     </nav>
 
-    <!-- ========================================================= -->
-    <!-- HERO -->
-    <!-- ========================================================= -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Conecte-se com <span class="highlight">pessoas incríveis</span> e transforme sua rede</h1>
-                <p>
-                    Encontre talentos, compartilhe habilidades e construa sua rede
-                    de contatos profissionais. O PplBase é o lugar onde pessoas e
-                    oportunidades se encontram.
-                </p>
+                <h1>Informação que liga <span class="highlight">pessoas</span> e cria <span class="highlight">oportunidades</span></h1>
+                <p>Conteúdos reais sobre a vida local, educação, tecnologia, trabalho e oportunidades para crescer todos os dias.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary btn-large" id="btnHeroCadastro">
-                        🚀 Começar Agora
-                    </button>
-                    <a href="#como-funciona" class="btn btn-outline">Entender como funciona</a>
+                    <button class="btn btn-primary" id="btnHeroCadastro">Explorar Conteúdos</button>
+                    <button class="btn btn-outline" id="btnVerOportunidades">Ver Oportunidades</button>
+                </div>
+                <div class="hero-stats">
+                    <div><div class="stat-number">1.200+</div><div class="stat-label">Profissionais</div></div>
+                    <div><div class="stat-number">300+</div><div class="stat-label">Empresas</div></div>
+                    <div><div class="stat-number">95%</div><div class="stat-label">Satisfação</div></div>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="hero-illustration">
-                    <div class="hero-logo">
-                        <svg class="logo-svg" viewBox="0 0 100 100">
-                            <circle class="logo-ring" cx="50" cy="50" r="45" />
-                            <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="32" />
-                            <circle class="logo-dot" cx="50" cy="5" r="5" />
-                            <circle class="logo-dot" cx="50" cy="95" r="5" />
-                            <circle class="logo-dot" cx="5" cy="50" r="5" />
-                            <circle class="logo-dot" cx="95" cy="50" r="5" />
-                            <circle class="logo-dot" cx="50" cy="50" r="14" fill="#8b5cf6" opacity="0.15" />
-                            <text class="logo-letter" x="50" y="55" text-anchor="middle">P</text>
-                        </svg>
-                    </div>
-                    <div class="circle circle-1"></div>
-                    <div class="circle circle-2"></div>
-                    <div class="circle circle-3"></div>
+            <div class="hero-illustration">
+                <div class="hero-logo">
+                    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- FEATURES -->
-    <!-- ========================================================= -->
-    <section class="features" id="features">
+    <section style="padding: 40px 0;">
         <div class="container">
-            <h2>Por que usar o <span class="highlight">PplBase</span>?</h2>
+            <h2 class="section-title">Explore o que <span class="highlight">importa</span></h2>
+            <p class="section-subtitle">Conteúdos que fazem a diferença no teu dia a dia</p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Encontre Talentos</h3>
-                    <p>Busque pessoas por habilidades, localização ou experiência profissional.</p>
+                    <div class="icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h3>Vida Local</h3>
+                    <p>Notícias, eventos e histórias da nossa comunidade.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
-                    <h3>Conecte-se</h3>
-                    <p>Construa sua rede de contatos com pessoas que compartilham seus interesses.</p>
+                    <div class="icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </div>
+                    <h3>Educação</h3>
+                    <p>Dicas de estudo, bolsas, cursos e muito mais.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Mostre seu Trabalho</h3>
-                    <p>Compartilhe suas experiências e habilidades para atrair novas oportunidades.</p>
+                    <div class="icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
+                    <h3>Trabalho</h3>
+                    <p>Vagas de emprego, dicas e carreira profissional.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Tecnologia</h3>
+                    <p>Novidades, tutoriais e oportunidades digitais.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- COMO FUNCIONA -->
-    <!-- ========================================================= -->
-    <section class="como-funciona" id="como-funciona">
+    <section style="padding: 20px 0 60px;">
         <div class="container">
-            <h2>Como funciona?</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Crie seu perfil</h3>
-                    <p>Cadastre-se e compartilhe suas habilidades e experiências.</p>
+            <h2 class="section-title">Conhecimento que <span class="highlight">transforma</span></h2>
+            <p class="section-subtitle">Temas que conectam pessoas e criam oportunidades</p>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h4>Conhecimento Local</h4>
+                    <p>Notícias e histórias da nossa comunidade.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Conecte-se</h3>
-                    <p>Encontre pessoas com interesses e habilidades complementares.</p>
+                <div class="topic-card">
+                    <div class="icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h4>Oportunidades Reais</h4>
+                    <p>Empregos, formação, bolsas e concursos.</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Colabore</h3>
-                    <p>Troque conhecimentos, colabore em projetos e cresça juntos.</p>
+                <div class="topic-card">
+                    <div class="icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                    </div>
+                    <h4>Mundo Digital</h4>
+                    <p>Tecnologia, internet e dicas para o dia a dia.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h4>Comunidade Forte</h4>
+                    <p>Espaço para partilhar ideias e fazer a diferença.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- FOOTER -->
-    <!-- ========================================================= -->
+    <section style="padding: 20px 0 60px;">
+        <div class="container">
+            <div class="newsletter">
+                <h2>📬 Junta-te à nossa comunidade!</h2>
+                <p>Recebe as melhores informações e oportunidades no teu e-mail.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="O teu email" required>
+                    <button type="submit" class="btn btn-primary">Inscrever</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <!-- ========================================================= -->
-    <!-- MODAL LOGIN / CADASTRO -->
-    <!-- ========================================================= -->
+    <!-- MODAL LOGIN/CADASTRO -->
     <div class="modal" id="modalLogin">
         <div class="modal-content">
-
-            <!-- X DE SAÍDA (AFASATADO PARA CIMA) -->
-            <span class="modal-close" id="fecharModal">&times;</span>
-
+            <button class="modal-close" id="fecharModal">&times;</button>
             <div class="modal-tabs">
                 <button class="tab active" data-tab="login">Entrar</button>
                 <button class="tab" data-tab="cadastro">Cadastrar</button>
             </div>
-
-            <!-- ========================================================= -->
-            <!-- FORM LOGIN -->
-            <!-- ========================================================= -->
             <form id="formLogin" class="modal-form active">
                 <h2>Entrar no PplBase</h2>
-
                 <div class="form-group">
                     <label>Usuário ou Email</label>
-                    <input type="text" id="loginUsername" placeholder="Seu username ou email" required />
+                    <input type="text" id="loginUsername" placeholder="Seu username ou email" required>
                 </div>
-
                 <div class="form-group">
                     <label>Senha</label>
                     <div class="password-wrapper">
-                        <input type="password" id="loginSenha" placeholder="Sua senha" required />
+                        <input type="password" id="loginSenha" placeholder="Sua senha" required>
                         <button type="button" class="toggle-password" onclick="toggleSenha('loginSenha', this)">👁️</button>
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-primary btn-full">Entrar</button>
-
                 <div class="divider">ou</div>
-
                 <button type="button" class="btn-google">
-                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
                     Entrar com Google
                 </button>
-
                 <p class="form-message" id="loginMessage"></p>
             </form>
-
-            <!-- ========================================================= -->
-            <!-- FORM CADASTRO -->
-            <!-- ========================================================= -->
             <form id="formCadastro" class="modal-form">
                 <h2>Criar sua conta</h2>
-
                 <div class="form-group">
                     <label>Nome completo</label>
-                    <input type="text" id="cadNome" placeholder="Ex: João Silva" required />
+                    <input type="text" id="cadNome" placeholder="Ex: João Silva" required>
                 </div>
-
                 <div class="form-group">
                     <label>Usuário</label>
-                    <input type="text" id="cadUsername" placeholder="Escolha um username" required />
-                    <small>Sem espaços, apenas letras e números</small>
+                    <input type="text" id="cadUsername" placeholder="Escolha um username" required>
                 </div>
-
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="cadEmail" placeholder="seu@email.com" required />
+                    <input type="email" id="cadEmail" placeholder="seu@email.com" required>
                 </div>
-
                 <div class="form-group">
                     <label>Senha</label>
                     <div class="password-wrapper">
-                        <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" required />
+                        <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" required>
                         <button type="button" class="toggle-password" onclick="toggleSenha('cadSenha', this)">👁️</button>
                     </div>
-                    <small>Mínimo 6 caracteres</small>
                 </div>
-
                 <div class="form-group">
                     <label>Localização</label>
                     <select id="cadLocalizacao">
@@ -232,24 +213,17 @@
                         <option value="Niassa">Niassa</option>
                     </select>
                 </div>
-
                 <button type="submit" class="btn btn-primary btn-full">Criar conta</button>
-
                 <div class="divider">ou</div>
-
                 <button type="button" class="btn-google">
-                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
                     Entrar com Google
                 </button>
-
                 <p class="form-message" id="cadastroMessage"></p>
             </form>
         </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- SCRIPT PARA MOSTRAR/ESCONDER SENHA -->
-    <!-- ========================================================= -->
     <script>
         function toggleSenha(inputId, btn) {
             const input = document.getElementById(inputId);
@@ -263,11 +237,6 @@
             }
         }
     </script>
-
-    <!-- ========================================================= -->
-    <!-- SCRIPT PRINCIPAL -->
-    <!-- ========================================================= -->
     <script src="script.js"></script>
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,218 +7,306 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ===== ESTILOS DO DASHBOARD ===== */
+        /* ===== DASHBOARD ESTILOS ===== */
         .dashboard-container {
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 1000px;
+            margin: 30px auto;
             padding: 0 20px;
         }
 
-        .dashboard-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .dashboard-header h1 {
-            font-size: 32px;
-        }
-
-        .dashboard-header p {
-            color: #a0a4b8;
-        }
-
-        .profile-card {
-            background: #161926;
-            border: 1px solid #1a1d2e;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 30px;
-        }
-
-        .profile-card .header {
+        .profile-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            margin-bottom: 16px;
         }
 
-        .profile-card .header h3 {
-            font-size: 20px;
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
             color: #fff;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
         }
 
-        .profile-card .info {
-            background: #0b0d15;
-            border-radius: 12px;
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar .upload-btn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            padding: 4px;
+            font-size: 10px;
+            text-align: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .profile-avatar:hover .upload-btn {
+            opacity: 1;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .profile-username {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .profile-bio {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            margin-left: auto;
+            flex-wrap: wrap;
+        }
+
+        /* ===== EXPERIÊNCIAS ===== */
+        .exp-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
             padding: 16px;
-            border: 1px solid #1a1d2e;
-        }
-
-        .profile-card .info .row {
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1a1d2e;
+            align-items: flex-start;
+            gap: 12px;
         }
 
-        .profile-card .info .row:last-child {
-            border-bottom: none;
+        .exp-item .exp-info h4 {
+            font-size: 16px;
+            color: var(--text-primary);
         }
 
-        .profile-card .info .label {
-            color: #a0a4b8;
-            font-weight: 500;
+        .exp-item .exp-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 2px 0;
         }
 
-        .profile-card .info .value {
-            color: #fff;
+        .exp-item .exp-actions {
+            display: flex;
+            gap: 8px;
         }
 
+        .exp-item .exp-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .exp-item .exp-actions button:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .exp-item .exp-actions .delete-btn:hover {
+            color: var(--danger);
+        }
+
+        /* ===== GRID ===== */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
 
-        .action-card {
-            background: #161926;
-            border: 1px solid #1a1d2e;
-            border-radius: 16px;
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
             padding: 24px;
-            text-align: left;
         }
 
-        .action-card .icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .action-card h3 {
-            color: #fff;
+        .card h3 {
             font-size: 18px;
-            margin-bottom: 4px;
+            margin-bottom: 16px;
         }
 
-        .action-card p {
-            color: #a0a4b8;
+        .card .empty-state {
+            color: var(--text-muted);
             font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .action-card .btn-small {
-            padding: 8px 20px;
-            background: #8b5cf6;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .action-card .btn-small:hover {
-            background: #6d28d9;
-            transform: scale(1.03);
+            text-align: center;
+            padding: 20px 0;
         }
 
         .tag {
             display: inline-block;
-            background: #1a1d2e;
-            color: #8b5cf6;
+            background: var(--bg-primary);
+            color: var(--accent-primary);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 13px;
-            margin: 3px 3px 0 0;
-        }
-
-        .empty-state {
-            color: #5a5e72;
-            font-size: 14px;
-            margin-top: 8px;
+            margin: 3px;
+            border: 1px solid var(--border-color);
         }
 
         @media (max-width: 640px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-actions {
+                margin-left: 0;
+                justify-content: center;
+            }
             .dashboard-grid {
                 grid-template-columns: 1fr;
-            }
-            .profile-card .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
                 <div class="logo-avatar">
-                    <svg class="logo-svg" viewBox="0 0 100 100">
-                        <circle class="logo-ring" cx="50" cy="50" r="42" />
-                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
-                        <circle class="logo-dot" cx="50" cy="8" r="4" />
-                        <circle class="logo-dot" cx="50" cy="92" r="4" />
-                        <circle class="logo-dot" cx="8" cy="50" r="4" />
-                        <circle class="logo-dot" cx="92" cy="50" r="4" />
-                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
-                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                 </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
             <div class="nav-links">
                 <a href="inicio.html">Início</a>
-                <a href="busca.html">🔍 Buscar</a>
+                <a href="busca.html">Buscar</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
-                <button class="btn btn-outline" id="btnLogout">Sair</button>
+                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+                <div class="theme-toggle" id="themeToggle">
+                    <button class="toggle-option active" data-theme="dark">🌙</button>
+                    <button class="toggle-option" data-theme="light">☀️</button>
+                </div>
             </div>
         </div>
     </nav>
 
+    <!-- ===== DASHBOARD ===== -->
     <div class="dashboard-container">
-        <div class="dashboard-header">
-            <h1>👤 Seu <span class="highlight">Dashboard</span></h1>
-            <p>Gerencie seu perfil, habilidades e experiências.</p>
-        </div>
 
         <!-- PERFIL -->
-        <div class="profile-card">
-            <div class="header">
-                <h3>Meu Perfil</h3>
-                <button class="btn-small" id="btnEditarPerfil">✏️ Editar</button>
+        <div class="profile-header">
+            <div class="profile-avatar" id="avatarContainer">
+                <span id="avatarPlaceholder">👤</span>
+                <img id="avatarImage" style="display:none;" alt="Foto de perfil">
+                <label class="upload-btn" for="avatarUpload">📷 Upload</label>
+                <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
             </div>
-            <div class="info" id="profileInfo">
-                <div style="text-align:center; padding:20px; color:#5a5e72;">⏳ Carregando perfil...</div>
+            <div>
+                <div class="profile-name" id="profileName">Carregando...</div>
+                <div class="profile-username" id="profileUsername">@usuario</div>
+                <div class="profile-bio" id="profileBio">Sem bio</div>
+            </div>
+            <div class="profile-actions">
+                <button class="btn btn-primary btn-small" id="btnEditarPerfil">✏️ Editar</button>
             </div>
         </div>
 
         <!-- GRID -->
         <div class="dashboard-grid">
-            <div class="action-card">
-                <div class="icon">🧠</div>
-                <h3>Habilidades</h3>
-                <p>Adicione suas competências.</p>
-                <button class="btn-small" id="btnAdicionarHabilidade">+ Adicionar</button>
-                <div id="habilidadesList" class="empty-state">Nenhuma habilidade.</div>
+            <!-- HABILIDADES -->
+            <div class="card">
+                <h3>🧠 Habilidades</h3>
+                <div id="habilidadesList"><div class="empty-state">Nenhuma habilidade</div></div>
+                <div style="display:flex; gap:8px; margin-top:12px;">
+                    <input type="text" id="novaHabilidadeInput" placeholder="Nova habilidade..." style="flex:1; padding:8px 12px; background:var(--bg-primary); border:1px solid var(--border-color); border-radius:6px; color:var(--text-primary);">
+                    <button class="btn btn-primary btn-small" id="btnAdicionarHabilidade">+</button>
+                </div>
             </div>
 
-            <div class="action-card">
-                <div class="icon">💼</div>
-                <h3>Experiências</h3>
-                <p>Compartilhe sua trajetória.</p>
-                <button class="btn-small" id="btnAdicionarExperiencia">+ Adicionar</button>
-                <div id="experienciasList" class="empty-state">Nenhuma experiência.</div>
+            <!-- EXPERIÊNCIAS -->
+            <div class="card">
+                <h3>💼 Experiências</h3>
+                <div id="experienciasList"><div class="empty-state">Nenhuma experiência</div></div>
+                <button class="btn btn-primary btn-small" id="btnAdicionarExperiencia" style="margin-top:12px; width:100%;">+ Adicionar Experiência</button>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
+    <!-- ===== MODAL EXPERIÊNCIA ===== -->
+    <div class="modal" id="modalExperiencia">
+        <div class="modal-content">
+            <button class="modal-close" id="fecharModalExp">&times;</button>
+            <h2 id="modalExpTitle">Adicionar Experiência</h2>
+            <form id="formExperiencia">
+                <input type="hidden" id="expId" value="">
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" id="expTitulo" placeholder="Ex: Desenvolvedor Full Stack" required>
+                </div>
+                <div class="form-group">
+                    <label>Empresa</label>
+                    <input type="text" id="expEmpresa" placeholder="Ex: Google">
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <input type="text" id="expDescricao" placeholder="O que fazia...">
+                </div>
+                <div class="form-group">
+                    <label>Localização</label>
+                    <input type="text" id="expLocalizacao" placeholder="Ex: Maputo">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Salvar</button>
+                <p class="form-message" id="expMessage"></p>
+            </form>
         </div>
-    </footer>
+    </div>
+
+    <!-- ===== MODAL EDITAR PERFIL ===== -->
+    <div class="modal" id="modalEditarPerfil">
+        <div class="modal-content">
+            <button class="modal-close" id="fecharModalEditar">&times;</button>
+            <h2>✏️ Editar Perfil</h2>
+            <form id="formEditarPerfil">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" id="editNome" required>
+                </div>
+                <div class="form-group">
+                    <label>Bio</label>
+                    <input type="text" id="editBio" placeholder="Fale sobre você...">
+                </div>
+                <div class="form-group">
+                    <label>Localização</label>
+                    <input type="text" id="editLocalizacao" placeholder="Ex: Maputo">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Salvar</button>
+                <p class="form-message" id="editMessage"></p>
+            </form>
+        </div>
+    </div>
 
     <script src="dashboard.js"></script>
 </body>
