@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,91 +7,121 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
+        /* ===== ESTILOS DO DASHBOARD ===== */
+        .dashboard-container {
             max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 40px auto;
+            padding: 0 20px;
         }
-        
-        .dashboard-card {
-            background: #161926;
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #1a1d2e;
-            text-align: left;
-            transition: all 0.3s;
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 30px;
         }
-        
-        .dashboard-card:hover {
-            border-color: #8b5cf6;
-            transform: translateY(-3px);
-        }
-        
-        .dashboard-card .icon {
+
+        .dashboard-header h1 {
             font-size: 32px;
-            margin-bottom: 12px;
         }
-        
-        .dashboard-card h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        
-        .dashboard-card p {
+
+        .dashboard-header p {
             color: #a0a4b8;
-            font-size: 14px;
+        }
+
+        .profile-card {
+            background: #161926;
+            border: 1px solid #1a1d2e;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+
+        .profile-card .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             margin-bottom: 16px;
         }
-        
-        .dashboard-card .btn-small {
-            padding: 8px 20px;
-            font-size: 13px;
-            background: #8b5cf6;
+
+        .profile-card .header h3 {
+            font-size: 20px;
             color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
         }
-        
-        .dashboard-card .btn-small:hover {
-            background: #6d28d9;
-            transform: scale(1.05);
-        }
-        
-        .profile-info {
+
+        .profile-card .info {
             background: #0b0d15;
-            padding: 20px;
             border-radius: 12px;
+            padding: 16px;
             border: 1px solid #1a1d2e;
-            margin-top: 16px;
         }
-        
-        .profile-info .row {
+
+        .profile-card .info .row {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid #1a1d2e;
         }
-        
-        .profile-info .row:last-child {
+
+        .profile-card .info .row:last-child {
             border-bottom: none;
         }
-        
-        .profile-info .label {
+
+        .profile-card .info .label {
             color: #a0a4b8;
             font-weight: 500;
         }
-        
-        .profile-info .value {
+
+        .profile-card .info .value {
             color: #fff;
         }
-        
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .action-card {
+            background: #161926;
+            border: 1px solid #1a1d2e;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: left;
+        }
+
+        .action-card .icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .action-card h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .action-card p {
+            color: #a0a4b8;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .action-card .btn-small {
+            padding: 8px 20px;
+            background: #8b5cf6;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-card .btn-small:hover {
+            background: #6d28d9;
+            transform: scale(1.03);
+        }
+
         .tag {
             display: inline-block;
             background: #1a1d2e;
@@ -100,16 +129,23 @@
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 13px;
-            margin: 3px;
+            margin: 3px 3px 0 0;
         }
-        
-        .modal-edit .modal-content {
-            max-width: 500px;
+
+        .empty-state {
+            color: #5a5e72;
+            font-size: 14px;
+            margin-top: 8px;
         }
-        
-        @media (max-width: 768px) {
+
+        @media (max-width: 640px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
+            }
+            .profile-card .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
         }
     </style>
@@ -132,141 +168,57 @@
                 </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-         <div class="nav-links">
-    <a href="inicio.html">Início</a>
-    <a href="busca.html">🔍 Buscar</a>
-    <a href="dashboard.html">Dashboard</a>
-    <button class="btn btn-outline" id="btnLogout">Sair</button>
-</div>
+            <div class="nav-links">
+                <a href="inicio.html">Início</a>
+                <a href="busca.html">🔍 Buscar</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <button class="btn btn-outline" id="btnLogout">Sair</button>
+            </div>
         </div>
     </nav>
 
-    <section class="hero" style="min-height: 70vh; padding-top: 40px;">
-        <div class="container">
-            <div style="text-align: center; width: 100%;">
-                <h1 style="font-size: 36px;">Seu <span class="highlight">Dashboard</span></h1>
-                <p style="max-width: 600px; margin: 12px auto 0; color: #a0a4b8;">
-                    Gerencie seu perfil, habilidades e experiências.
-                </p>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>👤 Seu <span class="highlight">Dashboard</span></h1>
+            <p>Gerencie seu perfil, habilidades e experiências.</p>
+        </div>
 
-                <div class="dashboard-card" style="max-width: 900px; margin: 30px auto; text-align: left;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                        <div>
-                            <div class="icon">👤</div>
-                            <h3>Meu Perfil</h3>
-                        </div>
-                        <button class="btn-small" id="btnEditarPerfil">✏️ Editar</button>
-                    </div>
-                    <div class="profile-info" id="profileInfo">
-                        <div style="text-align: center; padding: 20px; color: #5a5e72;">
-                            <span style="font-size: 48px;">⏳</span>
-                            <p>Carregando perfil...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-grid">
-                    <div class="dashboard-card">
-                        <div class="icon">🧠</div>
-                        <h3>Minhas Habilidades</h3>
-                        <p>Adicione e gerencie suas competências.</p>
-                        <button class="btn-small" id="btnAdicionarHabilidade">+ Adicionar</button>
-                        <div id="habilidadesList" style="margin-top: 12px;">
-                            <div style="color: #5a5e72; font-size: 14px;">Nenhuma habilidade adicionada.</div>
-                        </div>
-                    </div>
-
-                    <div class="dashboard-card">
-                        <div class="icon">💼</div>
-                        <h3>Minhas Experiências</h3>
-                        <p>Compartilhe sua trajetória profissional.</p>
-                        <button class="btn-small" id="btnAdicionarExperiencia">+ Adicionar</button>
-                        <div id="experienciasList" style="margin-top: 12px;">
-                            <div style="color: #5a5e72; font-size: 14px;">Nenhuma experiência adicionada.</div>
-                        </div>
-                    </div>
-                </div>
+        <!-- PERFIL -->
+        <div class="profile-card">
+            <div class="header">
+                <h3>Meu Perfil</h3>
+                <button class="btn-small" id="btnEditarPerfil">✏️ Editar</button>
+            </div>
+            <div class="info" id="profileInfo">
+                <div style="text-align:center; padding:20px; color:#5a5e72;">⏳ Carregando perfil...</div>
             </div>
         </div>
-    </section>
+
+        <!-- GRID -->
+        <div class="dashboard-grid">
+            <div class="action-card">
+                <div class="icon">🧠</div>
+                <h3>Habilidades</h3>
+                <p>Adicione suas competências.</p>
+                <button class="btn-small" id="btnAdicionarHabilidade">+ Adicionar</button>
+                <div id="habilidadesList" class="empty-state">Nenhuma habilidade.</div>
+            </div>
+
+            <div class="action-card">
+                <div class="icon">💼</div>
+                <h3>Experiências</h3>
+                <p>Compartilhe sua trajetória.</p>
+                <button class="btn-small" id="btnAdicionarExperiencia">+ Adicionar</button>
+                <div id="experienciasList" class="empty-state">Nenhuma experiência.</div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
             <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
         </div>
     </footer>
-
-    <!-- MODAL EDITAR PERFIL -->
-    <div class="modal modal-edit" id="modalEditarPerfil">
-        <div class="modal-content">
-            <span class="modal-close" id="fecharModalEditar">&times;</span>
-            <h2 style="margin-bottom: 24px; text-align: center;">✏️ Editar Perfil</h2>
-            <form id="formEditarPerfil">
-                <div class="form-group">
-                    <label>Nome completo</label>
-                    <input type="text" id="editNome" required />
-                </div>
-                <div class="form-group">
-                    <label>Bio</label>
-                    <input type="text" id="editBio" placeholder="Fale um pouco sobre você..." />
-                </div>
-                <div class="form-group">
-                    <label>Localização</label>
-                    <input type="text" id="editLocalizacao" placeholder="Ex: Chimoio, Moçambique" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Salvar alterações</button>
-                <p class="form-message" id="editMessage"></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL ADICIONAR HABILIDADE -->
-    <div class="modal modal-edit" id="modalAdicionarHabilidade">
-        <div class="modal-content">
-            <span class="modal-close" id="fecharModalHabilidade">&times;</span>
-            <h2 style="margin-bottom: 24px; text-align: center;">🧠 Adicionar Habilidade</h2>
-            <form id="formAdicionarHabilidade">
-                <div class="form-group">
-                    <label>Nome da habilidade</label>
-                    <input type="text" id="novaHabilidade" placeholder="Ex: Python, Marketing, Design..." required />
-                </div>
-                <div class="form-group">
-                    <label>Descrição (opcional)</label>
-                    <input type="text" id="novaHabilidadeDesc" placeholder="Descreva sua experiência com essa habilidade..." />
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Adicionar</button>
-                <p class="form-message" id="habilidadeMessage"></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL ADICIONAR EXPERIÊNCIA -->
-    <div class="modal modal-edit" id="modalAdicionarExperiencia">
-        <div class="modal-content">
-            <span class="modal-close" id="fecharModalExperiencia">&times;</span>
-            <h2 style="margin-bottom: 24px; text-align: center;">💼 Adicionar Experiência</h2>
-            <form id="formAdicionarExperiencia">
-                <div class="form-group">
-                    <label>Título</label>
-                    <input type="text" id="novaExpTitulo" placeholder="Ex: Desenvolvedor Full Stack" required />
-                </div>
-                <div class="form-group">
-                    <label>Empresa</label>
-                    <input type="text" id="novaExpEmpresa" placeholder="Ex: Google, Startup XYZ" />
-                </div>
-                <div class="form-group">
-                    <label>Descrição</label>
-                    <input type="text" id="novaExpDesc" placeholder="Descreva suas atividades..." />
-                </div>
-                <div class="form-group">
-                    <label>Localização</label>
-                    <input type="text" id="novaExpLocal" placeholder="Ex: Chimoio, Moçambique" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Adicionar</button>
-                <p class="form-message" id="experienciaMessage"></p>
-            </form>
-        </div>
-    </div>
 
     <script src="dashboard.js"></script>
 </body>
