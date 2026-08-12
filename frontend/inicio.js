@@ -8,10 +8,6 @@ document.getElementById('btnLogout').addEventListener('click', () => {
     window.location.href = '/';
 });
 
-// =========================================================
-// CARREGAR FEED
-// =========================================================
-
 async function carregarFeed() {
     try {
         const response = await fetch(`${API_URL}/pesquisa/pessoas`, {
@@ -23,50 +19,28 @@ async function carregarFeed() {
         const container = document.getElementById('feedContent');
 
         if (!pessoas.length) {
-            container.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding: 40px 0;">Nenhuma atividade recente.</div>';
+            container.innerHTML = '<div style="color:#64748B;">Nenhuma atividade recente.</div>';
             return;
         }
 
         container.innerHTML = pessoas.slice(0, 10).map(p => `
-            <div class="feed-item">
-                <div class="user">
-                    <div class="user-avatar">${p.nome?.charAt(0) || '?'}</div>
+            <div style="background:#1E293B; border:1px solid #334155; border-radius:12px; padding:16px; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <div style="width:40px; height:40px; border-radius:50%; background:#2563EB; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">${p.nome?.charAt(0) || '?'}</div>
                     <div>
-                        <div class="user-name">${p.nome || 'Usuário'}</div>
-                        <div class="user-username">@${p.username}</div>
+                        <div style="font-weight:600;">${p.nome || 'Usuário'}</div>
+                        <div style="color:#94A3B8; font-size:14px;">@${p.username}</div>
                     </div>
                 </div>
-                <div class="content">
-                    ${p.bio || 'Novo membro do PplBase!'}
-                </div>
-                <div class="timestamp">${p.localizacao ? `📍 ${p.localizacao}` : ''}</div>
+                <div style="margin-top:8px; color:#F1F5F9;">${p.bio || 'Novo membro do PplBase!'}</div>
+                <div style="margin-top:4px; color:#64748B; font-size:12px;">${p.localizacao ? `📍 ${p.localizacao}` : ''}</div>
             </div>
         `).join('');
 
     } catch (error) {
         console.error('Erro:', error);
-        document.getElementById('feedContent').innerHTML = '<div style="text-align:center; color: var(--danger); padding: 40px 0;">Erro ao carregar feed.</div>';
+        document.getElementById('feedContent').innerHTML = '<div style="color:#EF4444;">Erro ao carregar feed.</div>';
     }
 }
 
 carregarFeed();
-
-// =========================================================
-// TEMA
-// =========================================================
-
-document.querySelectorAll('.toggle-option').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const theme = this.dataset.theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        localStorage.setItem('theme', theme);
-    });
-});
-
-const savedTheme = localStorage.getItem('theme') || 'dark';
-document.documentElement.setAttribute('data-theme', savedTheme);
-document.querySelectorAll('.toggle-option').forEach(b => {
-    b.classList.toggle('active', b.dataset.theme === savedTheme);
-});

@@ -4,11 +4,27 @@ const token = localStorage.getItem('pplbase_token');
 if (!token) window.location.href = '/';
 
 // =========================================================
+// ELEMENTOS
+// =========================================================
+
+const profileName = document.getElementById('profileName');
+const profileUsername = document.getElementById('profileUsername');
+const profileBio = document.getElementById('profileBio');
+const habilidadesList = document.getElementById('habilidadesList');
+const experienciasList = document.getElementById('experienciasList');
+const avatarPlaceholder = document.getElementById('avatarPlaceholder');
+const avatarImage = document.getElementById('avatarImage');
+const avatarUpload = document.getElementById('avatarUpload');
+
+// =========================================================
 // HEADERS
 // =========================================================
 
 function getHeaders() {
-    return { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
+    return {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    };
 }
 
 // =========================================================
@@ -21,50 +37,53 @@ async function carregarPerfil() {
         if (!response.ok) throw new Error('Erro');
         const user = await response.json();
 
-        document.getElementById('userName').textContent = user.nome || 'Usuário';
+        profileName.textContent = user.nome || 'Usuário';
+        profileUsername.textContent = `@${user.username}`;
+        profileBio.textContent = user.bio || 'Sem bio';
 
-        document.getElementById('profileInfo').innerHTML = `
-            <p><strong>Nome:</strong> ${user.nome || '-'}</p>
-            <p><strong>Username:</strong> @${user.username}</p>
-            <p><strong>Email:</strong> ${user.email}</p>
-            <p><strong>Localização:</strong> ${user.localizacao || 'Não definida'}</p>
-            <p><strong>Bio:</strong> ${user.bio || 'Sem bio'}</p>
-        `;
+        // Foto
+        if (user.foto_url) {
+            avatarPlaceholder.style.display = 'none';
+            avatarImage.src = user.foto_url;
+            avatarImage.style.display = 'block';
+        } else {
+            avatarPlaceholder.style.display = 'flex';
+            avatarImage.style.display = 'none';
+        }
 
         // Habilidades
-        const habList = document.getElementById('habilidadesList');
         if (user.habilidades?.length) {
-            habList.innerHTML = user.habilidades.map(h => `<span class="tag">${h.nome}</span>`).join('');
+            habilidadesList.innerHTML = user.habilidades.map(h =>
+                `<span class="tag">${h.nome}</span>`
+            ).join('');
         } else {
-            habList.innerHTML = '<div class="empty">Nenhuma habilidade</div>';
+            habilidadesList.innerHTML = '<div class="empty-state">Nenhuma habilidade</div>';
         }
 
         // Experiências
-        const expList = document.getElementById('experienciasList');
         if (user.experiencias?.length) {
-            expList.innerHTML = user.experiencias.map(exp => `
-                <div class="exp-item">
-                    <div class="info">
+            experienciasList.innerHTML = user.experiencias.map(exp =>
+                `<div class="exp-item">
+                    <div class="exp-info">
                         <h4>${exp.titulo}</h4>
                         ${exp.empresa ? `<p>${exp.empresa}</p>` : ''}
                         ${exp.descricao ? `<p>${exp.descricao}</p>` : ''}
                         ${exp.localizacao ? `<p>📍 ${exp.localizacao}</p>` : ''}
                     </div>
                     <div class="exp-actions">
-                        <button onclick="editarExperiencia(${exp.id})">✏️</button>
-                        <button onclick="removerExperiencia(${exp.id})">🗑️</button>
+                        <button onclick="editarExperiencia(${exp.id})" title="Editar">✏️</button>
+                        <button onclick="removerExperiencia(${exp.id})" class="delete-btn" title="Remover">🗑️</button>
                     </div>
-                </div>
-            `).join('');
+                </div>`
+            ).join('');
         } else {
-            expList.innerHTML = '<div class="empty">Nenhuma experiência</div>';
+            experienciasList.innerHTML = '<div class="empty-state">Nenhuma experiência</div>';
         }
 
         window.usuarioAtual = user;
 
     } catch (error) {
         console.error('Erro:', error);
-        document.getElementById('profileInfo').innerHTML = '<div class="empty">Erro ao carregar perfil</div>';
     }
 }
 
@@ -72,7 +91,7 @@ async function carregarPerfil() {
 // EXPERIÊNCIAS
 // =========================================================
 
-document.getElementById('btnAddExperiencia').addEventListener('click', () => {
+document.getElementById('btnAdicionarExperiencia').addEventListener('click', () => {
     document.getElementById('modalExpTitle').textContent = 'Adicionar Experiência';
     document.getElementById('expId').value = '';
     document.getElementById('expTitulo').value = '';
@@ -112,8 +131,12 @@ window.removerExperiencia = async (id) => {
             method: 'DELETE',
             headers: getHeaders()
         });
-        if (response.ok) await carregarPerfil();
-    } catch (error) { console.error('Erro:', error); }
+        if (response.ok) {
+            await carregarPerfil();
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+    }
 };
 
 document.getElementById('formExperiencia').addEventListener('submit', async (e) => {
@@ -141,15 +164,17 @@ document.getElementById('formExperiencia').addEventListener('submit', async (e) 
             const data = await response.json();
             message.textContent = data.detail || 'Erro';
         }
-    } catch (error) { message.textContent = 'Erro de conexão'; }
+    } catch (error) {
+        message.textContent = 'Erro de conexão';
+    }
 });
 
 // =========================================================
 // HABILIDADES
 // =========================================================
 
-document.getElementById('btnAddHabilidade').addEventListener('click', async () => {
-    const input = document.getElementById('novaHabilidade');
+document.getElementById('btnAdicionarHabilidade').addEventListener('click', async () => {
+    const input = document.getElementById('novaHabilidadeInput');
     const nome = input.value.trim();
     if (!nome) return;
 
@@ -163,7 +188,34 @@ document.getElementById('btnAddHabilidade').addEventListener('click', async () =
             input.value = '';
             await carregarPerfil();
         }
-    } catch (error) { console.error('Erro:', error); }
+    } catch (error) {
+        console.error('Erro:', error);
+    }
+});
+
+// =========================================================
+// FOTO DE PERFIL (UPLOAD)
+// =========================================================
+
+avatarUpload.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('foto', file);
+
+    try {
+        const response = await fetch(`${API_URL}/usuarios/upload-foto`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData
+        });
+        if (response.ok) {
+            await carregarPerfil();
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+    }
 });
 
 // =========================================================
@@ -203,7 +255,9 @@ document.getElementById('formEditarPerfil').addEventListener('submit', async (e)
             const data = await response.json();
             message.textContent = data.detail || 'Erro';
         }
-    } catch (error) { message.textContent = 'Erro de conexão'; }
+    } catch (error) {
+        message.textContent = 'Erro de conexão';
+    }
 });
 
 // =========================================================
@@ -213,6 +267,26 @@ document.getElementById('formEditarPerfil').addEventListener('submit', async (e)
 document.getElementById('btnLogout').addEventListener('click', () => {
     localStorage.removeItem('pplbase_token');
     window.location.href = '/';
+});
+
+// =========================================================
+// TEMA
+// =========================================================
+
+document.querySelectorAll('.toggle-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        localStorage.setItem('theme', theme);
+    });
+});
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.querySelectorAll('.toggle-option').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === savedTheme);
 });
 
 // =========================================================

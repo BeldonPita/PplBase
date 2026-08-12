@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - PplBase</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .feed-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .feed-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .feed-item .user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .feed-item .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .feed-item .user-name {
+            font-weight: 600;
+        }
+
+        .feed-item .user-username {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .feed-item .content {
+            color: var(--text-primary);
+            margin: 8px 0;
+        }
+
+        .feed-item .timestamp {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="inicio.html" class="active">Início</a>
+                <a href="busca.html">Buscar</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+                <div class="theme-toggle" id="themeToggle">
+                    <button class="toggle-option active" data-theme="dark">🌙</button>
+                    <button class="toggle-option" data-theme="light">☀️</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="feed-container">
+        <h1 style="margin-bottom: 20px;">📰 Atividades Recentes</h1>
+        <div id="feedContent">
+            <div style="text-align:center; color: var(--text-muted); padding: 40px 0;">Carregando...</div>
+        </div>
+    </div>
+
+    <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
+
+    <script src="inicio.js"></script>
+</body>
+</html>

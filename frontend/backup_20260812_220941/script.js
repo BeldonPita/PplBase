@@ -1,12 +1,9 @@
-const API_URL = 'https://pplbase.onrender.com';
-
-// =========================================================
-// MODAL
-// =========================================================
+const API_URL = window.API_URL || 'https://pplbase.onrender.com';
 
 const modal = document.getElementById('modalLogin');
 const btnAbrirModal = document.getElementById('btnAbrirModal');
 const btnHeroCadastro = document.getElementById('btnHeroCadastro');
+const btnHeroCadastro2 = document.getElementById('btnHeroCadastro2');
 const btnFecharModal = document.getElementById('fecharModal');
 const tabs = document.querySelectorAll('.tab');
 const formLogin = document.getElementById('formLogin');
@@ -15,6 +12,7 @@ const formCadastro = document.getElementById('formCadastro');
 function abrirModal(tab = 'login') {
     if (!modal) return;
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
     tabs.forEach(t => t.classList.remove('active'));
     const tabAtiva = document.querySelector(`.tab[data-tab="${tab}"]`);
     if (tabAtiva) tabAtiva.classList.add('active');
@@ -27,10 +25,12 @@ function abrirModal(tab = 'login') {
 function fecharModal() {
     if (!modal) return;
     modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
 if (btnAbrirModal) btnAbrirModal.addEventListener('click', () => abrirModal('login'));
 if (btnHeroCadastro) btnHeroCadastro.addEventListener('click', () => abrirModal('cadastro'));
+if (btnHeroCadastro2) btnHeroCadastro2.addEventListener('click', () => abrirModal('cadastro'));
 if (btnFecharModal) btnFecharModal.addEventListener('click', fecharModal);
 if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) fecharModal(); });
 
@@ -46,10 +46,6 @@ tabs.forEach(tab => {
     });
 });
 
-// =========================================================
-// AUXILIARES
-// =========================================================
-
 function mostrarMensagem(el, msg, tipo = 'error') {
     if (!el) return;
     el.textContent = msg;
@@ -60,10 +56,6 @@ function mostrarMensagem(el, msg, tipo = 'error') {
 function salvarToken(token) { localStorage.setItem('pplbase_token', token); }
 function getToken() { return localStorage.getItem('pplbase_token'); }
 
-// =========================================================
-// LOGIN
-// =========================================================
-
 if (formLogin) {
     formLogin.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -71,7 +63,6 @@ if (formLogin) {
         const senha = document.getElementById('loginSenha');
         const message = document.getElementById('loginMessage');
         if (!username || !senha) return;
-
         try {
             const response = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
@@ -82,7 +73,7 @@ if (formLogin) {
             if (response.ok) {
                 salvarToken(data.access_token);
                 mostrarMensagem(message, '✅ Login realizado!', 'success');
-                setTimeout(() => { fecharModal(); window.location.href = '/dashboard.html'; }, 800);
+                setTimeout(() => { fecharModal(); window.location.href = '/dashboard.html'; }, 1000);
             } else {
                 mostrarMensagem(message, data.detail || '❌ Erro ao fazer login');
             }
@@ -92,10 +83,6 @@ if (formLogin) {
         }
     });
 }
-
-// =========================================================
-// CADASTRO
-// =========================================================
 
 if (formCadastro) {
     formCadastro.addEventListener('submit', async (e) => {
@@ -107,12 +94,10 @@ if (formCadastro) {
         const localizacao = document.getElementById('cadLocalizacao');
         const message = document.getElementById('cadastroMessage');
         if (!nome || !username || !email || !senha) return;
-
         if (senha.value.length < 6) {
             mostrarMensagem(message, '❌ Senha deve ter mínimo 6 caracteres');
             return;
         }
-
         try {
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
@@ -129,7 +114,7 @@ if (formCadastro) {
             if (response.ok) {
                 salvarToken(data.access_token);
                 mostrarMensagem(message, '✅ Conta criada!', 'success');
-                setTimeout(() => { fecharModal(); window.location.href = '/dashboard.html'; }, 1000);
+                setTimeout(() => { fecharModal(); window.location.href = '/dashboard.html'; }, 1500);
             } else {
                 mostrarMensagem(message, data.detail || '❌ Erro ao criar conta');
             }
@@ -140,11 +125,27 @@ if (formCadastro) {
     });
 }
 
-// =========================================================
-// VERIFICAR LOGIN
-// =========================================================
-
-if (window.location.pathname.includes('dashboard.html')) {
+async function verificarLogin() {
     const token = getToken();
-    if (!token) window.location.href = '/';
+    if (!token) return false;
+    try {
+        const response = await fetch(`${API_URL}/usuarios/me`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (response.ok) {
+            const user = await response.json();
+            console.log('✅ Usuário logado:', user);
+            if (btnAbrirModal) {
+                btnAbrirModal.textContent = '👤 Perfil';
+                btnAbrirModal.style.background = '#2a2d3e';
+            }
+            return true;
+        } else {
+            localStorage.removeItem('pplbase_token');
+            return false;
+        }
+    } catch (error) { return false; }
 }
+
+document.addEventListener('DOMContentLoaded', () => { verificarLogin(); });
+console.log('🚀 PplBase carregado! API:', API_URL);
