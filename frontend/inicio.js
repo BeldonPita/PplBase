@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = window.API_URL || 'https://pplbase.onrender.com';
 const token = localStorage.getItem('pplbase_token');
 
 if (!token) {

@@ -1,0 +1,1 @@
+postgresql://postgres:Supabase%40PplBase2026!@db.vxsmtwszmpvjchokyloa.supabase.co:5432/postgres
