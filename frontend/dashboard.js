@@ -216,6 +216,26 @@ document.getElementById('btnLogout').addEventListener('click', () => {
 });
 
 // =========================================================
+// TEMA
+// =========================================================
+
+document.querySelectorAll('.toggle-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        localStorage.setItem('theme', theme);
+    });
+});
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.querySelectorAll('.toggle-option').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === savedTheme);
+});
+
+// =========================================================
 // INICIALIZAR
 // =========================================================
 

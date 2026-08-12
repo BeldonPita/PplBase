@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +7,48 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .dashboard-container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .dashboard-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
         .welcome { margin-bottom: 24px; }
         .welcome h1 { font-size: 28px; }
-        .welcome p { color: #94A3B8; }
-        .card { background: #1E293B; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
-        .card h3 { margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .tag { display: inline-block; background: #0F172A; color: #2563EB; padding: 4px 12px; border-radius: 20px; font-size: 13px; margin: 3px; border: 1px solid #334155; }
-        .empty { color: #64748B; text-align: center; padding: 20px 0; }
-        .exp-item { background: #0F172A; border: 1px solid #334155; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .exp-item .info h4 { font-size: 16px; color: #F1F5F9; }
-        .exp-item .info p { color: #94A3B8; font-size: 14px; margin: 2px 0; }
-        .exp-actions button { background: none; border: none; color: #94A3B8; cursor: pointer; padding: 4px 8px; }
+        .welcome p { color: var(--text-secondary); }
+        .exp-item { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .exp-item .info h4 { font-size: 16px; color: var(--text-primary); }
+        .exp-item .info p { color: var(--text-secondary); font-size: 14px; margin: 2px 0; }
+        .exp-actions button { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 4px 8px; }
         .exp-actions button:hover { color: #EF4444; }
         .input-row { display: flex; gap: 8px; margin-top: 12px; }
-        .input-row input { flex: 1; padding: 8px 12px; background: #0F172A; border: 1px solid #334155; border-radius: 6px; color: #F1F5F9; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+        .input-row input { flex: 1; padding: 8px 12px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); }
+        .profile-info p { padding: 4px 0; border-bottom: 1px solid var(--border-color); }
+        .profile-info p:last-child { border-bottom: none; }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Ppl<span class="highlight">Base</span></div>
+            <div class="logo">
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
+            </div>
             <div class="nav-links">
                 <a href="inicio.html">Início</a>
                 <a href="busca.html">Buscar</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
                 <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+                <div class="theme-toggle" id="themeToggle">
+                    <button class="toggle-option active" data-theme="dark">🌙</button>
+                    <button class="toggle-option" data-theme="light">☀️</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -42,14 +56,12 @@
     <div class="dashboard-container">
         <div class="welcome">
             <h1>Olá, <span id="userName">Usuário</span> 👋</h1>
-            <p>Bem-vindo ao seu dashboard. Aqui você gerencia seu perfil e conexões.</p>
+            <p>Bem-vindo ao seu dashboard.</p>
         </div>
 
         <div class="card">
             <h3>👤 Meu Perfil</h3>
-            <div id="profileInfo">
-                <div class="empty">Carregando...</div>
-            </div>
+            <div class="profile-info" id="profileInfo"><div class="empty">Carregando...</div></div>
             <button class="btn btn-primary btn-small" id="btnEditarPerfil" style="margin-top:12px;">✏️ Editar Perfil</button>
         </div>
 

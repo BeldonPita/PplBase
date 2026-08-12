@@ -47,6 +47,26 @@ tabs.forEach(tab => {
 });
 
 // =========================================================
+// TOGGLE THEME
+// =========================================================
+
+document.querySelectorAll('.toggle-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        localStorage.setItem('theme', theme);
+    });
+});
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.querySelectorAll('.toggle-option').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === savedTheme);
+});
+
+// =========================================================
 // AUXILIARES
 // =========================================================
 
@@ -104,7 +124,6 @@ if (formCadastro) {
         const username = document.getElementById('cadUsername');
         const email = document.getElementById('cadEmail');
         const senha = document.getElementById('cadSenha');
-        const localizacao = document.getElementById('cadLocalizacao');
         const message = document.getElementById('cadastroMessage');
         if (!nome || !username || !email || !senha) return;
 
@@ -121,8 +140,7 @@ if (formCadastro) {
                     nome: nome.value,
                     username: username.value,
                     email: email.value,
-                    senha: senha.value,
-                    localizacao: localizacao ? localizacao.value : ''
+                    senha: senha.value
                 })
             });
             const data = await response.json();
