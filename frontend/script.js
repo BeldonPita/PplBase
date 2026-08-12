@@ -72,13 +72,13 @@ if (formLogin) {
             const data = await response.json();
             if (response.ok) {
                 salvarToken(data.access_token);
-                mostrarMensagem(message, '✅ Login realizado!', 'success');
+                mostrarMensagem(message, 'Login realizado!', 'success');
                 setTimeout(() => { fecharModal(); window.location.href = '/dashboard.html'; }, 800);
             } else {
-                mostrarMensagem(message, data.detail || '❌ Erro ao fazer login');
+                mostrarMensagem(message, data.detail || 'Erro ao fazer login');
             }
         } catch (error) {
-            mostrarMensagem(message, '❌ Erro de conexão com o servidor');
+            mostrarMensagem(message, 'Erro de conexão com o servidor');
             console.error('Erro:', error);
         }
     });
@@ -96,7 +96,7 @@ if (formCadastro) {
         if (!nome || !username || !email || !senha) return;
 
         if (senha.value.length < 6) {
-            mostrarMensagem(message, '❌ Senha deve ter mínimo 6 caracteres');
+            mostrarMensagem(message, 'Senha deve ter mínimo 6 caracteres');
             return;
         }
 
@@ -114,13 +114,13 @@ if (formCadastro) {
             const data = await response.json();
             if (response.ok) {
                 salvarToken(data.access_token);
-                mostrarMensagem(message, '✅ Conta criada!', 'success');
+                mostrarMensagem(message, 'Conta criada!', 'success');
                 setTimeout(() => { fecharModal(); window.location.href = '/dashboard.html'; }, 1000);
             } else {
-                mostrarMensagem(message, data.detail || '❌ Erro ao criar conta');
+                mostrarMensagem(message, data.detail || 'Erro ao criar conta');
             }
         } catch (error) {
-            mostrarMensagem(message, '❌ Erro de conexão com o servidor');
+            mostrarMensagem(message, 'Erro de conexão com o servidor');
             console.error('Erro:', error);
         }
     });
