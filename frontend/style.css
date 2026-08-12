@@ -462,7 +462,7 @@ footer {
 /* MODAL */
 /* ========================================================= */
 .modal {
-    display: none;
+    display: inline-block;
     position: fixed;
     top: 0;
     left: 0;
@@ -536,7 +536,7 @@ footer {
 }
 
 .modal-form {
-    display: none;
+    display: inline-block;
 }
 
 .modal-form.active {
@@ -668,7 +668,7 @@ footer {
     }
 
     .nav-links a {
-        display: none;
+        display: inline-block;
     }
 
     .modal-content {
@@ -683,5 +683,21 @@ footer {
 
     .stats {
         gap: 30px;
+    }
+}
+/* ===== MENU RESPONSIVO ===== */
+@media (max-width: 640px) {
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    .nav-links a,
+    .nav-links button {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+    .nav-links button {
+        margin-left: 0;
     }
 }
