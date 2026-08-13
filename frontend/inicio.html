@@ -1,226 +1,219 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início - PplBase</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .welcome-section {
-            padding: 40px 0;
+        .feed-container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+        .feed-item { background: #161926; border: 1px solid #1A1D2E; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .feed-item .user { display: flex; align-items: center; gap: 12px; }
+        .feed-item .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #8B5CF6, #6D28D9); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; }
+        .feed-item .content { margin-top: 8px; color: #A0A4B8; }
+        .feed-item .time { color: #5A5E72; font-size: 12px; margin-top: 4px; }
+        .empty { color: #5A5E72; text-align: center; padding: 40px 0; }
+
+        .side-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
         }
-        
-        .welcome-section h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        
-        .welcome-section .subtitle {
-            color: #a0a4b8;
-            font-size: 16px;
-            margin-bottom: 30px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-        
-        .stat-card {
-            background: #161926;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #1a1d2e;
-            text-align: center;
-        }
-        
-        .stat-card .number {
-            font-size: 28px;
-            font-weight: 700;
-            color: #8b5cf6;
-        }
-        
-        .stat-card .label {
-            color: #a0a4b8;
-            font-size: 14px;
-        }
-        
-        .dashboard-grid-inicio {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        
-        .card-inicio {
-            background: #161926;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid #1a1d2e;
-        }
-        
-        .card-inicio h3 {
-            color: #fff;
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        
-        .card-inicio .item {
-            padding: 10px 0;
-            border-bottom: 1px solid #1a1d2e;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .card-inicio .item:last-child {
-            border-bottom: none;
-        }
-        
-        .card-inicio .item .name {
-            color: #fff;
-        }
-        
-        .card-inicio .item .username {
-            color: #8b5cf6;
-            font-size: 13px;
-        }
-        
-        .empty-state-small {
-            color: #5a5e72;
-            font-size: 14px;
-            padding: 20px 0;
-            text-align: center;
-        }
-        
-        .sugestao-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #1a1d2e;
-        }
-        
-        .sugestao-item:last-child {
-            border-bottom: none;
-        }
-        
-        .sugestao-item .info .name {
-            color: #fff;
-        }
-        
-        .sugestao-item .info .username {
-            color: #a0a4b8;
-            font-size: 13px;
-        }
-        
-        .btn-seguir {
-            padding: 6px 16px;
-            background: #8b5cf6;
-            color: #fff;
+        .side-menu .menu-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
             border: none;
-            border-radius: 6px;
+            color: #fff;
+            font-size: 24px;
             cursor: pointer;
-            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
             transition: all 0.3s;
         }
-        
-        .btn-seguir:hover {
-            background: #6d28d9;
-            transform: scale(1.05);
+        .side-menu .menu-icon:hover { transform: scale(1.05); }
+        .side-menu .menu-dropdown {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 160px;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-        
-        .btn-seguir.seguindo {
-            background: #2a2d3e;
-            color: #a0a4b8;
+        .side-menu .menu-dropdown.active { display: block; }
+        .side-menu .menu-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 10px 16px;
+            background: none;
+            border: none;
+            color: #E4E6EB;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .dashboard-grid-inicio {
-                grid-template-columns: 1fr;
-            }
+        .side-menu .menu-dropdown button:hover { background: #1A1D2E; }
+        .side-menu .menu-dropdown .divider { height: 1px; background: #1A1D2E; margin: 6px 0; }
+
+        /* ===== NAVBAR ===== */
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a {
+            color: #A0A4B8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #E4E6EB;
+            background: #1A1D2E;
+        }
+        .btn-small { padding: 6px 16px; font-size: 13px; border-radius: 6px; }
+        .btn-outline { background: transparent; color: #A0A4B8; border: 2px solid #2A2D3E; }
+        .btn-outline:hover { border-color: #8B5CF6; color: #fff; }
     </style>
 </head>
 <body>
 
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <div class="logo-avatar">
-                    <svg class="logo-svg" viewBox="0 0 100 100">
-                        <circle class="logo-ring" cx="50" cy="50" r="42" />
-                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
-                        <circle class="logo-dot" cx="50" cy="8" r="4" />
-                        <circle class="logo-dot" cx="50" cy="92" r="4" />
-                        <circle class="logo-dot" cx="8" cy="50" r="4" />
-                        <circle class="logo-dot" cx="92" cy="50" r="4" />
-                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
-                    </svg>
-                </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-           <div class="nav-links">
-    <a href="inicio.html">Início</a>
-    <a href="busca.html">🔍 Buscar</a>
-    <a href="dashboard.html">Dashboard</a>
-    <button class="btn btn-outline" id="btnLogout">Sair</button>
-</div>
+            <div class="nav-links">
+                <a href="inicio.html" class="active">Início</a>
+                <a href="busca.html">Buscar</a>
+                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+            </div>
         </div>
     </nav>
 
-    <section class="welcome-section">
-        <div class="container">
-            <h1>👋 Bem-vindo de volta, <span class="highlight" id="welcomeNome">Usuário</span></h1>
-            <p class="subtitle">Aqui está o resumo da sua rede profissional.</p>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="number" id="statSeguidores">0</div>
-                    <div class="label">Seguidores</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number" id="statSeguindo">0</div>
-                    <div class="label">Seguindo</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number" id="statHabilidades">0</div>
-                    <div class="label">Habilidades</div>
-                </div>
-                <div class="stat-card">
-                    <div class="number" id="statExperiencias">0</div>
-                    <div class="label">Experiências</div>
-                </div>
-            </div>
-
-            <div class="dashboard-grid-inicio">
-                <div class="card-inicio">
-                    <h3>🚀 Pessoas sugeridas</h3>
-                    <div id="sugestoesContainer">
-                        <div class="empty-state-small">Carregando sugestões...</div>
-                    </div>
-                </div>
-                <div class="card-inicio">
-                    <h3>📊 Atividades recentes</h3>
-                    <div id="atividadesContainer">
-                        <div class="empty-state-small">Nenhuma atividade recente.</div>
-                    </div>
-                </div>
-            </div>
+    <!-- ===== MENU 3 BARRAS ===== -->
+    <div class="side-menu" id="sideMenu">
+        <button class="menu-icon" id="menuToggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+        <div class="menu-dropdown" id="menuDropdown">
+            <button id="menuDashboard">📊 Dashboard</button>
+            <button id="menuAtividades">📰 Atividades</button>
+            <div class="divider"></div>
+            <button id="menuDarkMode">🌙 Dark Mode</button>
+            <button id="menuLightMode">☀️ Light Mode</button>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    <!-- ===== FEED ===== -->
+    <div class="feed-container">
+        <h1 style="margin-bottom:20px;">Atividades Recentes</h1>
+        <div id="feedContent"><div class="empty">Carregando...</div></div>
+    </div>
 
-    <script src="inicio.js"></script>
+    <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
+
+    <script>
+        // ===== MENU 3 BARRAS =====
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('menuDropdown').classList.toggle('active');
+        });
+
+        document.getElementById('menuDashboard').addEventListener('click', () => {
+            window.location.href = '/dashboard.html';
+        });
+
+        document.getElementById('menuAtividades').addEventListener('click', () => {
+            window.location.href = '/inicio.html';
+        });
+
+        document.getElementById('menuDarkMode').addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            document.getElementById('menuDropdown').classList.remove('active');
+        });
+
+        document.getElementById('menuLightMode').addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            document.getElementById('menuDropdown').classList.remove('active');
+        });
+
+        // ===== TEMA =====
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // ===== LOGOUT =====
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            localStorage.removeItem('pplbase_token');
+            window.location.href = '/';
+        });
+
+        // ===== CARREGAR FEED =====
+        const API_URL = 'https://pplbase.onrender.com';
+        const token = localStorage.getItem('pplbase_token');
+
+        if (!token) window.location.href = '/';
+
+        async function carregarFeed() {
+            try {
+                const response = await fetch(`${API_URL}/pesquisa/pessoas`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Erro');
+                const pessoas = await response.json();
+                const container = document.getElementById('feedContent');
+
+                if (!pessoas.length) {
+                    container.innerHTML = '<div class="empty">Nenhuma atividade recente.</div>';
+                    return;
+                }
+
+                container.innerHTML = pessoas.slice(0, 10).map(p => `
+                    <div class="feed-item">
+                        <div class="user">
+                            <div class="avatar">${p.nome?.charAt(0) || '?'}</div>
+                            <div><strong>${p.nome || 'Usuário'}</strong> <span style="color:#5A5E72;">@${p.username}</span></div>
+                        </div>
+                        <div class="content">${p.bio || 'Novo membro do PplBase!'}</div>
+                        <div class="time">${p.localizacao ? `📍 ${p.localizacao}` : ''}</div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('feedContent').innerHTML = '<div class="empty">Erro ao carregar feed.</div>';
+            }
+        }
+
+        carregarFeed();
+    </script>
+
 </body>
 </html>
