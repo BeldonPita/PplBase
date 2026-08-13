@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PplBase - Conectando Talentos</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ========================================================= -->
+    <!-- NAVBAR -->
+    <!-- ========================================================= -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
+            </div>
+           <div class="nav-links">
+    <a href="index.html">Início</a>
+    <a href="#features">Recursos</a>
+    <a href="#como-funciona">Como Funciona</a>
+    <button class="btn btn-primary" id="btnAbrirModal">Entrar</button>
+</div>
+        </div>
+    </nav>
+
+    <!-- ========================================================= -->
+    <!-- HERO -->
+    <!-- ========================================================= -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Conecte-se com <span class="highlight">pessoas incríveis</span> e transforme sua rede</h1>
+                <p>
+                    Encontre talentos, compartilhe habilidades e construa sua rede
+                    de contatos profissionais. O PplBase é o lugar onde pessoas e
+                    oportunidades se encontram.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" id="btnHeroCadastro">
+                        🚀 Começar Agora
+                    </button>
+                    <a href="#como-funciona" class="btn btn-outline">Entender como funciona</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-illustration">
+                    <div class="hero-logo">
+                        <svg class="logo-svg" viewBox="0 0 100 100">
+                            <circle class="logo-ring" cx="50" cy="50" r="45" />
+                            <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="32" />
+                            <circle class="logo-dot" cx="50" cy="5" r="5" />
+                            <circle class="logo-dot" cx="50" cy="95" r="5" />
+                            <circle class="logo-dot" cx="5" cy="50" r="5" />
+                            <circle class="logo-dot" cx="95" cy="50" r="5" />
+                            <circle class="logo-dot" cx="50" cy="50" r="14" fill="#8b5cf6" opacity="0.15" />
+                            <text class="logo-letter" x="50" y="55" text-anchor="middle">P</text>
+                        </svg>
+                    </div>
+                    <div class="circle circle-1"></div>
+                    <div class="circle circle-2"></div>
+                    <div class="circle circle-3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FEATURES -->
+    <!-- ========================================================= -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Por que usar o <span class="highlight">PplBase</span>?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Encontre Talentos</h3>
+                    <p>Busque pessoas por habilidades, localização ou experiência profissional.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Conecte-se</h3>
+                    <p>Construa sua rede de contatos com pessoas que compartilham seus interesses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Mostre seu Trabalho</h3>
+                    <p>Compartilhe suas experiências e habilidades para atrair novas oportunidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- COMO FUNCIONA -->
+    <!-- ========================================================= -->
+    <section class="como-funciona" id="como-funciona">
+        <div class="container">
+            <h2>Como funciona?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Crie seu perfil</h3>
+                    <p>Cadastre-se e compartilhe suas habilidades e experiências.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Conecte-se</h3>
+                    <p>Encontre pessoas com interesses e habilidades complementares.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Colabore</h3>
+                    <p>Troque conhecimentos, colabore em projetos e cresça juntos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================================= -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- MODAL LOGIN / CADASTRO -->
+    <!-- ========================================================= -->
+    <div class="modal" id="modalLogin">
+        <div class="modal-content">
+
+            <!-- X DE SAÍDA (AFASATADO PARA CIMA) -->
+            <span class="modal-close" id="fecharModal">&times;</span>
+
+            <div class="modal-tabs">
+                <button class="tab active" data-tab="login">Entrar</button>
+                <button class="tab" data-tab="cadastro">Cadastrar</button>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- FORM LOGIN -->
+            <!-- ========================================================= -->
+            <form id="formLogin" class="modal-form active">
+                <h2>Entrar no PplBase</h2>
+
+                <div class="form-group">
+                    <label>Usuário ou Email</label>
+                    <input type="text" id="loginUsername" placeholder="Seu username ou email" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Senha</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="loginSenha" placeholder="Sua senha" required />
+                        <button type="button" class="toggle-password" onclick="toggleSenha('loginSenha', this)">👁️</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+
+                <div class="divider">ou</div>
+
+                <button type="button" class="btn-google">
+                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                    Entrar com Google
+                </button>
+
+                <p class="form-message" id="loginMessage"></p>
+            </form>
+
+            <!-- ========================================================= -->
+            <!-- FORM CADASTRO -->
+            <!-- ========================================================= -->
+            <form id="formCadastro" class="modal-form">
+                <h2>Criar sua conta</h2>
+
+                <div class="form-group">
+                    <label>Nome completo</label>
+                    <input type="text" id="cadNome" placeholder="Ex: João Silva" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Usuário</label>
+                    <input type="text" id="cadUsername" placeholder="Escolha um username" required />
+                    <small>Sem espaços, apenas letras e números</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="cadEmail" placeholder="seu@email.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Senha</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" required />
+                        <button type="button" class="toggle-password" onclick="toggleSenha('cadSenha', this)">👁️</button>
+                    </div>
+                    <small>Mínimo 6 caracteres</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Localização</label>
+                    <select id="cadLocalizacao">
+                        <option value="">Selecione sua província</option>
+                        <option value="Maputo">Maputo</option>
+                        <option value="Maputo-Cidade">Maputo-Cidade</option>
+                        <option value="Gaza">Gaza</option>
+                        <option value="Inhambane">Inhambane</option>
+                        <option value="Sofala">Sofala</option>
+                        <option value="Manica">Manica</option>
+                        <option value="Tete">Tete</option>
+                        <option value="Zambezia">Zambézia</option>
+                        <option value="Nampula">Nampula</option>
+                        <option value="Cabo-Delgado">Cabo Delgado</option>
+                        <option value="Niassa">Niassa</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Criar conta</button>
+
+                <div class="divider">ou</div>
+
+                <button type="button" class="btn-google">
+                    <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+                    Entrar com Google
+                </button>
+
+                <p class="form-message" id="cadastroMessage"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- SCRIPT PARA MOSTRAR/ESCONDER SENHA -->
+    <!-- ========================================================= -->
+    <script>
+        function toggleSenha(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+    </script>
+
+    <!-- ========================================================= -->
+    <!-- SCRIPT PRINCIPAL -->
+    <!-- ========================================================= -->
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - PplBase</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .perfil-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #161926;
+            border-radius: 16px;
+            border: 1px solid #1a1d2e;
+            padding: 40px;
+        }
+        
+        .perfil-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 16px;
+        }
+        
+        .perfil-nome {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .perfil-username {
+            text-align: center;
+            color: #8b5cf6;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .perfil-localizacao {
+            text-align: center;
+            color: #a0a4b8;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .perfil-bio {
+            text-align: center;
+            color: #a0a4b8;
+            font-size: 15px;
+            max-width: 500px;
+            margin: 0 auto 24px;
+        }
+        
+        .perfil-section {
+            margin-top: 24px;
+        }
+        
+        .perfil-section h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #1a1d2e;
+            padding-bottom: 8px;
+        }
+        
+        .perfil-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .perfil-tags .tag {
+            background: #1a1d2e;
+            color: #8b5cf6;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .perfil-exp-item {
+            background: #0b0d15;
+            padding: 16px;
+            border-radius: 12px;
+            border-left: 3px solid #8b5cf6;
+            margin-bottom: 12px;
+        }
+        
+        .perfil-exp-item .titulo {
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .perfil-exp-item .empresa {
+            color: #a0a4b8;
+            font-size: 14px;
+        }
+        
+        .perfil-exp-item .desc {
+            color: #a0a4b8;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .btn-conectar {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 24px auto 0;
+            padding: 14px;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-conectar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .loading-perfil {
+            text-align: center;
+            padding: 60px 0;
+            color: #a0a4b8;
+        }
+        
+        .loading-perfil .big-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .erro-perfil {
+            text-align: center;
+            padding: 60px 0;
+            color: #f87171;
+        }
+        
+        .erro-perfil .big-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .voltar-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+        
+        .voltar-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
+            </div>
+           <div class="nav-links">
+    <a href="inicio.html">Início</a>
+    <a href="busca.html">🔍 Buscar</a>
+    <a href="dashboard.html">Dashboard</a>
+    <button class="btn btn-outline" id="btnLogout">Sair</button>
+</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="perfilContainer">
+            <div class="loading-perfil">
+                <div class="big-icon">⏳</div>
+                <p>Carregando perfil...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="perfil.js"></script>
+</body>
+</html>
