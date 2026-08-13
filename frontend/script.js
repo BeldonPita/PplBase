@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://pplbase.onrender.com';
 
 const modal = document.getElementById('modalLogin');
 const btnAbrirModal = document.getElementById('btnAbrirModal');
