@@ -175,9 +175,6 @@ function renderResultados(usuarios, page) {
     resultsContainer.innerHTML = html;
 }
 
-// =========================================================
-// FILTROS RÁPIDOS
-// =========================================================
 
 filterTags.forEach(tag => {
     tag.addEventListener('click', () => {
@@ -198,9 +195,6 @@ filterTags.forEach(tag => {
     });
 });
 
-// =========================================================
-// EVENTOS
-// =========================================================
 
 btnBuscar.addEventListener('click', () => buscarPessoas(0));
 
