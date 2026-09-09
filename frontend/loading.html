@@ -121,6 +121,14 @@
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
+        .message.erro {
+            color: #F87171;
+            animation: none;
+        }
+        .message.sucesso {
+            color: #4ADE80;
+            animation: none;
+        }
     </style>
 </head>
 <body>
@@ -163,11 +171,16 @@
         const action = getParam('action');
         const username = getParam('username');
         const senha = getParam('senha');
+        const nome = getParam('nome');
+        const email = getParam('email');
+        const localizacao = getParam('localizacao');
 
         const API_URL = 'https://pplbase.onrender.com';
+        let erroOcorreu = false;
+        let mensagemErro = '';
 
         // =========================================================
-        // FUNÇÃO PARA ATUALIZAR A BARRA
+        // ELEMENTOS
         // =========================================================
 
         const fill = document.getElementById('progressFill');
@@ -182,9 +195,49 @@
             'Bem-vindo ao PplBase! 🚀'
         ];
 
+        const messagesErro = [
+            'A conetar ao servidor...',
+            'A autenticar credenciais...',
+            '⚠️ A verificar dados...',
+            '❌ Erro detectado',
+            'A redirecionar...'
+        ];
+
         let progress = 0;
+        let isComplete = false;
+        let isErro = false;
 
         function updateProgress() {
+            if (isComplete) return;
+
+            if (isErro) {
+                // Modo de erro: barra vai até 100% e redireciona para o login
+                if (progress < 100) {
+                    const increment = progress < 50 ? 15 : 8;
+                    progress = Math.min(progress + increment, 100);
+                    fill.style.width = progress + '%';
+
+                    const index = Math.min(Math.floor(progress / 20), messagesErro.length - 1);
+                    label.textContent = messagesErro[index];
+
+                    if (progress < 30) statusMsg.textContent = '⏳ A conetar...';
+                    else if (progress < 60) statusMsg.textContent = '🔐 A verificar credenciais...';
+                    else if (progress < 80) statusMsg.textContent = '⚠️ ' + mensagemErro;
+                    else statusMsg.textContent = '❌ Erro, a redirecionar...';
+
+                    setTimeout(updateProgress, 150);
+                } else {
+                    label.textContent = '❌ ' + mensagemErro;
+                    statusMsg.className = 'message erro';
+                    statusMsg.textContent = 'A redirecionar...';
+                    setTimeout(() => {
+                        window.location.href = '/login.html?erro=' + encodeURIComponent(mensagemErro);
+                    }, 1500);
+                }
+                return;
+            }
+
+            // Modo normal (sucesso)
             if (progress < 100) {
                 const increment = progress < 30 ? 12 :
                                   progress < 60 ? 8 :
@@ -203,53 +256,73 @@
 
                 setTimeout(updateProgress, 120);
             } else {
+                isComplete = true;
                 label.textContent = '✅ Pronto!';
-                statusMsg.textContent = 'A redirecionar...';
+                statusMsg.className = 'message sucesso';
+                statusMsg.textContent = action === 'login' ? '✅ Login realizado com sucesso!' : '✅ Conta criada com sucesso!';
                 setTimeout(() => {
                     window.location.href = redirectUrl;
-                }, 400);
+                }, 800);
             }
         }
 
         // =========================================================
-        // SE FOR LOGIN, FAZER A REQUISIÇÃO
+        // PROCESSAR AÇÃO
         // =========================================================
 
-        if (action === 'login' && username && senha) {
-            // Iniciar a animação
-            updateProgress();
-
-            // Fazer a requisição de login
+        if (action === 'login') {
+            // LOGIN
             fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, senha })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.access_token) {
+            .then(response => response.json().then(data => ({ ok: response.ok, data })))
+            .then(({ ok, data }) => {
+                if (ok && data.access_token) {
                     localStorage.setItem('pplbase_token', data.access_token);
-                    // A barra já está a correr, só aguardar
+                    // Sucesso -> animação normal
+                    updateProgress();
                 } else {
-                    // Erro: redirecionar de volta com erro
-                    localStorage.removeItem('pplbase_token');
-                    statusMsg.textContent = '❌ ' + (data.detail || 'Erro ao fazer login');
-                    label.textContent = 'Erro';
-                    // Voltar após 2 segundos
-                    setTimeout(() => {
-                        window.location.href = '/login.html?erro=' + encodeURIComponent(data.detail || 'Erro');
-                    }, 2000);
+                    isErro = true;
+                    mensagemErro = data.detail || 'Credenciais inválidas';
+                    updateProgress();
                 }
             })
             .catch(err => {
-                statusMsg.textContent = '❌ Erro de conexão';
-                label.textContent = 'Erro';
-                setTimeout(() => {
-                    window.location.href = '/login.html?erro=Erro de conexão';
-                }, 2000);
+                isErro = true;
+                mensagemErro = 'Erro de conexão com o servidor';
+                updateProgress();
             });
+
+        } else if (action === 'cadastro') {
+            // CADASTRO
+            const payload = { nome, username: getParam('username'), email, senha, localizacao };
+            fetch(`${API_URL}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(response => response.json().then(data => ({ ok: response.ok, data })))
+            .then(({ ok, data }) => {
+                if (ok && data.access_token) {
+                    localStorage.setItem('pplbase_token', data.access_token);
+                    // Sucesso -> animação normal
+                    updateProgress();
+                } else {
+                    isErro = true;
+                    mensagemErro = data.detail || 'Erro ao criar conta';
+                    updateProgress();
+                }
+            })
+            .catch(err => {
+                isErro = true;
+                mensagemErro = 'Erro de conexão com o servidor';
+                updateProgress();
+            });
+
         } else {
-            // Se for redirecionamento normal (cadastro), só mostrar a animação
+            // Redirecionamento normal (sem ação) -> só animação
             updateProgress();
         }
     </script>
