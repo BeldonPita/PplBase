@@ -19,12 +19,13 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            flex-wrap: wrap;
         }
         .nav-links a {
             color: #A0A4B8;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 8px;
             font-weight: 500;
             font-size: 14px;
@@ -165,12 +166,20 @@
         }
         .nav-links.mobile.open { display: flex; }
         .nav-links.mobile a { padding: 10px 12px; }
+        .nav-links.mobile .btn-outline { width: 100%; text-align: center; margin-top: 8px; }
 
         @media (max-width: 768px) {
             .nav-links.desktop { display: none; }
             .menu-toggle { display: block; }
             .nav-links.mobile { max-width: 100%; right: 0; top: 60px; }
             .banner h1 { font-size: 22px; }
+            .banner { padding: 20px; }
+        }
+        @media (max-width: 480px) {
+            .banner h1 { font-size: 18px; }
+            .container-inicio { padding: 12px; }
+            .logo-text { font-size: 18px; }
+            .logo-avatar { width: 32px; height: 32px; }
         }
     </style>
 </head>
@@ -246,14 +255,14 @@
             <h1>👋 Bem-vindo de volta, <span id="userName">Usuário</span>!</h1>
             <p>Explore as últimas novidades e conecte-se com a comunidade.</p>
         </div>
-
         <div id="feedContent" style="color:#A0A4B8; text-align:center; padding:40px 0;">
             Carregando atividades...
         </div>
     </div>
 
     <footer style="padding:40px 0; text-align:center; border-top:1px solid #1A1D2E; color:#5A5E72;">
-        <div class="container"><p>&copy; 2026 PplBase</p></div></footer>
+        <div class="container"><p>&copy; 2026 PplBase</p></div>
+    </footer>
 
     <script>
         // ===== MENU MOBILE =====
@@ -293,7 +302,6 @@
         // ===== CARREGAR FEED =====
         const API_URL = 'https://pplbase.onrender.com';
         const token = localStorage.getItem('pplbase_token');
-
         if (!token) window.location.href = '/';
 
         async function carregarFeed() {
@@ -326,9 +334,7 @@
                 document.getElementById('feedContent').innerHTML = '<div style="text-align:center; color:#EF4444; padding:20px;">Erro ao carregar feed.</div>';
             }
         }
-
         carregarFeed();
     </script>
-
 </body>
 </html>

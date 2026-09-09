@@ -7,29 +7,174 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .dashboard-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .card { background: #161926; border: 1px solid #1A1D2E; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .card {
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
         .card h3 { color: #E4E6EB; margin-bottom: 12px; }
         .profile-header { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #8B5CF6, #6D28D9); display: flex; align-items: center; justify-content: center; font-size: 32px; color: #fff; flex-shrink: 0; overflow: hidden; position: relative; }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #fff;
+            flex-shrink: 0;
+        }
         .profile-info p { padding: 4px 0; border-bottom: 1px solid #1A1D2E; color: #A0A4B8; }
         .profile-info p:last-child { border-bottom: none; }
         .profile-info strong { color: #E4E6EB; }
-        .tag { display: inline-block; background: #0B0D15; color: #8B5CF6; padding: 4px 12px; border-radius: 20px; font-size: 13px; margin: 3px; border: 1px solid #1A1D2E; }
+        .tag {
+            display: inline-block;
+            background: #0B0D15;
+            color: #8B5CF6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 3px;
+            border: 1px solid #1A1D2E;
+        }
         .empty { color: #5A5E72; text-align: center; padding: 20px 0; }
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .input-row { display: flex; gap: 8px; margin-top: 12px; }
-        .input-row input { flex: 1; padding: 8px 12px; background: #0B0D15; border: 1px solid #1A1D2E; border-radius: 6px; color: #E4E6EB; }
+        .input-row input {
+            flex: 1;
+            padding: 8px 12px;
+            background: #0B0D15;
+            border: 1px solid #1A1D2E;
+            border-radius: 6px;
+            color: #E4E6EB;
+        }
         .input-row input:focus { outline: none; border-color: #8B5CF6; }
         .btn-small { padding: 6px 16px; font-size: 13px; border-radius: 6px; }
-        .btn-primary { background: linear-gradient(135deg, #8B5CF6, #6D28D9); color: #fff; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4); }
-        .btn-outline { background: transparent; color: #A0A4B8; border: 2px solid #2A2D3E; padding: 6px 16px; border-radius: 6px; font-size: 13px; cursor: pointer; transition: all 0.3s; }
+        .btn-primary {
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,92,246,0.4); }
+        .btn-outline {
+            background: transparent;
+            color: #A0A4B8;
+            border: 2px solid #2A2D3E;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
         .btn-outline:hover { border-color: #8B5CF6; color: #fff; }
-
-        .exp-item { background: #0B0D15; border: 1px solid #1A1D2E; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; color: #A0A4B8; }
+        .exp-item {
+            background: #0B0D15;
+            border: 1px solid #1A1D2E;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #A0A4B8;
+        }
         .exp-item strong { color: #E4E6EB; }
-        .exp-actions button { background: none; border: none; color: #5A5E72; cursor: pointer; padding: 4px 8px; }
-        .exp-actions button:hover { color: #F87171; }
+        .exp-actions button {
+            background: none;
+            border: none;
+            color: #5A5E72;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+        .exp-actions button:hover { color: #EF4444; }
+
+        /* ===== NAVBAR ===== */
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #A0A4B8;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #E4E6EB;
+            background: #1A1D2E;
+        }
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+            color: #A0A4B8;
+            transition: all 0.2s;
+        }
+        .notification-icon:hover { color: #8B5CF6; }
+        .notification-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #EF4444;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #E4E6EB;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-links.mobile {
+            display: none;
+            flex-direction: column;
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 12px;
+            padding: 16px;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            z-index: 100;
+            min-width: 180px;
+            width: 100%;
+            max-width: 280px;
+        }
+        .nav-links.mobile.open { display: flex; }
+        .nav-links.mobile a { padding: 10px 12px; }
+        .nav-links.mobile .btn-outline { width: 100%; text-align: center; margin-top: 8px; }
 
         .side-menu {
             position: fixed;
@@ -49,7 +194,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(139,92,246,0.4);
             transition: all 0.3s;
         }
         .side-menu .menu-icon:hover { transform: scale(1.05); }
@@ -84,7 +229,18 @@
         .side-menu .menu-dropdown button:hover { background: #1A1D2E; }
         .side-menu .menu-dropdown .divider { height: 1px; background: #1A1D2E; margin: 6px 0; }
 
-        @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .nav-links.desktop { display: none; }
+            .menu-toggle { display: block; }
+            .nav-links.mobile { max-width: 100%; right: 0; top: 60px; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .dashboard-container { padding: 0 12px; margin: 16px auto; }
+        }
+        @media (max-width: 480px) {
+            .profile-header { flex-direction: column; text-align: center; }
+            .logo-text { font-size: 18px; }
+            .logo-avatar { width: 32px; height: 32px; }
+        }
     </style>
 </head>
 <body>
@@ -93,19 +249,51 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <div class="logo-avatar"><svg class="logo-svg" viewBox="0 0 100 100"><circle class="logo-ring" cx="50" cy="50" r="42" /><circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" /><circle class="logo-dot" cx="50" cy="8" r="4" /><circle class="logo-dot" cx="50" cy="92" r="4" /><circle class="logo-dot" cx="8" cy="50" r="4" /><circle class="logo-dot" cx="92" cy="50" r="4" /><text class="logo-letter" x="50" y="58" text-anchor="middle">P</text></svg></div><span class="logo-text">Ppl<span class="highlight">Base</span></span>
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-            <div class="nav-links">
+            <button class="menu-toggle" id="menuToggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <div class="nav-links desktop">
                 <a href="inicio.html">Início</a>
                 <a href="busca.html">Buscar</a>
-                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <div class="notification-icon" id="notifIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">3</span>
+                </div>
+                <button class="btn-outline" id="btnLogoutDesktop">Sair</button>
+            </div>
+            <div class="nav-links mobile" id="mobileMenu">
+                <a href="inicio.html">Início</a>
+                <a href="busca.html">Buscar</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <button class="btn-outline" id="btnLogoutMobile">Sair</button>
             </div>
         </div>
     </nav>
 
     <!-- ===== MENU 3 BARRAS ===== -->
     <div class="side-menu" id="sideMenu">
-        <button class="menu-icon" id="menuToggle">
+        <button class="menu-icon" id="menuToggleSide">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <line x1="3" y1="12" x2="21" y2="12"/>
@@ -128,10 +316,7 @@
         <div class="card">
             <h3>Perfil</h3>
             <div class="profile-header">
-                <div class="profile-avatar" id="avatarContainer">
-                    <span id="avatarPlaceholder">P</span>
-                    <img id="avatarImage" style="display:none;" alt="Foto">
-                </div>
+                <div class="profile-avatar" id="avatarContainer"><span id="avatarPlaceholder">P</span></div>
                 <div id="profileInfo"><div class="empty">Carregando...</div></div>
             </div>
         </div>
@@ -153,48 +338,48 @@
         </div>
     </div>
 
-    <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
+    <footer style="padding:40px 0; text-align:center; border-top:1px solid #1A1D2E; color:#5A5E72;">
+        <div class="container"><p>&copy; 2026 PplBase</p></div>
+    </footer>
 
     <script>
-        // ===== MENU 3 BARRAS =====
+        // ===== MENU MOBILE =====
         document.getElementById('menuToggle').addEventListener('click', () => {
-            document.getElementById('menuDropdown').classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('open');
         });
 
+        // ===== MENU 3 BARRAS =====
+        document.getElementById('menuToggleSide').addEventListener('click', () => {
+            document.getElementById('menuDropdown').classList.toggle('active');
+        });
         document.getElementById('menuDashboard').addEventListener('click', () => {
             window.location.href = '/dashboard.html';
         });
-
         document.getElementById('menuAtividades').addEventListener('click', () => {
             window.location.href = '/inicio.html';
         });
-
         document.getElementById('menuDarkMode').addEventListener('click', () => {
             document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
             document.getElementById('menuDropdown').classList.remove('active');
         });
-
         document.getElementById('menuLightMode').addEventListener('click', () => {
             document.documentElement.setAttribute('data-theme', 'light');
             localStorage.setItem('theme', 'light');
             document.getElementById('menuDropdown').classList.remove('active');
         });
 
-        // ===== TEMA =====
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-
         // ===== LOGOUT =====
-        document.getElementById('btnLogout').addEventListener('click', () => {
+        function logout() {
             localStorage.removeItem('pplbase_token');
             window.location.href = '/';
-        });
+        }
+        document.getElementById('btnLogoutDesktop').addEventListener('click', logout);
+        document.getElementById('btnLogoutMobile').addEventListener('click', logout);
 
         // ===== DASHBOARD JS =====
         const API_URL = 'https://pplbase.onrender.com';
         const token = localStorage.getItem('pplbase_token');
-
         if (!token) window.location.href = '/';
 
         function getHeaders() {
@@ -206,7 +391,6 @@
                 const response = await fetch(`${API_URL}/usuarios/me`, { headers: getHeaders() });
                 if (!response.ok) throw new Error('Erro');
                 const user = await response.json();
-
                 document.getElementById('profileInfo').innerHTML = `
                     <p><strong>Nome:</strong> ${user.nome || '-'}</p>
                     <p><strong>Username:</strong> @${user.username}</p>
@@ -214,30 +398,24 @@
                     <p><strong>Localização:</strong> ${user.localizacao || 'Não definida'}</p>
                     <p><strong>Bio:</strong> ${user.bio || 'Sem bio'}</p>
                 `;
-
                 const habList = document.getElementById('habilidadesList');
                 if (user.habilidades?.length) {
                     habList.innerHTML = user.habilidades.map(h => `<span class="tag">${h.nome}</span>`).join('');
                 } else {
                     habList.innerHTML = '<div class="empty">Nenhuma habilidade</div>';
                 }
-
                 const expList = document.getElementById('experienciasList');
                 if (user.experiencias?.length) {
                     expList.innerHTML = user.experiencias.map(exp => `
                         <div class="exp-item">
                             <div><strong>${exp.titulo}</strong> ${exp.empresa ? `- ${exp.empresa}` : ''} ${exp.localizacao ? `📍 ${exp.localizacao}` : ''}</div>
-                            <div class="exp-actions">
-                                <button onclick="removerExperiencia(${exp.id})">🗑️</button>
-                            </div>
+                            <div class="exp-actions"><button onclick="removerExperiencia(${exp.id})">🗑️</button></div>
                         </div>
                     `).join('');
                 } else {
                     expList.innerHTML = '<div class="empty">Nenhuma experiência</div>';
                 }
-
                 window.usuarioAtual = user;
-
             } catch (error) {
                 console.error('Erro:', error);
                 document.getElementById('profileInfo').innerHTML = '<div class="empty">Erro ao carregar perfil</div>';
@@ -259,7 +437,6 @@
             const input = document.getElementById('novaHabilidade');
             const nome = input.value.trim();
             if (!nome) return;
-
             try {
                 const response = await fetch(`${API_URL}/usuarios/habilidades`, {
                     method: 'POST',
@@ -279,6 +456,5 @@
 
         carregarPerfil();
     </script>
-
 </body>
 </html>
