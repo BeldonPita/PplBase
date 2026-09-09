@@ -18,71 +18,71 @@
             justify-content: center;
             padding: 20px;
         }
-        .login-container {
+        .cadastro-container {
             background: #161926;
             border: 1px solid #1A1D2E;
             border-radius: 24px;
-            padding: 48px 40px;
+            padding: 40px 36px;
             max-width: 440px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
-        .login-container::-webkit-scrollbar { width: 4px; }
-        .login-container::-webkit-scrollbar-track { background: #0B0D15; }
-        .login-container::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 4px; }
+        .cadastro-container::-webkit-scrollbar { width: 4px; }
+        .cadastro-container::-webkit-scrollbar-track { background: #0B0D15; }
+        .cadastro-container::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 4px; }
 
-        .login-logo {
+        .logo {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
-        .login-logo .logo-avatar {
-            width: 48px;
-            height: 48px;
+        .logo-avatar {
+            width: 44px;
+            height: 44px;
             flex-shrink: 0;
         }
-        .login-logo .logo-svg {
+        .logo-svg {
             width: 100%;
             height: 100%;
             animation: girarLogo 8s linear infinite;
         }
-        .login-logo .logo-ring {
+        .logo-ring {
             fill: none;
             stroke: #8B5CF6;
             stroke-width: 2;
             opacity: 0.7;
         }
-        .login-logo .logo-ring-2 {
+        .logo-ring-2 {
             stroke: #6D28D9;
             stroke-width: 1.5;
             stroke-dasharray: 4 8;
             animation: girarLogo 4s linear infinite reverse;
         }
-        .login-logo .logo-dot {
+        .logo-dot {
             fill: #8B5CF6;
             animation: pulsarDot 2s ease-in-out infinite;
         }
-        .login-logo .logo-dot:nth-child(3) { animation-delay: 0.5s; }
-        .login-logo .logo-dot:nth-child(4) { animation-delay: 1s; }
-        .login-logo .logo-dot:nth-child(5) { animation-delay: 1.5s; }
-        .login-logo .logo-letter {
+        .logo-dot:nth-child(3) { animation-delay: 0.5s; }
+        .logo-dot:nth-child(4) { animation-delay: 1s; }
+        .logo-dot:nth-child(5) { animation-delay: 1.5s; }
+        .logo-letter {
             fill: #E4E6EB;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             text-anchor: middle;
             dominant-baseline: central;
         }
-        .login-logo .logo-text {
-            font-size: 28px;
+        .logo-text {
+            font-size: 26px;
             font-weight: 800;
             color: #E4E6EB;
         }
-        .login-logo .logo-text .highlight { color: #8B5CF6; }
+        .logo-text .highlight { color: #8B5CF6; }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -92,36 +92,36 @@
             50% { opacity: 1; r: 5; }
         }
 
-        .login-title {
+        .titulo {
             text-align: center;
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 4px;
         }
-        .login-subtitle {
+        .subtitulo {
             text-align: center;
             color: #A0A4B8;
             font-size: 14px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .form-group { margin-bottom: 16px; }
+        .form-group { margin-bottom: 14px; }
         .form-group label {
             display: block;
             font-weight: 500;
             color: #A0A4B8;
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 4px;
         }
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             background: #0B0D15;
             border: 2px solid #1A1D2E;
-            border-radius: 12px;
+            border-radius: 10px;
             color: #E4E6EB;
-            font-size: 16px;
+            font-size: 15px;
             transition: border-color 0.3s;
             appearance: none;
             -webkit-appearance: none;
@@ -143,12 +143,12 @@
         .checkbox-group {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            margin: 16px 0 24px;
+            gap: 10px;
+            margin: 14px 0 20px;
         }
         .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             accent-color: #8B5CF6;
             margin-top: 2px;
             flex-shrink: 0;
@@ -156,7 +156,7 @@
         }
         .checkbox-group label {
             color: #A0A4B8;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
         }
         .checkbox-group label a {
@@ -171,32 +171,32 @@
             background: linear-gradient(135deg, #8B5CF6, #6D28D9);
             color: #fff;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 700;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
         }
 
-        .login-footer {
+        .footer {
             text-align: center;
             color: #5A5E72;
             font-size: 14px;
         }
-        .login-footer a {
+        .footer a {
             color: #8B5CF6;
             text-decoration: none;
             font-weight: 600;
         }
-        .login-footer a:hover { text-decoration: underline; }
+        .footer a:hover { text-decoration: underline; }
 
         .form-message {
-            margin-top: 12px;
+            margin-top: 10px;
             text-align: center;
             font-size: 14px;
         }
@@ -204,19 +204,20 @@
         .form-message.error { color: #F87171; }
 
         @media (max-width: 480px) {
-            .login-container { padding: 32px 20px; }
-            .login-logo .logo-text { font-size: 22px; }
-            .login-title { font-size: 20px; }
+            .cadastro-container { padding: 28px 20px; }
+            .logo-text { font-size: 22px; }
+            .titulo { font-size: 20px; }
             .form-group input,
-            .form-group select { padding: 12px 14px; font-size: 14px; }
+            .form-group select { padding: 10px 12px; font-size: 14px; }
             .btn-primary { padding: 12px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="login-logo">
+    <div class="cadastro-container">
+        <!-- LOGO -->
+        <div class="logo">
             <div class="logo-avatar">
                 <svg class="logo-svg" viewBox="0 0 100 100">
                     <circle class="logo-ring" cx="50" cy="50" r="42" />
@@ -231,286 +232,11 @@
             <span class="logo-text">Ppl<span class="highlight">Base</span></span>
         </div>
 
-        <h1 class="login-title">Criar sua conta</h1>
-        <p class="login-subtitle">Comece a conectar-se com pessoas e oportunidades</p>
+        <h1 class="titulo">Criar sua conta</h1>
+        <p class="subtitulo">Comece a conectar-se com pessoas e oportunidades</p>
 
-        <form id="formCadastro">
-            <div class="form-group">
-                <label>Nome completo</label>
-                <input type="text" id="cadNome" placeholder="Ex: João Silva" required />
-            </div>
-            <div class="form-group">
-                <label>Usuário</label>
-                <input type="text" id="cadUsername" placeholder="Escolha um username" required />
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="cadEmail" placeholder="seu@email.com" required />
-            </div>
-            <div class="form-group">
-                <label>Senha</label>
-                <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" required />
-            </div>
-            <div class="form-group">
-                <label>Localização</label>
-                <select id="cadLocalizacao">
-                    <option value="">Selecione sua província</option>
-                    <option value="Maputo">Maputo</option>
-                    <option value="Maputo-Cidade">Maputo-Cidade</option>
-                    <option value="Gaza">Gaza</option>
-                    <option value="Inhambane">Inhambane</option>
-                    <option value="Sofala">Sofala</option>
-                    <option value="Manica">Manica</option>
-                    <option value="Tete">Tete</option>
-                    <option value="Zambezia">Zambézia</option>
-                    <option value="Nampula">Nampula</option>
-                    <option value="Cabo-Delgado">Cabo Delgado</option>
-                    <option value="Niassa">Niassa</option>
-                </select>
-            </div>
-
-            <div class="checkbox-group">
-                <input type="checkbox" id="termsCheck" required />
-                <label
-cd ~/pplbase/frontend
-cat > cadastro.html << 'EOF'
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Conta - PplBase</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0B0D15;
-            color: #E4E6EB;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .login-container {
-            background: #161926;
-            border: 1px solid #1A1D2E;
-            border-radius: 24px;
-            padding: 48px 40px;
-            max-width: 440px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        }
-        .login-container::-webkit-scrollbar { width: 4px; }
-        .login-container::-webkit-scrollbar-track { background: #0B0D15; }
-        .login-container::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 4px; }
-
-        .login-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-        .login-logo .logo-avatar {
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-        }
-        .login-logo .logo-svg {
-            width: 100%;
-            height: 100%;
-            animation: girarLogo 8s linear infinite;
-        }
-        .login-logo .logo-ring {
-            fill: none;
-            stroke: #8B5CF6;
-            stroke-width: 2;
-            opacity: 0.7;
-        }
-        .login-logo .logo-ring-2 {
-            stroke: #6D28D9;
-            stroke-width: 1.5;
-            stroke-dasharray: 4 8;
-            animation: girarLogo 4s linear infinite reverse;
-        }
-        .login-logo .logo-dot {
-            fill: #8B5CF6;
-            animation: pulsarDot 2s ease-in-out infinite;
-        }
-        .login-logo .logo-dot:nth-child(3) { animation-delay: 0.5s; }
-        .login-logo .logo-dot:nth-child(4) { animation-delay: 1s; }
-        .login-logo .logo-dot:nth-child(5) { animation-delay: 1.5s; }
-        .login-logo .logo-letter {
-            fill: #E4E6EB;
-            font-size: 32px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            text-anchor: middle;
-            dominant-baseline: central;
-        }
-        .login-logo .logo-text {
-            font-size: 28px;
-            font-weight: 800;
-            color: #E4E6EB;
-        }
-        .login-logo .logo-text .highlight { color: #8B5CF6; }
-        @keyframes girarLogo {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes pulsarDot {
-            0%, 100% { opacity: 0.3; r: 3; }
-            50% { opacity: 1; r: 5; }
-        }
-
-        .login-title {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .login-subtitle {
-            text-align: center;
-            color: #A0A4B8;
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            color: #A0A4B8;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 14px 16px;
-            background: #0B0D15;
-            border: 2px solid #1A1D2E;
-            border-radius: 12px;
-            color: #E4E6EB;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #8B5CF6;
-        }
-        .form-group input::placeholder {
-            color: #5A5E72;
-            font-size: 14px;
-        }
-        .form-group select option {
-            background: #161926;
-            color: #E4E6EB;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 16px 0 24px;
-        }
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #8B5CF6;
-            margin-top: 2px;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-        .checkbox-group label {
-            color: #A0A4B8;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .checkbox-group label a {
-            color: #8B5CF6;
-            text-decoration: none;
-        }
-        .checkbox-group label a:hover { text-decoration: underline; }
-
-        .btn-primary {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 20px;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
-        }
-
-        .login-footer {
-            text-align: center;
-            color: #5A5E72;
-            font-size: 14px;
-        }
-        .login-footer a {
-            color: #8B5CF6;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .login-footer a:hover { text-decoration: underline; }
-
-        .form-message {
-            margin-top: 12px;
-            text-align: center;
-            font-size: 14px;
-        }
-        .form-message.success { color: #4ADE80; }
-        .form-message.error { color: #F87171; }
-
-        @media (max-width: 480px) {
-            .login-container { padding: 32px 20px; }
-            .login-logo .logo-text { font-size: 22px; }
-            .login-title { font-size: 20px; }
-            .form-group input,
-            .form-group select { padding: 12px 14px; font-size: 14px; }
-            .btn-primary { padding: 12px; font-size: 14px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="login-container">
-        <div class="login-logo">
-            <div class="logo-avatar">
-                <svg class="logo-svg" viewBox="0 0 100 100">
-                    <circle class="logo-ring" cx="50" cy="50" r="42" />
-                    <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
-                    <circle class="logo-dot" cx="50" cy="8" r="4" />
-                    <circle class="logo-dot" cx="50" cy="92" r="4" />
-                    <circle class="logo-dot" cx="8" cy="50" r="4" />
-                    <circle class="logo-dot" cx="92" cy="50" r="4" />
-                    <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
-                </svg>
-            </div>
-            <span class="logo-text">Ppl<span class="highlight">Base</span></span>
-        </div>
-
-        <h1 class="login-title">Criar sua conta</h1>
-        <p class="login-subtitle">Comece a conectar-se com pessoas e oportunidades</p>
-
-        <form id="formCadastro">
+        <!-- FORMULÁRIO -->
+        <form id="formCadastro" novalidate>
             <div class="form-group">
                 <label>Nome completo</label>
                 <input type="text" id="cadNome" placeholder="Ex: João Silva" required />
@@ -556,7 +282,7 @@ cat > cadastro.html << 'EOF'
             <p class="form-message" id="cadastroMessage"></p>
         </form>
 
-        <div class="login-footer">
+        <div class="footer">
             <p>Já tem conta? <a href="login.html">Entrar</a></p>
         </div>
     </div>
@@ -567,12 +293,20 @@ cat > cadastro.html << 'EOF'
         document.getElementById('formCadastro').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const nome = document.getElementById('cadNome').value;
-            const username = document.getElementById('cadUsername').value;
-            const email = document.getElementById('cadEmail').value;
+            const nome = document.getElementById('cadNome').value.trim();
+            const username = document.getElementById('cadUsername').value.trim();
+            const email = document.getElementById('cadEmail').value.trim();
             const senha = document.getElementById('cadSenha').value;
             const localizacao = document.getElementById('cadLocalizacao').value;
             const message = document.getElementById('cadastroMessage');
+            const termsCheck = document.getElementById('termsCheck');
+
+            // Validações
+            if (!nome || !username || !email || !senha) {
+                message.textContent = '❌ Preencha todos os campos obrigatórios';
+                message.className = 'form-message error';
+                return;
+            }
 
             if (senha.length < 6) {
                 message.textContent = '❌ A senha deve ter no mínimo 6 caracteres';
@@ -580,11 +314,28 @@ cat > cadastro.html << 'EOF'
                 return;
             }
 
+            if (!termsCheck.checked) {
+                message.textContent = '❌ Aceite os Termos de Uso e Condições';
+                message.className = 'form-message error';
+                return;
+            }
+
+            // Mostrar mensagem de processamento
             message.textContent = '⏳ A criar conta...';
             message.className = 'form-message';
 
             // Ir para a tela de carregamento com os dados
-            window.location.href = `loading.html?action=cadastro&nome=${encodeURIComponent(nome)}&username=${encodeURIComponent(username)}&email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}&localizacao=${encodeURIComponent(localizacao)}&redirect=/inicio.html`;
+            const params = new URLSearchParams({
+                action: 'cadastro',
+                nome: nome,
+                username: username,
+                email: email,
+                senha: senha,
+                localizacao: localizacao,
+                redirect: '/inicio.html'
+            });
+
+            window.location.href = `loading.html?${params.toString()}`;
         });
     </script>
 
