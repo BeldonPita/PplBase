@@ -11,10 +11,6 @@ from app.auth import criar_access_token, hash_senha
 
 router = APIRouter()
 
-# =========================================================
-# CONFIGURAÇÕES GOOGLE (lidas do ambiente)
-# =========================================================
-
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", "https://pplbase-frontend.onrender.com/auth/google/callback")
@@ -22,10 +18,8 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "https://pplbase-frontend.onrender.com"
 
 @router.get("/google/login")
 def google_login():
-    """Redireciona para o Google para autenticação"""
     if not GOOGLE_CLIENT_ID:
         raise HTTPException(status_code=500, detail="GOOGLE_CLIENT_ID não configurado")
-    
     params = {
         "client_id": GOOGLE_CLIENT_ID,
         "redirect_uri": GOOGLE_REDIRECT_URI,
@@ -39,11 +33,8 @@ def google_login():
 
 @router.get("/google/callback")
 def google_callback(code: str, db: Session = Depends(get_db)):
-    """Callback do Google após autenticação"""
     if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
         raise HTTPException(status_code=500, detail="Credenciais Google não configuradas")
-    
-    # Trocar código por token
     token_url = "https://oauth2.googleapis.com/token"
     token_data = {
         "code": code,
@@ -52,41 +43,29 @@ def google_callback(code: str, db: Session = Depends(get_db)):
         "redirect_uri": GOOGLE_REDIRECT_URI,
         "grant_type": "authorization_code"
     }
-    
     token_response = requests.post(token_url, data=token_data)
     token_json = token_response.json()
-    
     if "error" in token_json:
         raise HTTPException(status_code=400, detail=token_json.get("error_description", "Erro ao obter token"))
-    
     access_token = token_json.get("access_token")
-    
-    # Obter informações do utilizador
     user_info_response = requests.get(
         "https://www.googleapis.com/oauth2/v2/userinfo",
         headers={"Authorization": f"Bearer {access_token}"}
     )
     user_info = user_info_response.json()
-    
     if "error" in user_info:
         raise HTTPException(status_code=400, detail=user_info.get("error_description", "Erro ao obter informações"))
-    
     email = user_info.get("email")
     nome = user_info.get("name")
     foto_url = user_info.get("picture")
-    
     if not email:
         raise HTTPException(status_code=400, detail="Email não encontrado")
-    
-    # Verificar se o utilizador já existe
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
-    
     if not usuario:
         username = email.split("@")[0]
         existing = db.query(Usuario).filter(Usuario.username == username).first()
         if existing:
             username = f"{username}_{secrets.token_hex(3)}"
-        
         usuario = Usuario(
             nome=nome or username,
             username=username,
@@ -99,9 +78,5 @@ def google_callback(code: str, db: Session = Depends(get_db)):
         db.add(usuario)
         db.commit()
         db.refresh(usuario)
-    
-    # Criar token JWT
     token = criar_access_token(data={"sub": usuario.username})
-    
-    # Redirecionar para o frontend com o token
     return RedirectResponse(url=f"{FRONTEND_URL}/auth/success?token={token}")
