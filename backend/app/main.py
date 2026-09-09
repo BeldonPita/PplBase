@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
-from app.routers import auth, usuarios, pesquisa, conexoes
+from app.routers import auth, usuarios, pesquisa, conexoes, google
 
 Base.metadata.create_all(bind=engine)
 
@@ -24,6 +24,7 @@ app.include_router(auth.router, prefix="/auth", tags=["Autenticação"])
 app.include_router(usuarios.router, prefix="/usuarios", tags=["Usuários"])
 app.include_router(pesquisa.router, prefix="/pesquisa", tags=["Pesquisa"])
 app.include_router(conexoes.router, prefix="/conexoes", tags=["Conexões"])
+app.include_router(google.router, prefix="/auth", tags=["Google"])
 
 @app.get("/")
 def root():
