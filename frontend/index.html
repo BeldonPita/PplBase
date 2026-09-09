@@ -24,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* ===== NAVBAR ===== */
         .navbar {
             padding: 16px 0;
             background: rgba(11, 13, 21, 0.95);
@@ -100,7 +99,6 @@
             50% { opacity: 1; r: 5; }
         }
 
-        /* ===== MENU ===== */
         .nav-links {
             display: flex;
             align-items: center;
@@ -137,7 +135,6 @@
             box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
         }
 
-        /* ===== MENU MOBILE ===== */
         .menu-toggle {
             display: none;
             background: none;
@@ -174,7 +171,6 @@
             margin-top: 4px;
         }
 
-        /* ===== HERO ===== */
         .hero {
             padding: 80px 0 60px;
             min-height: 70vh;
@@ -208,7 +204,6 @@
             flex-wrap: wrap;
         }
 
-        /* ===== FEATURES ===== */
         .features {
             padding: 60px 0;
             background: #0F111A;
@@ -248,7 +243,117 @@
             font-size: 14px;
         }
 
-        /* ===== FOOTER ===== */
+        /* ===== MÓDULOS ===== */
+        .modulos {
+            padding: 60px 0;
+            background: #0B0D15;
+        }
+        .modulos h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+        .modulos .subtitle {
+            text-align: center;
+            color: #A0A4B8;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+        .modulos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .modulo-card {
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .modulo-card:hover {
+            border-color: #8B5CF6;
+            transform: translateY(-5px);
+        }
+        .modulo-card .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .modulo-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #E4E6EB;
+        }
+        .modulo-card p {
+            color: #A0A4B8;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ===== DEPOIMENTOS ===== */
+        .depoimentos {
+            padding: 60px 0;
+            background: #0F111A;
+        }
+        .depoimentos h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+        .depoimentos .subtitle {
+            text-align: center;
+            color: #A0A4B8;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+        .depoimentos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .depoimento-card {
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .depoimento-card:hover {
+            border-color: #8B5CF6;
+            transform: translateY(-5px);
+        }
+        .depoimento-card .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 auto 12px;
+        }
+        .depoimento-card blockquote {
+            color: #A0A4B8;
+            font-size: 15px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .depoimento-card .nome {
+            font-weight: 600;
+            color: #E4E6EB;
+            font-size: 16px;
+        }
+        .depoimento-card .cargo {
+            color: #5A5E72;
+            font-size: 13px;
+        }
+
         .footer {
             padding: 40px 0;
             border-top: 1px solid #1A1D2E;
@@ -296,7 +401,6 @@
             color: #8B5CF6;
         }
 
-        /* ===== RESPONSIVO ===== */
         @media (max-width: 1024px) {
             .hero .container {
                 grid-template-columns: 1fr;
@@ -308,7 +412,9 @@
             .hero-buttons {
                 justify-content: center;
             }
-            .features-grid {
+            .features-grid,
+            .modulos-grid,
+            .depoimentos-grid {
                 grid-template-columns: 1fr 1fr;
             }
             .footer-grid {
@@ -322,7 +428,9 @@
             .menu-toggle {
                 display: block;
             }
-            .features-grid {
+            .features-grid,
+            .modulos-grid,
+            .depoimentos-grid {
                 grid-template-columns: 1fr;
             }
             .hero h1 {
@@ -352,10 +460,14 @@
                 padding: 40px 0 30px;
                 min-height: auto;
             }
-            .features {
+            .features,
+            .modulos,
+            .depoimentos {
                 padding: 30px 0;
             }
-            .features h2 {
+            .features h2,
+            .modulos h2,
+            .depoimentos h2 {
                 font-size: 28px;
             }
             .logo-text {
@@ -444,7 +556,7 @@
         </div>
     </section>
 
-    <!-- ===== FEATURES ===== -->
+    <!-- ===== FUNCIONALIDADES ===== -->
     <section class="features" id="funcionalidades">
         <div class="container">
             <h2>Por que usar o <span class="highlight">PplBase</span>?</h2>
@@ -463,6 +575,74 @@
                     <div class="feature-icon">📈</div>
                     <h3>Mostre seu Trabalho</h3>
                     <p>Compartilhe suas experiências e habilidades para atrair novas oportunidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MÓDULOS ===== -->
+    <section class="modulos" id="modulos">
+        <div class="container">
+            <h2>📚 <span class="highlight">Módulos</span> do PplBase</h2>
+            <p class="subtitle">Ferramentas completas para impulsionar sua carreira e conectar-se com o mundo</p>
+            <div class="modulos-grid">
+                <div class="modulo-card">
+                    <div class="icon">👤</div>
+                    <h3>Perfil Profissional</h3>
+                    <p>Destaque suas habilidades, experiências e projetos em um perfil completo e atrativo para recrutadores.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">🔍</div>
+                    <h3>Busca de Talentos</h3>
+                    <p>Encontre profissionais com as habilidades certas, filtradas por localização, área e experiência.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">🤝</div>
+                    <h3>Networking Inteligente</h3>
+                    <p>Receba sugestões de conexões com base nos seus interesses, habilidades e objetivos de carreira.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">💼</div>
+                    <h3>Oportunidades Reais</h3>
+                    <p>Acesse vagas, bolsas, cursos e eventos exclusivos, atualizados diariamente pela nossa comunidade.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">📊</div>
+                    <h3>Dashboard Inteligente</h3>
+                    <p>Monitore seu progresso, visualize suas conexões e acompanhe o impacto da sua rede profissional.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">🚀</div>
+                    <h3>Crescimento Contínuo</h3>
+                    <p>Receba recomendações personalizadas de conteúdos, cursos e pessoas para acelerar sua carreira.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DEPOIMENTOS ===== -->
+    <section class="depoimentos" id="depoimentos">
+        <div class="container">
+            <h2>💬 O que dizem sobre o <span class="highlight">PplBase</span></h2>
+            <p class="subtitle">Histórias reais de quem já transformou sua carreira com a nossa plataforma</p>
+            <div class="depoimentos-grid">
+                <div class="depoimento-card">
+                    <div class="avatar">A</div>
+                    <blockquote>"O PplBase me ajudou a encontrar uma oportunidade incrível em menos de uma semana. Conectei-me com pessoas que realmente fazem a diferença."</blockquote>
+                    <div class="nome">Ana Costa</div>
+                    <div class="cargo">Desenvolvedora Full Stack</div>
+                </div>
+                <div class="depoimento-card">
+                    <div class="avatar">C</div>
+                    <blockquote>"A plataforma é intuitiva e me deu visibilidade que eu nunca tive. Consegui meu primeiro emprego internacional através do PplBase."</blockquote>
+                    <div class="nome">Carlos Mendes</div>
+                    <div class="cargo">Designer UX/UI</div>
+                </div>
+                <div class="depoimento-card">
+                    <div class="avatar">M</div>
+                    <blockquote>"O PplBase não é só uma rede, é uma comunidade. Aqui eu encontrei mentores, parceiros e amigos que me ajudam a crescer todos os dias."</blockquote>
+                    <div class="nome">Marta Silva</div>
+                    <div class="cargo">Empreendedora</div>
                 </div>
             </div>
         </div>
