@@ -281,7 +281,6 @@
                 <input type="password" id="loginSenha" placeholder="Tua senha" required />
             </div>
 
-            <!-- ===== CHECKBOX TERMOS ===== -->
             <div class="checkbox-group">
                 <input type="checkbox" id="termsCheck" required />
                 <label for="termsCheck">
@@ -301,33 +300,31 @@
     <script>
         const API_URL = 'https://pplbase.onrender.com';
 
+        // =========================================================
+        // FUNÇÃO PARA MOSTRAR A TELA DE CARREGAMENTO
+        // =========================================================
+
+        function irParaLoading(redirectUrl) {
+            // Salvar o token se já existir (para não perder)
+            const token = localStorage.getItem('pplbase_token');
+            // Ir para a tela de carregamento com a URL de redirecionamento
+            window.location.href = `loading.html?redirect=${encodeURIComponent(redirectUrl)}`;
+        }
+
         document.getElementById('formLogin').addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const username = document.getElementById('loginUsername').value;
             const senha = document.getElementById('loginSenha').value;
             const message = document.getElementById('loginMessage');
 
-            try {
-                const response = await fetch(`${API_URL}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, senha })
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    message.textContent = '✅ Login realizado!';
-                    message.className = 'form-message success';
-                    localStorage.setItem('pplbase_token', data.access_token);
-                    setTimeout(() => { window.location.href = '/inicio.html'; }, 1000);
-                } else {
-                    message.textContent = data.detail || '❌ Erro ao fazer login';
-                    message.className = 'form-message error';
-                }
-            } catch (error) {
-                message.textContent = '❌ Erro de conexão com o servidor';
-                message.className = 'form-message error';
-                console.error('Erro:', error);
-            }
+            // Mostrar mensagem de "A processar..."
+            message.textContent = '⏳ A processar...';
+            message.className = 'form-message';
+
+            // MOSTRAR A TELA DE CARREGAMENTO IMEDIATAMENTE
+            // (vai para loading.html, que vai fazer a requisição)
+            window.location.href = `loading.html?action=login&username=${encodeURIComponent(username)}&senha=${encodeURIComponent(senha)}&redirect=/inicio.html`;
         });
 
         document.getElementById('btnGoogleLogin').addEventListener('click', () => {

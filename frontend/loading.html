@@ -18,7 +18,6 @@
             gap: 40px;
         }
 
-        /* ===== LOGO ANIMADA ===== */
         .logo-container {
             display: flex;
             flex-direction: column;
@@ -68,9 +67,7 @@
             color: #E4E6EB;
             letter-spacing: 2px;
         }
-        .logo-text .highlight {
-            color: #8B5CF6;
-        }
+        .logo-text .highlight { color: #8B5CF6; }
 
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
@@ -81,7 +78,6 @@
             50% { opacity: 1; r: 6; }
         }
 
-        /* ===== BARRA DE PROGRESSO ===== */
         .progress-container {
             width: 280px;
             max-width: 80vw;
@@ -116,8 +112,6 @@
             font-weight: 500;
             letter-spacing: 0.5px;
         }
-
-        /* ===== MENSAGEM ===== */
         .message {
             color: #5A5E72;
             font-size: 14px;
@@ -132,7 +126,6 @@
 <body>
 
     <div class="logo-container">
-        <!-- LOGO ANIMADA -->
         <div class="logo-avatar">
             <svg class="logo-svg" viewBox="0 0 100 100">
                 <circle class="logo-ring" cx="50" cy="50" r="42" />
@@ -147,7 +140,6 @@
         <span class="logo-text">Ppl<span class="highlight">Base</span></span>
     </div>
 
-    <!-- BARRA DE PROGRESSO -->
     <div class="progress-container">
         <div class="progress-bar">
             <div class="fill" id="progressFill"></div>
@@ -159,14 +151,29 @@
 
     <script>
         // =========================================================
-        // ANIMAÇÃO DA BARRA DE PROGRESSO
+        // OBTER PARÂMETROS DA URL
+        // =========================================================
+
+        function getParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        const redirectUrl = getParam('redirect') || '/inicio.html';
+        const action = getParam('action');
+        const username = getParam('username');
+        const senha = getParam('senha');
+
+        const API_URL = 'https://pplbase.onrender.com';
+
+        // =========================================================
+        // FUNÇÃO PARA ATUALIZAR A BARRA
         // =========================================================
 
         const fill = document.getElementById('progressFill');
         const label = document.getElementById('progressLabel');
         const statusMsg = document.getElementById('statusMessage');
 
-        // Textos dinâmicos
         const messages = [
             'A conetar ao servidor...',
             'A autenticar credenciais...',
@@ -176,22 +183,18 @@
         ];
 
         let progress = 0;
-        let step = 0;
 
         function updateProgress() {
             if (progress < 100) {
-                // Avançar de forma dinâmica (mais rápido no início, mais lento no fim)
                 const increment = progress < 30 ? 12 :
                                   progress < 60 ? 8 :
                                   progress < 80 ? 5 : 3;
                 progress = Math.min(progress + increment, 100);
                 fill.style.width = progress + '%';
 
-                // Atualizar texto com base no progresso
                 const index = Math.min(Math.floor(progress / 20), messages.length - 1);
                 label.textContent = messages[index];
 
-                // Mensagem adicional
                 if (progress < 30) statusMsg.textContent = '⏳ A iniciar sessão...';
                 else if (progress < 60) statusMsg.textContent = '🔐 A verificar credenciais...';
                 else if (progress < 80) statusMsg.textContent = '📁 A carregar perfil...';
@@ -202,16 +205,53 @@
             } else {
                 label.textContent = '✅ Pronto!';
                 statusMsg.textContent = 'A redirecionar...';
-                // Redirecionar após concluir
-                const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || '/inicio.html';
                 setTimeout(() => {
                     window.location.href = redirectUrl;
-                }, 600);
+                }, 400);
             }
         }
 
-        // Iniciar a animação
-        updateProgress();
+        // =========================================================
+        // SE FOR LOGIN, FAZER A REQUISIÇÃO
+        // =========================================================
+
+        if (action === 'login' && username && senha) {
+            // Iniciar a animação
+            updateProgress();
+
+            // Fazer a requisição de login
+            fetch(`${API_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, senha })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.access_token) {
+                    localStorage.setItem('pplbase_token', data.access_token);
+                    // A barra já está a correr, só aguardar
+                } else {
+                    // Erro: redirecionar de volta com erro
+                    localStorage.removeItem('pplbase_token');
+                    statusMsg.textContent = '❌ ' + (data.detail || 'Erro ao fazer login');
+                    label.textContent = 'Erro';
+                    // Voltar após 2 segundos
+                    setTimeout(() => {
+                        window.location.href = '/login.html?erro=' + encodeURIComponent(data.detail || 'Erro');
+                    }, 2000);
+                }
+            })
+            .catch(err => {
+                statusMsg.textContent = '❌ Erro de conexão';
+                label.textContent = 'Erro';
+                setTimeout(() => {
+                    window.location.href = '/login.html?erro=Erro de conexão';
+                }, 2000);
+            });
+        } else {
+            // Se for redirecionamento normal (cadastro), só mostrar a animação
+            updateProgress();
+        }
     </script>
 </body>
 </html>
