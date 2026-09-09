@@ -136,21 +136,6 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
         }
-        .btn-outline {
-            padding: 8px 20px;
-            background: transparent;
-            color: #A0A4B8;
-            border: 2px solid #2A2D3E;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-outline:hover {
-            border-color: #8B5CF6;
-            color: #fff;
-        }
 
         /* ===== MENU MOBILE ===== */
         .menu-toggle {
@@ -183,8 +168,7 @@
         .nav-links.mobile a {
             padding: 10px 12px;
         }
-        .nav-links.mobile .btn-primary,
-        .nav-links.mobile .btn-outline {
+        .nav-links.mobile .btn-primary {
             width: 100%;
             text-align: center;
             margin-top: 4px;
@@ -381,8 +365,7 @@
                 width: 32px;
                 height: 32px;
             }
-            .btn-primary,
-            .btn-outline {
+            .btn-primary {
                 padding: 8px 16px;
                 font-size: 13px;
             }
@@ -421,8 +404,7 @@
                 <a href="#modulos">Módulos</a>
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato">Contato</a>
-                <button class="btn-primary" onclick="window.location.href='cadastro.html'">Fazer login</button>
-                <button class="btn-outline" onclick="window.location.href='login.html'">Fazer login</button>
+                <button class="btn-primary" onclick="window.location.href='login.html'">Fazer login</button>
             </div>
             <div class="nav-links mobile" id="mobileMenu">
                 <a href="index.html" class="active">Início</a>
@@ -430,8 +412,7 @@
                 <a href="#modulos">Módulos</a>
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato">Contato</a>
-                <button class="btn-primary" onclick="window.location.href='cadastro.html'">Fazer login</button>
-                <button class="btn-outline" onclick="window.location.href='login.html'">Fazer login</button>
+                <button class="btn-primary" onclick="window.location.href='login.html'">Fazer login</button>
             </div>
         </div>
     </nav>
@@ -443,8 +424,7 @@
                 <h1>Conecte-se com <span class="highlight">pessoas incríveis</span></h1>
                 <p>Encontre talentos, compartilhe habilidades e construa sua rede de contatos profissionais.</p>
                 <div class="hero-buttons">
-                    <button class="btn-primary" onclick="window.location.href='cadastro.html'">Fazer login</button>
-                    <button class="btn-outline" onclick="window.location.href='login.html'">Fazer login</button>
+                    <button class="btn-primary" onclick="window.location.href='login.html'">Fazer login</button>
                 </div>
             </div>
             <div style="display:flex; justify-content:center; align-items:center;">
@@ -527,5 +507,6 @@
             document.getElementById('mobileMenu').classList.toggle('open');
         });
     </script>
+
 </body>
 </html>
