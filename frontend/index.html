@@ -7,22 +7,14 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             background: #0B0D15;
             color: #E4E6EB;
             min-height: 100vh;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         .navbar {
             padding: 16px 0;
@@ -87,9 +79,7 @@
             font-weight: 800;
             color: #E4E6EB;
         }
-        .logo-text .highlight {
-            color: #8B5CF6;
-        }
+        .logo-text .highlight { color: #8B5CF6; }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -114,8 +104,7 @@
             font-size: 14px;
             transition: all 0.2s;
         }
-        .nav-links a:hover,
-        .nav-links a.active {
+        .nav-links a:hover, .nav-links a.active {
             color: #E4E6EB;
             background: #1A1D2E;
         }
@@ -159,17 +148,9 @@
             width: 100%;
             max-width: 280px;
         }
-        .nav-links.mobile.open {
-            display: flex;
-        }
-        .nav-links.mobile a {
-            padding: 10px 12px;
-        }
-        .nav-links.mobile .btn-primary {
-            width: 100%;
-            text-align: center;
-            margin-top: 4px;
-        }
+        .nav-links.mobile.open { display: flex; }
+        .nav-links.mobile a { padding: 10px 12px; }
+        .nav-links.mobile .btn-primary { width: 100%; text-align: center; margin-top: 4px; }
 
         .hero {
             padding: 80px 0 60px;
@@ -189,20 +170,14 @@
             line-height: 1.1;
             margin-bottom: 20px;
         }
-        .hero h1 .highlight {
-            color: #8B5CF6;
-        }
+        .hero h1 .highlight { color: #8B5CF6; }
         .hero p {
             font-size: 18px;
             color: #A0A4B8;
             max-width: 500px;
             margin-bottom: 30px;
         }
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
 
         .features {
             padding: 60px 0;
@@ -230,9 +205,9 @@
             border-color: #8B5CF6;
             transform: translateY(-5px);
         }
-        .feature-icon {
-            font-size: 40px;
+        .feature-card .icon {
             margin-bottom: 12px;
+            color: #8B5CF6;
         }
         .feature-card h3 {
             font-size: 18px;
@@ -243,7 +218,6 @@
             font-size: 14px;
         }
 
-        /* ===== MÓDULOS ===== */
         .modulos {
             padding: 60px 0;
             background: #0B0D15;
@@ -276,10 +250,7 @@
             border-color: #8B5CF6;
             transform: translateY(-5px);
         }
-        .modulo-card .icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
+        .modulo-card .icon { margin-bottom: 16px; color: #8B5CF6; }
         .modulo-card h3 {
             font-size: 20px;
             margin-bottom: 8px;
@@ -291,7 +262,6 @@
             line-height: 1.6;
         }
 
-        /* ===== DEPOIMENTOS ===== */
         .depoimentos {
             padding: 60px 0;
             background: #0F111A;
@@ -378,9 +348,7 @@
             padding: 4px 0;
             transition: color 0.3s;
         }
-        .footer-grid a:hover {
-            color: #8B5CF6;
-        }
+        .footer-grid a:hover { color: #8B5CF6; }
         .footer-bottom {
             border-top: 1px solid #1A1D2E;
             padding-top: 20px;
@@ -397,96 +365,38 @@
             text-decoration: none;
             margin-left: 16px;
         }
-        .footer-bottom a:hover {
-            color: #8B5CF6;
-        }
+        .footer-bottom a:hover { color: #8B5CF6; }
 
         @media (max-width: 1024px) {
-            .hero .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero p {
-                margin: 0 auto 30px;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .features-grid,
-            .modulos-grid,
-            .depoimentos-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 30px; }
+            .hero-buttons { justify-content: center; }
+            .features-grid, .modulos-grid, .depoimentos-grid { grid-template-columns: 1fr 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
-            .nav-links.desktop {
-                display: none;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .features-grid,
-            .modulos-grid,
-            .depoimentos-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero h1 {
-                font-size: 32px;
-            }
-            .nav-links.mobile {
-                max-width: 100%;
-                right: 0;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-            .footer-bottom a {
-                margin: 0 8px;
-            }
+            .nav-links.desktop { display: none; }
+            .menu-toggle { display: block; }
+            .features-grid, .modulos-grid, .depoimentos-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+            .nav-links.mobile { max-width: 100%; right: 0; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-bottom a { margin: 0 8px; }
         }
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 26px;
-            }
-            .hero {
-                padding: 40px 0 30px;
-                min-height: auto;
-            }
-            .features,
-            .modulos,
-            .depoimentos {
-                padding: 30px 0;
-            }
-            .features h2,
-            .modulos h2,
-            .depoimentos h2 {
-                font-size: 28px;
-            }
-            .logo-text {
-                font-size: 18px;
-            }
-            .logo-avatar {
-                width: 32px;
-                height: 32px;
-            }
-            .btn-primary {
-                padding: 8px 16px;
-                font-size: 13px;
-            }
+            .hero h1 { font-size: 26px; }
+            .hero { padding: 40px 0 30px; min-height: auto; }
+            .features, .modulos, .depoimentos { padding: 30px 0; }
+            .features h2, .modulos h2, .depoimentos h2 { font-size: 28px; }
+            .logo-text { font-size: 18px; }
+            .logo-avatar { width: 32px; height: 32px; }
+            .btn-primary { padding: 8px 16px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -529,7 +439,6 @@
         </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="container">
             <div>
@@ -556,23 +465,28 @@
         </div>
     </section>
 
-    <!-- ===== FUNCIONALIDADES ===== -->
     <section class="features" id="funcionalidades">
         <div class="container">
             <h2>Por que usar o <span class="highlight">PplBase</span>?</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
                     <h3>Encontre Talentos</h3>
                     <p>Busque pessoas por habilidades, localização ou experiência profissional.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🤝</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
                     <h3>Conecte-se</h3>
                     <p>Construa sua rede de contatos com pessoas que compartilham seus interesses.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📈</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
                     <h3>Mostre seu Trabalho</h3>
                     <p>Compartilhe suas experiências e habilidades para atrair novas oportunidades.</p>
                 </div>
@@ -580,39 +494,50 @@
         </div>
     </section>
 
-    <!-- ===== MÓDULOS ===== -->
     <section class="modulos" id="modulos">
         <div class="container">
-            <h2>📚 <span class="highlight">Módulos</span> do PplBase</h2>
+            <h2>Módulos do <span class="highlight">PplBase</span></h2>
             <p class="subtitle">Ferramentas completas para impulsionar sua carreira e conectar-se com o mundo</p>
             <div class="modulos-grid">
                 <div class="modulo-card">
-                    <div class="icon">👤</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
                     <h3>Perfil Profissional</h3>
                     <p>Destaque suas habilidades, experiências e projetos em um perfil completo e atrativo para recrutadores.</p>
                 </div>
                 <div class="modulo-card">
-                    <div class="icon">🔍</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
                     <h3>Busca de Talentos</h3>
                     <p>Encontre profissionais com as habilidades certas, filtradas por localização, área e experiência.</p>
                 </div>
                 <div class="modulo-card">
-                    <div class="icon">🤝</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
                     <h3>Networking Inteligente</h3>
                     <p>Receba sugestões de conexões com base nos seus interesses, habilidades e objetivos de carreira.</p>
                 </div>
                 <div class="modulo-card">
-                    <div class="icon">💼</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><briefcase/></svg>
+                    </div>
                     <h3>Oportunidades Reais</h3>
                     <p>Acesse vagas, bolsas, cursos e eventos exclusivos, atualizados diariamente pela nossa comunidade.</p>
                 </div>
                 <div class="modulo-card">
-                    <div class="icon">📊</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    </div>
                     <h3>Dashboard Inteligente</h3>
                     <p>Monitore seu progresso, visualize suas conexões e acompanhe o impacto da sua rede profissional.</p>
                 </div>
                 <div class="modulo-card">
-                    <div class="icon">🚀</div>
+                    <div class="icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
                     <h3>Crescimento Contínuo</h3>
                     <p>Receba recomendações personalizadas de conteúdos, cursos e pessoas para acelerar sua carreira.</p>
                 </div>
@@ -620,10 +545,9 @@
         </div>
     </section>
 
-    <!-- ===== DEPOIMENTOS ===== -->
     <section class="depoimentos" id="depoimentos">
         <div class="container">
-            <h2>💬 O que dizem sobre o <span class="highlight">PplBase</span></h2>
+            <h2>O que dizem sobre o <span class="highlight">PplBase</span></h2>
             <p class="subtitle">Histórias reais de quem já transformou sua carreira com a nossa plataforma</p>
             <div class="depoimentos-grid">
                 <div class="depoimento-card">
@@ -648,7 +572,6 @@
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="footer" id="contato">
         <div class="container">
             <div class="footer-grid">
@@ -661,9 +584,9 @@
                 </div>
                 <div>
                     <h4>Contato</h4>
-                    <a href="#">📧 contato@pplbase.com</a>
-                    <a href="#">📞 +258 84 123 4567</a>
-                    <a href="#">📍 Chimoio, Moçambique</a>
+                    <a href="mailto:contato@pplbase.com">contato@pplbase.com</a>
+                    <a href="tel:+258841234567">+258 84 123 4567</a>
+                    <a href="#">Chimoio, Moçambique</a>
                 </div>
                 <div>
                     <h4>Redes Sociais</h4>
@@ -687,6 +610,5 @@
             document.getElementById('mobileMenu').classList.toggle('open');
         });
     </script>
-
 </body>
 </html>
