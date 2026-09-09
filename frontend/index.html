@@ -1,14 +1,237 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PplBase - Conectando Talentos</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0B0D15;
+            color: #E4E6EB;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            padding: 16px 0;
+            background: rgba(11, 13, 21, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1A1D2E;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-avatar {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+        .logo-svg {
+            width: 100%;
+            height: 100%;
+            animation: girarLogo 8s linear infinite;
+        }
+        .logo-ring {
+            fill: none;
+            stroke: #8B5CF6;
+            stroke-width: 2;
+            opacity: 0.7;
+        }
+        .logo-ring-2 {
+            stroke: #6D28D9;
+            stroke-width: 1.5;
+            stroke-dasharray: 4 8;
+            animation: girarLogo 4s linear infinite reverse;
+        }
+        .logo-dot { fill: #8B5CF6; animation: pulsarDot 2s ease-in-out infinite; }
+        .logo-dot:nth-child(3) { animation-delay: 0.5s; }
+        .logo-dot:nth-child(4) { animation-delay: 1s; }
+        .logo-dot:nth-child(5) { animation-delay: 1.5s; }
+        .logo-letter {
+            fill: #E4E6EB;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #E4E6EB;
+        }
+        .logo-text .highlight { color: #8B5CF6; }
+        @keyframes girarLogo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulsarDot {
+            0%, 100% { opacity: 0.3; r: 3; }
+            50% { opacity: 1; r: 5; }
+        }
+
+        /* ===== MENU DESKTOP ===== */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #A0A4B8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #E4E6EB;
+            background: #1A1D2E;
+        }
+        .btn-primary {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 80px 0 60px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .hero h1 .highlight { color: #8B5CF6; }
+        .hero p {
+            font-size: 18px;
+            color: #A0A4B8;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 60px 0;
+            background: #0F111A;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .feature-card {
+            background: #161926;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #1A1D2E;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: #8B5CF6;
+            transform: translateY(-5px);
+        }
+        .feature-icon { font-size: 40px; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 18px; margin-bottom: 8px; }
+        .feature-card p { color: #A0A4B8; font-size: 14px; }
+
+        /* ===== RESPONSIVO ===== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #E4E6EB;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-links.mobile {
+            display: none;
+            flex-direction: column;
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 12px;
+            padding: 16px;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            z-index: 100;
+            min-width: 180px;
+            width: 100%;
+            max-width: 280px;
+        }
+        .nav-links.mobile.open { display: flex; }
+        .nav-links.mobile a { padding: 10px 12px; }
+
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 30px; }
+            .hero-buttons { justify-content: center; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links.desktop { display: none; }
+            .menu-toggle { display: block; }
+            .features-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+            .nav-links.mobile { max-width: 100%; right: 0; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 26px; }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -25,47 +248,64 @@
                 </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-            <div class="nav-links">
-                <a href="#features">Recursos</a>
-                <a href="#como-funciona">Como Funciona</a>
-                <button class="btn btn-primary" id="btnAbrirModal">Entrar</button>
+            <button class="menu-toggle" id="menuToggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <div class="nav-links desktop">
+                <a href="index.html" class="active">Início</a>
+                <a href="#funcionalidades">Funcionalidades</a>
+                <a href="#modulos">Módulos</a>
+                <a href="#blog">Blog</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#contato">Contato</a>
+                <button class="btn-primary" id="btnAbrirModal">Entrar</button>
+            </div>
+            <div class="nav-links mobile" id="mobileMenu">
+                <a href="index.html" class="active">Início</a>
+                <a href="#funcionalidades">Funcionalidades</a>
+                <a href="#modulos">Módulos</a>
+                <a href="#blog">Blog</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#contato">Contato</a>
+                <button class="btn-primary" id="btnAbrirModalMobile">Entrar</button>
             </div>
         </div>
     </nav>
 
+    <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
+            <div>
                 <h1>Conecte-se com <span class="highlight">pessoas incríveis</span></h1>
                 <p>Encontre talentos, compartilhe habilidades e construa sua rede de contatos profissionais.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary btn-large" id="btnHeroCadastro">Começar Agora 🚀</button>
-                    <a href="#como-funciona" class="btn btn-outline">Saiba Mais</a>
+                    <button class="btn-primary btn-large" id="btnHeroCadastro">Começar Agora 🚀</button>
+                    <a href="#funcionalidades" class="btn-outline">Saiba Mais</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="hero-illustration">
-                    <div class="hero-logo">
-                        <svg class="logo-svg" viewBox="0 0 100 100">
-                            <circle class="logo-ring" cx="50" cy="50" r="45" />
-                            <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="32" />
-                            <circle class="logo-dot" cx="50" cy="5" r="5" />
-                            <circle class="logo-dot" cx="50" cy="95" r="5" />
-                            <circle class="logo-dot" cx="5" cy="50" r="5" />
-                            <circle class="logo-dot" cx="95" cy="50" r="5" />
-                            <circle class="logo-dot" cx="50" cy="50" r="14" fill="#8B5CF6" opacity="0.15" />
-                            <text class="logo-letter" x="50" y="55" text-anchor="middle">P</text>
-                        </svg>
-                    </div>
-                    <div class="circle circle-1"></div>
-                    <div class="circle circle-2"></div>
-                    <div class="circle circle-3"></div>
+            <div style="display:flex; justify-content:center; align-items:center;">
+                <div style="width:280px; height:280px;">
+                    <svg viewBox="0 0 100 100" style="width:100%; height:100%; animation: girarLogo 12s linear infinite;">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#8B5CF6" stroke-width="3" opacity="0.3" />
+                        <circle cx="50" cy="50" r="32" fill="none" stroke="#6D28D9" stroke-width="2" stroke-dasharray="6 12" />
+                        <circle cx="50" cy="5" r="5" fill="#8B5CF6" />
+                        <circle cx="50" cy="95" r="5" fill="#8B5CF6" />
+                        <circle cx="5" cy="50" r="5" fill="#8B5CF6" />
+                        <circle cx="95" cy="50" r="5" fill="#8B5CF6" />
+                        <circle cx="50" cy="50" r="16" fill="#8B5CF6" opacity="0.15" />
+                        <text x="50" y="56" text-anchor="middle" fill="#E4E6EB" font-size="40" font-weight="700" font-family="Inter">P</text>
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
+    <!-- ===== FUNCIONALIDADES ===== -->
+    <section class="features" id="funcionalidades">
         <div class="container">
             <h2>Por que usar o <span class="highlight">PplBase</span>?</h2>
             <div class="features-grid">
@@ -88,86 +328,27 @@
         </div>
     </section>
 
-    <section class="como-funciona" id="como-funciona">
-        <div class="container">
-            <h2>Como funciona?</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Crie seu perfil</h3>
-                    <p>Cadastre-se e compartilhe suas habilidades e experiências.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Conecte-se</h3>
-                    <p>Encontre pessoas com interesses e habilidades complementares.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Colabore</h3>
-                    <p>Troque conhecimentos, colabore em projetos e cresça juntos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
-        </div>
+    <footer style="padding:40px 0; text-align:center; border-top:1px solid #1A1D2E; color:#5A5E72;">
+        <div class="container"><p>&copy; 2026 PplBase - Todos os direitos reservados.</p></div>
     </footer>
 
-    <!-- MODAL LOGIN -->
-    <div class="modal" id="modalLogin">
-        <div class="modal-content">
-            <span class="modal-close" id="fecharModal">&times;</span>
-            <div class="modal-tabs">
-                <button class="tab active" data-tab="login">Entrar</button>
-                <button class="tab" data-tab="cadastro">Cadastrar</button>
-            </div>
+    <script>
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        });
 
-            <form id="formLogin" class="modal-form active">
-                <h2>Entrar no PplBase</h2>
-                <div class="form-group">
-                    <label>Usuário</label>
-                    <input type="text" id="loginUsername" placeholder="Seu username" required />
-                </div>
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input type="password" id="loginSenha" placeholder="Sua senha" required />
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Entrar</button>
-                <p class="form-message" id="loginMessage"></p>
-            </form>
+        // Botões de entrar
+        document.getElementById('btnAbrirModal').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+        document.getElementById('btnAbrirModalMobile').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+        document.getElementById('btnHeroCadastro').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+    </script>
 
-            <form id="formCadastro" class="modal-form">
-                <h2>Criar conta</h2>
-                <div class="form-group">
-                    <label>Nome completo</label>
-                    <input type="text" id="cadNome" placeholder="Seu nome" required />
-                </div>
-                <div class="form-group">
-                    <label>Usuário</label>
-                    <input type="text" id="cadUsername" placeholder="Escolha um username" required />
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="cadEmail" placeholder="seu@email.com" required />
-                </div>
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" required />
-                </div>
-                <div class="form-group">
-                    <label>Localização</label>
-                    <input type="text" id="cadLocalizacao" placeholder="Ex: Chimoio, Moçambique" />
-                </div>
-                <button type="submit" class="btn btn-primary btn-full">Criar conta</button>
-                <p class="form-message" id="cadastroMessage"></p>
-            </form>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>

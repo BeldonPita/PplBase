@@ -6,102 +6,139 @@
     <title>Início - PplBase</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== GERAL ===== */
         .container-inicio { max-width: 1000px; margin: 0 auto; padding: 20px; }
-        
+
+        /* ===== NAVBAR ===== */
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a {
+            color: #A0A4B8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #E4E6EB;
+            background: #1A1D2E;
+        }
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+            color: #A0A4B8;
+            transition: all 0.2s;
+        }
+        .notification-icon:hover { color: #8B5CF6; }
+        .notification-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: #EF4444;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-outline {
+            background: transparent;
+            color: #A0A4B8;
+            border: 2px solid #2A2D3E;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover {
+            border-color: #8B5CF6;
+            color: #fff;
+        }
+
+        /* ===== MENU 3 BARRAS ===== */
+        .side-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .side-menu .menu-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s;
+        }
+        .side-menu .menu-icon:hover { transform: scale(1.05); }
+        .side-menu .menu-dropdown {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            background: #161926;
+            border: 1px solid #1A1D2E;
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 160px;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .side-menu .menu-dropdown.active { display: block; }
+        .side-menu .menu-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 10px 16px;
+            background: none;
+            border: none;
+            color: #E4E6EB;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .side-menu .menu-dropdown button:hover { background: #1A1D2E; }
+        .side-menu .menu-dropdown .divider { height: 1px; background: #1A1D2E; margin: 6px 0; }
+
         /* ===== BANNER ===== */
         .banner {
             background: linear-gradient(135deg, #8B5CF6, #6D28D9);
             border-radius: 16px;
-            padding: 40px;
+            padding: 30px;
             color: #fff;
             margin-bottom: 30px;
-            text-align: center;
         }
-        .banner h1 { font-size: 32px; margin-bottom: 8px; }
-        .banner p { opacity: 0.9; font-size: 16px; }
+        .banner h1 { font-size: 28px; margin-bottom: 4px; }
+        .banner p { opacity: 0.9; }
 
-        /* ===== ESTATÍSTICAS ===== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-        .stat-card {
-            background: #161926;
-            border: 1px solid #1A1D2E;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .stat-card .number { font-size: 28px; font-weight: 700; color: #8B5CF6; }
-        .stat-card .label { color: #A0A4B8; font-size: 14px; }
-
-        /* ===== SUGESTÕES ===== */
-        .sugestoes {
-            background: #161926;
-            border: 1px solid #1A1D2E;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .sugestoes h3 { margin-bottom: 16px; }
-        .sugestao-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #1A1D2E;
-        }
-        .sugestao-item:last-child { border-bottom: none; }
-        .sugestao-item .info { display: flex; align-items: center; gap: 12px; }
-        .sugestao-item .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-        }
-        .sugestao-item .nome { font-weight: 600; }
-        .sugestao-item .username { color: #A0A4B8; font-size: 13px; }
-        .btn-seguir {
-            padding: 6px 16px;
-            background: #8B5CF6;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s;
-        }
-        .btn-seguir:hover { background: #6D28D9; transform: scale(1.05); }
-
-        /* ===== ATIVIDADES ===== */
-        .atividades {
-            background: #161926;
-            border: 1px solid #1A1D2E;
-            border-radius: 12px;
-            padding: 20px;
-        }
-        .atividades h3 { margin-bottom: 16px; }
-        .atividade-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid #1A1D2E;
-        }
-        .atividade-item:last-child { border-bottom: none; }
-        .atividade-item .icon { font-size: 20px; }
-        .atividade-item .text { color: #A0A4B8; font-size: 14px; }
-        .atividade-item .text strong { color: #E4E6EB; }
-
-        /* ===== MENU MOBILE ===== */
+        /* ===== RESPONSIVO ===== */
         .menu-toggle {
             display: none;
             background: none;
@@ -109,6 +146,7 @@
             color: #E4E6EB;
             font-size: 24px;
             cursor: pointer;
+            padding: 8px;
         }
         .nav-links.mobile {
             display: none;
@@ -118,29 +156,21 @@
             border-radius: 12px;
             padding: 16px;
             position: absolute;
-            top: 70px;
-            right: 20px;
+            top: 60px;
+            right: 0;
             z-index: 100;
-            min-width: 150px;
+            min-width: 180px;
+            width: 100%;
+            max-width: 280px;
         }
         .nav-links.mobile.open { display: flex; }
-        .nav-links.mobile a {
-            padding: 8px 0;
-            color: #A0A4B8;
-            text-decoration: none;
-        }
-        .nav-links.mobile a:hover { color: #8B5CF6; }
-        .nav-links.mobile button {
-            margin-top: 8px;
-            width: 100%;
-        }
+        .nav-links.mobile a { padding: 10px 12px; }
 
         @media (max-width: 768px) {
             .nav-links.desktop { display: none; }
             .menu-toggle { display: block; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .banner h1 { font-size: 24px; }
-            .banner { padding: 24px; }
+            .nav-links.mobile { max-width: 100%; right: 0; top: 60px; }
+            .banner h1 { font-size: 22px; }
         }
     </style>
 </head>
@@ -150,7 +180,18 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <div class="logo-avatar"><svg class="logo-svg" viewBox="0 0 100 100"><circle class="logo-ring" cx="50" cy="50" r="42" /><circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" /><circle class="logo-dot" cx="50" cy="8" r="4" /><circle class="logo-dot" cx="50" cy="92" r="4" /><circle class="logo-dot" cx="8" cy="50" r="4" /><circle class="logo-dot" cx="92" cy="50" r="4" /><text class="logo-letter" x="50" y="58" text-anchor="middle">P</text></svg></div><span class="logo-text">Ppl<span class="highlight">Base</span></span>
+                <div class="logo-avatar">
+                    <svg class="logo-svg" viewBox="0 0 100 100">
+                        <circle class="logo-ring" cx="50" cy="50" r="42" />
+                        <circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" />
+                        <circle class="logo-dot" cx="50" cy="8" r="4" />
+                        <circle class="logo-dot" cx="50" cy="92" r="4" />
+                        <circle class="logo-dot" cx="8" cy="50" r="4" />
+                        <circle class="logo-dot" cx="92" cy="50" r="4" />
+                        <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
+                    </svg>
+                </div>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
             <button class="menu-toggle" id="menuToggle">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -162,72 +203,83 @@
             <div class="nav-links desktop">
                 <a href="inicio.html" class="active">Início</a>
                 <a href="busca.html">Buscar</a>
-                <button class="btn btn-outline btn-small" id="btnLogoutDesktop">Sair</button>
+                <a href="dashboard.html">Dashboard</a>
+                <div class="notification-icon" id="notifIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">3</span>
+                </div>
+                <button class="btn-outline" id="btnLogoutDesktop">Sair</button>
             </div>
             <div class="nav-links mobile" id="mobileMenu">
                 <a href="inicio.html" class="active">Início</a>
                 <a href="busca.html">Buscar</a>
-                <button class="btn btn-outline btn-small" id="btnLogoutMobile">Sair</button>
+                <a href="dashboard.html">Dashboard</a>
+                <button class="btn-outline" id="btnLogoutMobile">Sair</button>
             </div>
         </div>
     </nav>
 
+    <!-- ===== MENU 3 BARRAS ===== -->
+    <div class="side-menu" id="sideMenu">
+        <button class="menu-icon" id="menuToggleSide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+        <div class="menu-dropdown" id="menuDropdown">
+            <button id="menuDashboard">📊 Dashboard</button>
+            <button id="menuAtividades">📰 Atividades</button>
+            <div class="divider"></div>
+            <button id="menuDarkMode">🌙 Dark Mode</button>
+            <button id="menuLightMode">☀️ Light Mode</button>
+        </div>
+    </div>
+
     <!-- ===== CONTEÚDO ===== -->
     <div class="container-inicio">
-        <!-- BANNER -->
         <div class="banner">
             <h1>👋 Bem-vindo de volta, <span id="userName">Usuário</span>!</h1>
             <p>Explore as últimas novidades e conecte-se com a comunidade.</p>
         </div>
 
-        <!-- ESTATÍSTICAS -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="number" id="statSeguidores">0</div>
-                <div class="label">Seguidores</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="statSeguindo">0</div>
-                <div class="label">Seguindo</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="statHabilidades">0</div>
-                <div class="label">Habilidades</div>
-            </div>
-            <div class="stat-card">
-                <div class="number" id="statExperiencias">0</div>
-                <div class="label">Experiências</div>
-            </div>
-        </div>
-
-        <!-- SUGESTÕES -->
-        <div class="sugestoes">
-            <h3>🚀 Pessoas para seguir</h3>
-            <div id="sugestoesContainer">
-                <div style="text-align:center; color:#5A5E72; padding:20px;">Carregando...</div>
-            </div>
-        </div>
-
-        <!-- ATIVIDADES -->
-        <div class="atividades">
-            <h3>📰 Últimas atividades</h3>
-            <div id="atividadesContainer">
-                <div style="text-align:center; color:#5A5E72; padding:20px;">Carregando...</div>
-            </div>
+        <div id="feedContent" style="color:#A0A4B8; text-align:center; padding:40px 0;">
+            Carregando atividades...
         </div>
     </div>
 
-    <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
+    <footer style="padding:40px 0; text-align:center; border-top:1px solid #1A1D2E; color:#5A5E72;">
+        <div class="container"><p>&copy; 2026 PplBase</p></div></footer>
 
     <script>
-        const API_URL = 'https://pplbase.onrender.com';
-        const token = localStorage.getItem('pplbase_token');
-
-        if (!token) window.location.href = '/';
-
         // ===== MENU MOBILE =====
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('mobileMenu').classList.toggle('open');
+        });
+
+        // ===== MENU 3 BARRAS =====
+        document.getElementById('menuToggleSide').addEventListener('click', () => {
+            document.getElementById('menuDropdown').classList.toggle('active');
+        });
+        document.getElementById('menuDashboard').addEventListener('click', () => {
+            window.location.href = '/dashboard.html';
+        });
+        document.getElementById('menuAtividades').addEventListener('click', () => {
+            window.location.href = '/inicio.html';
+        });
+        document.getElementById('menuDarkMode').addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            document.getElementById('menuDropdown').classList.remove('active');
+        });
+        document.getElementById('menuLightMode').addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            document.getElementById('menuDropdown').classList.remove('active');
         });
 
         // ===== LOGOUT =====
@@ -238,104 +290,44 @@
         document.getElementById('btnLogoutDesktop').addEventListener('click', logout);
         document.getElementById('btnLogoutMobile').addEventListener('click', logout);
 
-        // ===== CARREGAR DADOS =====
-        async function carregarDados() {
+        // ===== CARREGAR FEED =====
+        const API_URL = 'https://pplbase.onrender.com';
+        const token = localStorage.getItem('pplbase_token');
+
+        if (!token) window.location.href = '/';
+
+        async function carregarFeed() {
             try {
-                // Perfil
-                const respPerfil = await fetch(`${API_URL}/usuarios/me`, {
+                const response = await fetch(`${API_URL}/pesquisa/pessoas`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                const user = await respPerfil.json();
-                document.getElementById('userName').textContent = user.nome || 'Usuário';
-
-                // Seguidores/Seguindo
-                const respSeguidores = await fetch(`${API_URL}/conexoes/seguidores`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const seguidores = await respSeguidores.json();
-
-                const respSeguindo = await fetch(`${API_URL}/conexoes/seguindo`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const seguindo = await respSeguindo.json();
-
-                document.getElementById('statSeguidores').textContent = seguidores.length;
-                document.getElementById('statSeguindo').textContent = seguindo.length;
-                document.getElementById('statHabilidades').textContent = user.habilidades?.length || 0;
-                document.getElementById('statExperiencias').textContent = user.experiencias?.length || 0;
-
-                // Sugestões
-                const respBusca = await fetch(`${API_URL}/pesquisa/pessoas?limit=5`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const pessoas = await respBusca.json();
-                const seguindoUsernames = seguindo.map(u => u.username);
-                const sugestoes = pessoas.filter(p => 
-                    p.username !== user.username && 
-                    !seguindoUsernames.includes(p.username)
-                );
-
-                const sugestoesContainer = document.getElementById('sugestoesContainer');
-                if (sugestoes.length === 0) {
-                    sugestoesContainer.innerHTML = '<div style="text-align:center; color:#5A5E72; padding:20px;">Nenhuma sugestão no momento.</div>';
-                } else {
-                    sugestoesContainer.innerHTML = sugestoes.map(p => `
-                        <div class="sugestao-item">
-                            <div class="info">
-                                <div class="avatar">${p.nome?.charAt(0) || '?'}</div>
-                                <div>
-                                    <div class="nome">${p.nome || 'Usuário'}</div>
-                                    <div class="username">@${p.username}</div>
-                                </div>
-                            </div>
-                            <button class="btn-seguir" onclick="seguirUsuario('${p.username}')">Seguir</button>
-                        </div>
-                    `).join('');
+                if (!response.ok) throw new Error('Erro');
+                const pessoas = await response.json();
+                const container = document.getElementById('feedContent');
+                if (!pessoas.length) {
+                    container.innerHTML = '<div style="text-align:center; color:#5A5E72; padding:20px;">Nenhuma atividade recente.</div>';
+                    return;
                 }
-
-                // Atividades
-                const atividadesContainer = document.getElementById('atividadesContainer');
-                if (pessoas.length === 0) {
-                    atividadesContainer.innerHTML = '<div style="text-align:center; color:#5A5E72; padding:20px;">Nenhuma atividade recente.</div>';
-                } else {
-                    atividadesContainer.innerHTML = pessoas.slice(0, 5).map(p => `
-                        <div class="atividade-item">
-                            <div class="icon">👤</div>
-                            <div class="text">
-                                <strong>${p.nome || 'Usuário'}</strong> 
-                                ${p.bio ? `— ${p.bio}` : 'entrou no PplBase!'}
+                container.innerHTML = pessoas.slice(0, 5).map(p => `
+                    <div style="background:#161926; border:1px solid #1A1D2E; border-radius:12px; padding:16px; margin-bottom:12px;">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#8B5CF6,#6D28D9); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">${p.nome?.charAt(0) || '?'}</div>
+                            <div>
+                                <div style="font-weight:600;">${p.nome || 'Usuário'}</div>
+                                <div style="color:#5A5E72; font-size:13px;">@${p.username}</div>
                             </div>
                         </div>
-                    `).join('');
-                }
-
+                        <div style="margin-top:8px; color:#A0A4B8;">${p.bio || 'Novo membro do PplBase!'}</div>
+                        ${p.localizacao ? `<div style="color:#5A5E72; font-size:12px; margin-top:4px;">📍 ${p.localizacao}</div>` : ''}
+                    </div>
+                `).join('');
             } catch (error) {
                 console.error('Erro:', error);
+                document.getElementById('feedContent').innerHTML = '<div style="text-align:center; color:#EF4444; padding:20px;">Erro ao carregar feed.</div>';
             }
         }
 
-        async function seguirUsuario(username) {
-            try {
-                const response = await fetch(`${API_URL}/conexoes/seguir/${username}`, {
-                    method: 'POST',
-                    headers: { 
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                if (response.ok) {
-                    alert(`✅ Você agora segue @${username}`);
-                    carregarDados();
-                } else {
-                    const data = await response.json();
-                    alert(`❌ ${data.detail}`);
-                }
-            } catch (error) {
-                alert('❌ Erro ao seguir usuário');
-            }
-        }
-
-        carregarDados();
+        carregarFeed();
     </script>
 
 </body>
