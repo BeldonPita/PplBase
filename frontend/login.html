@@ -300,17 +300,7 @@
     <script>
         const API_URL = 'https://pplbase.onrender.com';
 
-        // =========================================================
-        // FUNÇÃO PARA MOSTRAR A TELA DE CARREGAMENTO
-        // =========================================================
-
-        function irParaLoading(redirectUrl) {
-            // Salvar o token se já existir (para não perder)
-            const token = localStorage.getItem('pplbase_token');
-            // Ir para a tela de carregamento com a URL de redirecionamento
-            window.location.href = `loading.html?redirect=${encodeURIComponent(redirectUrl)}`;
-        }
-
+        // ===== LOGIN NORMAL =====
         document.getElementById('formLogin').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -318,17 +308,16 @@
             const senha = document.getElementById('loginSenha').value;
             const message = document.getElementById('loginMessage');
 
-            // Mostrar mensagem de "A processar..."
             message.textContent = '⏳ A processar...';
             message.className = 'form-message';
 
-            // MOSTRAR A TELA DE CARREGAMENTO IMEDIATAMENTE
-            // (vai para loading.html, que vai fazer a requisição)
             window.location.href = `loading.html?action=login&username=${encodeURIComponent(username)}&senha=${encodeURIComponent(senha)}&redirect=/inicio.html`;
         });
 
-        document.getElementById('btnGoogleLogin').addEventListener('click', () => {
-            alert('🚧 Login com Google em breve!');
+        // ===== LOGIN COM GOOGLE =====
+        document.getElementById('btnGoogleLogin').addEventListener('click', function() {
+            // Redirecionar para o backend que inicia o fluxo OAuth do Google
+            window.location.href = 'https://pplbase.onrender.com/auth/google/login';
         });
     </script>
 
