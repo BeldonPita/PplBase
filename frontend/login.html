@@ -235,7 +235,7 @@
 
             if (!termsCheck.checked) {
                 termsGroup.classList.add('destaque');
-                termsMessage.textContent = '⚠️ Aceite os Termos de Uso e Condições para continuar';
+                termsMessage.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Aceite os Termos de Uso e Condições para continuar`;
                 termsMessage.style.display = 'block';
                 termsGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return false;
