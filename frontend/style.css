@@ -456,3 +456,91 @@ footer {
     .btn-primary { padding: 8px 16px; font-size: 13px; }
     .modal-content { padding: 24px; }
 }
+
+/* ============================================================ */
+/* CORREÇÕES PARA O LIGHT MODE */
+/* ============================================================ */
+
+/* Garantir que inputs e selects no light mode tenham fundo visível */
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group select,
+[data-theme="light"] .form-group textarea {
+    background: #FFFFFF;
+    border-color: rgba(43, 38, 33, 0.15);
+    color: #2B2621;
+}
+
+/* Placeholder no light mode */
+[data-theme="light"] .form-group input::placeholder {
+    color: #9C948C;
+}
+
+/* Modal no light mode */
+[data-theme="light"] .modal-content {
+    background: #FFFFFF;
+    border: 1px solid rgba(43, 38, 33, 0.10);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Navbar no light mode */
+[data-theme="light"] .navbar {
+    background: rgba(251, 246, 239, 0.95);
+    border-bottom-color: rgba(43, 38, 33, 0.10);
+}
+
+/* Botão outline no light mode */
+[data-theme="light"] .btn-outline {
+    color: #2B2621;
+    border-color: rgba(43, 38, 33, 0.20);
+}
+
+[data-theme="light"] .btn-outline:hover {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+}
+
+/* Cards no light mode */
+[data-theme="light"] .card,
+[data-theme="light"] .dashboard-card,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .modulo-card,
+[data-theme="light"] .depoimento-card {
+    background: #FFFFFF;
+    border-color: rgba(43, 38, 33, 0.10);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Nav links no light mode */
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a.active {
+    background: rgba(217, 102, 59, 0.10);
+}
+
+/* Menu dropdown no light mode */
+[data-theme="light"] .side-menu .menu-dropdown {
+    background: #FFFFFF;
+    border-color: rgba(43, 38, 33, 0.10);
+}
+
+/* Tags no light mode */
+[data-theme="light"] .tag {
+    background: rgba(217, 102, 59, 0.08);
+    border-color: rgba(43, 38, 33, 0.10);
+}
+
+/* Logo letter no light mode */
+[data-theme="light"] .logo-letter {
+    fill: #2B2621;
+}
+
+/* Footer no light mode */
+[data-theme="light"] footer {
+    border-top-color: rgba(43, 38, 33, 0.10);
+    color: #6B625A;
+}
+
+/* Botão toggle no light mode */
+[data-theme="light"] .toggle-tema {
+    background: #FFFFFF;
+    border-color: rgba(43, 38, 33, 0.20);
+}

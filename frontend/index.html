@@ -10,8 +10,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #0B0D15;
-            color: #E4E6EB;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
             min-height: 100vh;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -20,7 +20,7 @@
             padding: 16px 0;
             background: rgba(11, 13, 21, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1A1D2E;
+            border-bottom: 1px solid var(--cor-borda);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -49,25 +49,25 @@
         }
         .logo-ring {
             fill: none;
-            stroke: #8B5CF6;
+            stroke: var(--cor-primaria);
             stroke-width: 2;
             opacity: 0.7;
         }
         .logo-ring-2 {
-            stroke: #6D28D9;
+            stroke: var(--cor-secundaria);
             stroke-width: 1.5;
             stroke-dasharray: 4 8;
             animation: girarLogo 4s linear infinite reverse;
         }
         .logo-dot {
-            fill: #8B5CF6;
+            fill: var(--cor-primaria);
             animation: pulsarDot 2s ease-in-out infinite;
         }
         .logo-dot:nth-child(3) { animation-delay: 0.5s; }
         .logo-dot:nth-child(4) { animation-delay: 1s; }
         .logo-dot:nth-child(5) { animation-delay: 1.5s; }
         .logo-letter {
-            fill: #E4E6EB;
+            fill: var(--cor-texto);
             font-size: 24px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
@@ -77,9 +77,9 @@
         .logo-text {
             font-size: 22px;
             font-weight: 800;
-            color: #E4E6EB;
+            color: var(--cor-texto);
         }
-        .logo-text .highlight { color: #8B5CF6; }
+        .logo-text .highlight { color: var(--cor-primaria); }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -96,7 +96,7 @@
             flex-wrap: wrap;
         }
         .nav-links a {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             text-decoration: none;
             padding: 8px 14px;
             border-radius: 8px;
@@ -105,12 +105,12 @@
             transition: all 0.2s;
         }
         .nav-links a:hover, .nav-links a.active {
-            color: #E4E6EB;
-            background: #1A1D2E;
+            color: var(--cor-texto);
+            background: var(--cor-borda);
         }
         .btn-primary {
             padding: 8px 20px;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -121,14 +121,14 @@
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
         }
 
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 24px;
             cursor: pointer;
             padding: 8px;
@@ -136,8 +136,8 @@
         .nav-links.mobile {
             display: none;
             flex-direction: column;
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 12px;
             padding: 16px;
             position: absolute;
@@ -170,10 +170,10 @@
             line-height: 1.1;
             margin-bottom: 20px;
         }
-        .hero h1 .highlight { color: #8B5CF6; }
+        .hero h1 .highlight { color: var(--cor-primaria); }
         .hero p {
             font-size: 18px;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             max-width: 500px;
             margin-bottom: 30px;
         }
@@ -194,33 +194,33 @@
             gap: 30px;
         }
         .feature-card {
-            background: #161926;
+            background: var(--cor-cartao);
             padding: 30px;
             border-radius: 16px;
-            border: 1px solid #1A1D2E;
+            border: 1px solid var(--cor-borda);
             text-align: center;
             transition: all 0.3s;
         }
         .feature-card:hover {
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
             transform: translateY(-5px);
         }
         .feature-card .icon {
             margin-bottom: 12px;
-            color: #8B5CF6;
+            color: var(--cor-primaria);
         }
         .feature-card h3 {
             font-size: 18px;
             margin-bottom: 8px;
         }
         .feature-card p {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
 
         .modulos {
             padding: 60px 0;
-            background: #0B0D15;
+            background: var(--cor-fundo);
         }
         .modulos h2 {
             text-align: center;
@@ -229,7 +229,7 @@
         }
         .modulos .subtitle {
             text-align: center;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 16px;
             margin-bottom: 40px;
         }
@@ -239,25 +239,25 @@
             gap: 30px;
         }
         .modulo-card {
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 16px;
             padding: 30px;
             text-align: center;
             transition: all 0.3s;
         }
         .modulo-card:hover {
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
             transform: translateY(-5px);
         }
-        .modulo-card .icon { margin-bottom: 16px; color: #8B5CF6; }
+        .modulo-card .icon { margin-bottom: 16px; color: var(--cor-primaria); }
         .modulo-card h3 {
             font-size: 20px;
             margin-bottom: 8px;
-            color: #E4E6EB;
+            color: var(--cor-texto);
         }
         .modulo-card p {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             line-height: 1.6;
         }
@@ -273,7 +273,7 @@
         }
         .depoimentos .subtitle {
             text-align: center;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 16px;
             margin-bottom: 40px;
         }
@@ -283,22 +283,22 @@
             gap: 30px;
         }
         .depoimento-card {
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 16px;
             padding: 30px;
             text-align: center;
             transition: all 0.3s;
         }
         .depoimento-card:hover {
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
             transform: translateY(-5px);
         }
         .depoimento-card .avatar {
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -308,7 +308,7 @@
             margin: 0 auto 12px;
         }
         .depoimento-card blockquote {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 15px;
             font-style: italic;
             line-height: 1.6;
@@ -316,17 +316,17 @@
         }
         .depoimento-card .nome {
             font-weight: 600;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 16px;
         }
         .depoimento-card .cargo {
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 13px;
         }
 
         .footer {
             padding: 40px 0;
-            border-top: 1px solid #1A1D2E;
+            border-top: 1px solid var(--cor-borda);
             background: #0F111A;
         }
         .footer-grid {
@@ -336,36 +336,36 @@
             margin-bottom: 30px;
         }
         .footer-grid h4 {
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 16px;
             margin-bottom: 12px;
         }
         .footer-grid a {
             display: block;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             text-decoration: none;
             font-size: 14px;
             padding: 4px 0;
             transition: color 0.3s;
         }
-        .footer-grid a:hover { color: #8B5CF6; }
+        .footer-grid a:hover { color: var(--cor-primaria); }
         .footer-bottom {
-            border-top: 1px solid #1A1D2E;
+            border-top: 1px solid var(--cor-borda);
             padding-top: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
         .footer-bottom a {
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             text-decoration: none;
             margin-left: 16px;
         }
-        .footer-bottom a:hover { color: #8B5CF6; }
+        .footer-bottom a:hover { color: var(--cor-primaria); }
 
         @media (max-width: 1024px) {
             .hero .container { grid-template-columns: 1fr; text-align: center; }
@@ -451,14 +451,14 @@
             <div style="display:flex; justify-content:center; align-items:center;">
                 <div style="width:280px; height:280px;">
                     <svg viewBox="0 0 100 100" style="width:100%; height:100%; animation: girarLogo 12s linear infinite;">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="#8B5CF6" stroke-width="3" opacity="0.3" />
-                        <circle cx="50" cy="50" r="32" fill="none" stroke="#6D28D9" stroke-width="2" stroke-dasharray="6 12" />
-                        <circle cx="50" cy="5" r="5" fill="#8B5CF6" />
-                        <circle cx="50" cy="95" r="5" fill="#8B5CF6" />
-                        <circle cx="5" cy="50" r="5" fill="#8B5CF6" />
-                        <circle cx="95" cy="50" r="5" fill="#8B5CF6" />
-                        <circle cx="50" cy="50" r="16" fill="#8B5CF6" opacity="0.15" />
-                        <text x="50" y="56" text-anchor="middle" fill="#E4E6EB" font-size="40" font-weight="700" font-family="Inter">P</text>
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="var(--cor-primaria)" stroke-width="3" opacity="0.3" />
+                        <circle cx="50" cy="50" r="32" fill="none" stroke="var(--cor-secundaria)" stroke-width="2" stroke-dasharray="6 12" />
+                        <circle cx="50" cy="5" r="5" fill="var(--cor-primaria)" />
+                        <circle cx="50" cy="95" r="5" fill="var(--cor-primaria)" />
+                        <circle cx="5" cy="50" r="5" fill="var(--cor-primaria)" />
+                        <circle cx="95" cy="50" r="5" fill="var(--cor-primaria)" />
+                        <circle cx="50" cy="50" r="16" fill="var(--cor-primaria)" opacity="0.15" />
+                        <text x="50" y="56" text-anchor="middle" fill="var(--cor-texto)" font-size="40" font-weight="700" font-family="Inter">P</text>
                     </svg>
                 </div>
             </div>

@@ -10,8 +10,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #0B0D15;
-            color: #E4E6EB;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -19,8 +19,8 @@
             padding: 20px;
         }
         .cadastro-container {
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 24px;
             padding: 40px 36px;
             max-width: 440px;
@@ -30,8 +30,8 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
         .cadastro-container::-webkit-scrollbar { width: 4px; }
-        .cadastro-container::-webkit-scrollbar-track { background: #0B0D15; }
-        .cadastro-container::-webkit-scrollbar-thumb { background: #8B5CF6; border-radius: 4px; }
+        .cadastro-container::-webkit-scrollbar-track { background: var(--cor-fundo); }
+        .cadastro-container::-webkit-scrollbar-thumb { background: var(--cor-primaria); border-radius: 4px; }
 
         .logo {
             display: flex;
@@ -52,25 +52,25 @@
         }
         .logo-ring {
             fill: none;
-            stroke: #8B5CF6;
+            stroke: var(--cor-primaria);
             stroke-width: 2;
             opacity: 0.7;
         }
         .logo-ring-2 {
-            stroke: #6D28D9;
+            stroke: var(--cor-secundaria);
             stroke-width: 1.5;
             stroke-dasharray: 4 8;
             animation: girarLogo 4s linear infinite reverse;
         }
         .logo-dot {
-            fill: #8B5CF6;
+            fill: var(--cor-primaria);
             animation: pulsarDot 2s ease-in-out infinite;
         }
         .logo-dot:nth-child(3) { animation-delay: 0.5s; }
         .logo-dot:nth-child(4) { animation-delay: 1s; }
         .logo-dot:nth-child(5) { animation-delay: 1.5s; }
         .logo-letter {
-            fill: #E4E6EB;
+            fill: var(--cor-texto);
             font-size: 28px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
@@ -80,9 +80,9 @@
         .logo-text {
             font-size: 26px;
             font-weight: 800;
-            color: #E4E6EB;
+            color: var(--cor-texto);
         }
-        .logo-text .highlight { color: #8B5CF6; }
+        .logo-text .highlight { color: var(--cor-primaria); }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -100,7 +100,7 @@
         }
         .subtitulo {
             text-align: center;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             margin-bottom: 24px;
         }
@@ -109,7 +109,7 @@
         .form-group label {
             display: block;
             font-weight: 500;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 13px;
             margin-bottom: 4px;
         }
@@ -117,10 +117,10 @@
         .form-group select {
             width: 100%;
             padding: 12px 14px;
-            background: #0B0D15;
-            border: 2px solid #1A1D2E;
+            background: var(--cor-fundo);
+            border: 2px solid var(--cor-borda);
             border-radius: 10px;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 15px;
             transition: border-color 0.3s;
             appearance: none;
@@ -129,15 +129,15 @@
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
         }
         .form-group input::placeholder {
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
         .form-group select option {
-            background: #161926;
-            color: #E4E6EB;
+            background: var(--cor-cartao);
+            color: var(--cor-texto);
         }
 
         .checkbox-group {
@@ -149,18 +149,18 @@
         .checkbox-group input[type="checkbox"] {
             width: 18px;
             height: 18px;
-            accent-color: #8B5CF6;
+            accent-color: var(--cor-primaria);
             margin-top: 2px;
             flex-shrink: 0;
             cursor: pointer;
         }
         .checkbox-group label {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 13px;
             line-height: 1.5;
         }
         .checkbox-group label a {
-            color: #8B5CF6;
+            color: var(--cor-primaria);
             text-decoration: none;
         }
         .checkbox-group label a:hover { text-decoration: underline; }
@@ -168,7 +168,7 @@
         .btn-primary {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             color: #fff;
             border: none;
             border-radius: 10px;
@@ -180,16 +180,16 @@
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
         }
 
         .footer {
             text-align: center;
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
         .footer a {
-            color: #8B5CF6;
+            color: var(--cor-primaria);
             text-decoration: none;
             font-weight: 600;
         }

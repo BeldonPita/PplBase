@@ -14,8 +14,8 @@
         }
         body {
             font-family: 'Inter', sans-serif;
-            background: #0B0D15;
-            color: #E4E6EB;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
             padding: 40px 20px;
             min-height: 100vh;
             display: flex;
@@ -25,8 +25,8 @@
         .container {
             max-width: 820px;
             width: 100%;
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 24px;
             padding: 48px 40px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
@@ -49,25 +49,25 @@
         }
         .logo-ring {
             fill: none;
-            stroke: #8B5CF6;
+            stroke: var(--cor-primaria);
             stroke-width: 2;
             opacity: 0.7;
         }
         .logo-ring-2 {
-            stroke: #6D28D9;
+            stroke: var(--cor-secundaria);
             stroke-width: 1.5;
             stroke-dasharray: 4 8;
             animation: girarLogo 4s linear infinite reverse;
         }
         .logo-dot {
-            fill: #8B5CF6;
+            fill: var(--cor-primaria);
             animation: pulsarDot 2s ease-in-out infinite;
         }
         .logo-dot:nth-child(3) { animation-delay: 0.5s; }
         .logo-dot:nth-child(4) { animation-delay: 1s; }
         .logo-dot:nth-child(5) { animation-delay: 1.5s; }
         .logo-letter {
-            fill: #E4E6EB;
+            fill: var(--cor-texto);
             font-size: 26px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
@@ -77,10 +77,10 @@
         .logo-text {
             font-size: 24px;
             font-weight: 800;
-            color: #E4E6EB;
+            color: var(--cor-texto);
         }
         .logo-text .highlight {
-            color: #8B5CF6;
+            color: var(--cor-primaria);
         }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
@@ -99,24 +99,24 @@
         }
         .subtitle {
             text-align: center;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             margin-bottom: 32px;
         }
 
         .termos-content {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 15px;
             line-height: 1.8;
         }
         .termos-content h2 {
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 20px;
             font-weight: 700;
             margin: 24px 0 12px;
         }
         .termos-content h3 {
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 17px;
             font-weight: 600;
             margin: 18px 0 8px;
@@ -132,7 +132,7 @@
             margin-bottom: 6px;
         }
         .termos-content a {
-            color: #8B5CF6;
+            color: var(--cor-primaria);
             text-decoration: none;
         }
         .termos-content a:hover {
@@ -143,7 +143,7 @@
             display: inline-block;
             margin-top: 32px;
             padding: 12px 32px;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -156,7 +156,7 @@
         }
         .btn-voltar:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
         }
         .footer-center {
             text-align: center;

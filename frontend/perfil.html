@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,9 @@
         .perfil-container {
             max-width: 800px;
             margin: 40px auto;
-            background: #161926;
+            background: var(--cor-cartao);
             border-radius: 16px;
-            border: 1px solid #1a1d2e;
+            border: 1px solid var(--cor-borda);
             padding: 40px;
         }
         
@@ -20,7 +20,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: var(--cor-primaria);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,21 +37,21 @@
         
         .perfil-username {
             text-align: center;
-            color: #8b5cf6;
+            color: var(--cor-primaria);
             font-size: 16px;
             margin-bottom: 8px;
         }
         
         .perfil-localizacao {
             text-align: center;
-            color: #a0a4b8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             margin-bottom: 16px;
         }
         
         .perfil-bio {
             text-align: center;
-            color: #a0a4b8;
+            color: var(--cor-texto-secundario);
             font-size: 15px;
             max-width: 500px;
             margin: 0 auto 24px;
@@ -65,7 +65,7 @@
             color: #fff;
             font-size: 18px;
             margin-bottom: 12px;
-            border-bottom: 1px solid #1a1d2e;
+            border-bottom: 1px solid var(--cor-borda);
             padding-bottom: 8px;
         }
         
@@ -76,18 +76,18 @@
         }
         
         .perfil-tags .tag {
-            background: #1a1d2e;
-            color: #8b5cf6;
+            background: var(--cor-borda);
+            color: var(--cor-primaria);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 14px;
         }
         
         .perfil-exp-item {
-            background: #0b0d15;
+            background: var(--cor-fundo);
             padding: 16px;
             border-radius: 12px;
-            border-left: 3px solid #8b5cf6;
+            border-left: 3px solid var(--cor-primaria);
             margin-bottom: 12px;
         }
         
@@ -97,12 +97,12 @@
         }
         
         .perfil-exp-item .empresa {
-            color: #a0a4b8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
         
         .perfil-exp-item .desc {
-            color: #a0a4b8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             margin-top: 4px;
         }
@@ -113,7 +113,7 @@
             max-width: 300px;
             margin: 24px auto 0;
             padding: 14px;
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            background: var(--cor-primaria);
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -125,13 +125,13 @@
         
         .btn-conectar:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
         }
         
         .loading-perfil {
             text-align: center;
             padding: 60px 0;
-            color: #a0a4b8;
+            color: var(--cor-texto-secundario);
         }
         
         .loading-perfil .big-icon {
@@ -153,7 +153,7 @@
         .voltar-link {
             display: inline-block;
             margin-top: 16px;
-            color: #8b5cf6;
+            color: var(--cor-primaria);
             text-decoration: none;
         }
         

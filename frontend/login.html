@@ -10,8 +10,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #0B0D15;
-            color: #E4E6EB;
+            background: var(--cor-fundo);
+            color: var(--cor-texto);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -19,8 +19,8 @@
             padding: 20px;
         }
         .login-container {
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 24px;
             padding: 48px 40px;
             max-width: 440px;
@@ -46,25 +46,25 @@
         }
         .login-logo .logo-ring {
             fill: none;
-            stroke: #8B5CF6;
+            stroke: var(--cor-primaria);
             stroke-width: 2;
             opacity: 0.7;
         }
         .login-logo .logo-ring-2 {
-            stroke: #6D28D9;
+            stroke: var(--cor-secundaria);
             stroke-width: 1.5;
             stroke-dasharray: 4 8;
             animation: girarLogo 4s linear infinite reverse;
         }
         .login-logo .logo-dot {
-            fill: #8B5CF6;
+            fill: var(--cor-primaria);
             animation: pulsarDot 2s ease-in-out infinite;
         }
         .login-logo .logo-dot:nth-child(3) { animation-delay: 0.5s; }
         .login-logo .logo-dot:nth-child(4) { animation-delay: 1s; }
         .login-logo .logo-dot:nth-child(5) { animation-delay: 1.5s; }
         .login-logo .logo-letter {
-            fill: #E4E6EB;
+            fill: var(--cor-texto);
             font-size: 32px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
@@ -74,9 +74,9 @@
         .login-logo .logo-text {
             font-size: 28px;
             font-weight: 800;
-            color: #E4E6EB;
+            color: var(--cor-texto);
         }
-        .login-logo .logo-text .highlight { color: #8B5CF6; }
+        .login-logo .logo-text .highlight { color: var(--cor-primaria); }
         @keyframes girarLogo {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -94,7 +94,7 @@
         }
         .login-subtitle {
             text-align: center;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             margin-bottom: 28px;
         }
@@ -103,7 +103,7 @@
             width: 100%;
             padding: 14px;
             background: #fff;
-            color: #1A1D2E;
+            color: var(--cor-borda);
             border: none;
             border-radius: 12px;
             font-weight: 600;
@@ -119,7 +119,7 @@
         .btn-google:hover {
             background: #f0f0f0;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.2);
         }
         .btn-google svg { width: 24px; height: 24px; }
 
@@ -128,7 +128,7 @@
             align-items: center;
             gap: 16px;
             margin: 16px 0 24px;
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 13px;
         }
         .divider::before,
@@ -136,33 +136,33 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: #1A1D2E;
+            background: var(--cor-borda);
         }
 
         .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block;
             font-weight: 500;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             margin-bottom: 4px;
         }
         .form-group input {
             width: 100%;
             padding: 14px 16px;
-            background: #0B0D15;
-            border: 2px solid #1A1D2E;
+            background: var(--cor-fundo);
+            border: 2px solid var(--cor-borda);
             border-radius: 12px;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 16px;
             transition: border-color 0.3s;
         }
         .form-group input:focus {
             outline: none;
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
         }
         .form-group input::placeholder {
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
 
@@ -175,18 +175,18 @@
         .checkbox-group input[type="checkbox"] {
             width: 20px;
             height: 20px;
-            accent-color: #8B5CF6;
+            accent-color: var(--cor-primaria);
             margin-top: 2px;
             flex-shrink: 0;
             cursor: pointer;
         }
         .checkbox-group label {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
             line-height: 1.5;
         }
         .checkbox-group label a {
-            color: #8B5CF6;
+            color: var(--cor-primaria);
             text-decoration: none;
         }
         .checkbox-group label a:hover { text-decoration: underline; }
@@ -194,7 +194,7 @@
         .btn-primary {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -206,16 +206,16 @@
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
         }
 
         .login-footer {
             text-align: center;
-            color: #5A5E72;
+            color: var(--cor-texto-secundario);
             font-size: 14px;
         }
         .login-footer a {
-            color: #8B5CF6;
+            color: var(--cor-primaria);
             text-decoration: none;
             font-weight: 600;
         }

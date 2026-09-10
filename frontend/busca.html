@@ -11,17 +11,17 @@
         .input-row input {
             flex: 1;
             padding: 12px 16px;
-            background: #0B0D15;
-            border: 2px solid #1A1D2E;
+            background: var(--cor-fundo);
+            border: 2px solid var(--cor-borda);
             border-radius: 8px;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 16px;
             min-width: 200px;
         }
-        .input-row input:focus { outline: none; border-color: #8B5CF6; }
+        .input-row input:focus { outline: none; border-color: var(--cor-primaria); }
         .btn-primary {
             padding: 12px 24px;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -29,26 +29,26 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139,92,246,0.4); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,139,99,0.4); }
         .result-item {
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 12px;
         }
         .result-item h3 { margin-bottom: 4px; }
-        .result-item p { color: #A0A4B8; font-size: 14px; }
+        .result-item p { color: var(--cor-texto-secundario); font-size: 14px; }
         .result-item .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
         .result-item .tag {
-            background: #0B0D15;
+            background: var(--cor-fundo);
             padding: 2px 10px;
             border-radius: 12px;
             font-size: 12px;
-            color: #8B5CF6;
-            border: 1px solid #1A1D2E;
+            color: var(--cor-primaria);
+            border: 1px solid var(--cor-borda);
         }
-        .empty { color: #5A5E72; text-align: center; padding: 40px 0; }
+        .empty { color: var(--cor-texto-secundario); text-align: center; padding: 40px 0; }
 
         /* ===== NAVBAR ===== */
         .navbar .container {
@@ -65,7 +65,7 @@
             flex-wrap: wrap;
         }
         .nav-links a {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             text-decoration: none;
             padding: 8px 14px;
             border-radius: 8px;
@@ -75,17 +75,17 @@
         }
         .nav-links a:hover,
         .nav-links a.active {
-            color: #E4E6EB;
-            background: #1A1D2E;
+            color: var(--cor-texto);
+            background: var(--cor-borda);
         }
         .notification-icon {
             position: relative;
             cursor: pointer;
             padding: 8px;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             transition: all 0.2s;
         }
-        .notification-icon:hover { color: #8B5CF6; }
+        .notification-icon:hover { color: var(--cor-primaria); }
         .notification-badge {
             position: absolute;
             top: 2px;
@@ -103,7 +103,7 @@
         }
         .btn-outline {
             background: transparent;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             border: 2px solid #2A2D3E;
             padding: 6px 16px;
             border-radius: 6px;
@@ -112,14 +112,14 @@
             transition: all 0.3s;
         }
         .btn-outline:hover {
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
             color: #fff;
         }
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 24px;
             cursor: pointer;
             padding: 8px;
@@ -127,8 +127,8 @@
         .nav-links.mobile {
             display: none;
             flex-direction: column;
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 12px;
             padding: 16px;
             position: absolute;
@@ -215,7 +215,7 @@
         <div id="resultsContainer"><div class="empty">Digite algo para buscar</div></div>
     </div>
 
-    <footer style="padding:40px 0; text-align:center; border-top:1px solid #1A1D2E; color:#5A5E72;">
+    <footer style="padding:40px 0; text-align:center; border-top:1px solid var(--cor-borda); color:var(--cor-texto-secundario);">
         <div class="container"><p>&copy; 2026 PplBase</p></div>
     </footer>
 
@@ -242,7 +242,7 @@
             const query = document.getElementById('searchInput').value.trim();
             if (!query) return;
             const container = document.getElementById('resultsContainer');
-            container.innerHTML = '<div style="text-align:center; color:#A0A4B8; padding:20px;">Buscando...</div>';
+            container.innerHTML = '<div style="text-align:center; color:var(--cor-texto-secundario); padding:20px;">Buscando...</div>';
             try {
                 const response = await fetch(`${API_URL}/pesquisa/pessoas?q=${encodeURIComponent(query)}`, {
                     headers: { 'Authorization': `Bearer ${token}` }

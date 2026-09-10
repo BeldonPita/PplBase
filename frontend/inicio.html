@@ -23,7 +23,7 @@
             flex-wrap: wrap;
         }
         .nav-links a {
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             text-decoration: none;
             padding: 8px 14px;
             border-radius: 8px;
@@ -33,17 +33,17 @@
         }
         .nav-links a:hover,
         .nav-links a.active {
-            color: #E4E6EB;
-            background: #1A1D2E;
+            color: var(--cor-texto);
+            background: var(--cor-borda);
         }
         .notification-icon {
             position: relative;
             cursor: pointer;
             padding: 8px;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             transition: all 0.2s;
         }
-        .notification-icon:hover { color: #8B5CF6; }
+        .notification-icon:hover { color: var(--cor-primaria); }
         .notification-badge {
             position: absolute;
             top: 2px;
@@ -61,7 +61,7 @@
         }
         .btn-outline {
             background: transparent;
-            color: #A0A4B8;
+            color: var(--cor-texto-secundario);
             border: 2px solid #2A2D3E;
             padding: 6px 16px;
             border-radius: 6px;
@@ -70,7 +70,7 @@
             transition: all 0.3s;
         }
         .btn-outline:hover {
-            border-color: #8B5CF6;
+            border-color: var(--cor-primaria);
             color: #fff;
         }
 
@@ -85,7 +85,7 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             border: none;
             color: #fff;
             font-size: 24px;
@@ -93,7 +93,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 139, 99, 0.4);
             transition: all 0.3s;
         }
         .side-menu .menu-icon:hover { transform: scale(1.05); }
@@ -101,8 +101,8 @@
             position: absolute;
             bottom: 60px;
             left: 0;
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 12px;
             padding: 8px;
             min-width: 160px;
@@ -118,19 +118,19 @@
             padding: 10px 16px;
             background: none;
             border: none;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 14px;
             font-weight: 500;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .side-menu .menu-dropdown button:hover { background: #1A1D2E; }
-        .side-menu .menu-dropdown .divider { height: 1px; background: #1A1D2E; margin: 6px 0; }
+        .side-menu .menu-dropdown button:hover { background: var(--cor-borda); }
+        .side-menu .menu-dropdown .divider { height: 1px; background: var(--cor-borda); margin: 6px 0; }
 
         /* ===== BANNER ===== */
         .banner {
-            background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+            background: var(--cor-primaria);
             border-radius: 16px;
             padding: 30px;
             color: #fff;
@@ -144,7 +144,7 @@
             display: none;
             background: none;
             border: none;
-            color: #E4E6EB;
+            color: var(--cor-texto);
             font-size: 24px;
             cursor: pointer;
             padding: 8px;
@@ -152,8 +152,8 @@
         .nav-links.mobile {
             display: none;
             flex-direction: column;
-            background: #161926;
-            border: 1px solid #1A1D2E;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
             border-radius: 12px;
             padding: 16px;
             position: absolute;
@@ -255,12 +255,12 @@
             <h1>Bem-vindo Bem-vindo de volta, <span id="userName">Usuário</span>!</h1>
             <p>Explore as últimas novidades e conecte-se com a comunidade.</p>
         </div>
-        <div id="feedContent" style="color:#A0A4B8; text-align:center; padding:40px 0;">
+        <div id="feedContent" style="color:var(--cor-texto-secundario); text-align:center; padding:40px 0;">
             Carregando atividades...
         </div>
     </div>
 
-    <footer style="padding:40px 0; text-align:center; border-top:1px solid #1A1D2E; color:#5A5E72;">
+    <footer style="padding:40px 0; text-align:center; border-top:1px solid var(--cor-borda); color:var(--cor-texto-secundario);">
         <div class="container"><p>&copy; 2026 PplBase</p></div>
     </footer>
 
@@ -313,20 +313,20 @@
                 const pessoas = await response.json();
                 const container = document.getElementById('feedContent');
                 if (!pessoas.length) {
-                    container.innerHTML = '<div style="text-align:center; color:#5A5E72; padding:20px;">Nenhuma atividade recente.</div>';
+                    container.innerHTML = '<div style="text-align:center; color:var(--cor-texto-secundario); padding:20px;">Nenhuma atividade recente.</div>';
                     return;
                 }
                 container.innerHTML = pessoas.slice(0, 5).map(p => `
-                    <div style="background:#161926; border:1px solid #1A1D2E; border-radius:12px; padding:16px; margin-bottom:12px;">
+                    <div style="background:var(--cor-cartao); border:1px solid var(--cor-borda); border-radius:12px; padding:16px; margin-bottom:12px;">
                         <div style="display:flex; align-items:center; gap:12px;">
-                            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#8B5CF6,#6D28D9); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">${p.nome?.charAt(0) || '?'}</div>
+                            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--cor-primaria),var(--cor-secundaria)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">${p.nome?.charAt(0) || '?'}</div>
                             <div>
                                 <div style="font-weight:600;">${p.nome || 'Usuário'}</div>
-                                <div style="color:#5A5E72; font-size:13px;">@${p.username}</div>
+                                <div style="color:var(--cor-texto-secundario); font-size:13px;">@${p.username}</div>
                             </div>
                         </div>
-                        <div style="margin-top:8px; color:#A0A4B8;">${p.bio || 'Novo membro do PplBase!'}</div>
-                        ${p.localizacao ? `<div style="color:#5A5E72; font-size:12px; margin-top:4px;">📍 ${p.localizacao}</div>` : ''}
+                        <div style="margin-top:8px; color:var(--cor-texto-secundario);">${p.bio || 'Novo membro do PplBase!'}</div>
+                        ${p.localizacao ? `<div style="color:var(--cor-texto-secundario); font-size:12px; margin-top:4px;">📍 ${p.localizacao}</div>` : ''}
                     </div>
                 `).join('');
             } catch (error) {
