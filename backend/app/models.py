@@ -65,3 +65,7 @@ class Conexao(Base):
     seguidor_id = Column(Integer, ForeignKey("usuarios.id", ondelete="CASCADE"), nullable=False)
     seguido_id = Column(Integer, ForeignKey("usuarios.id", ondelete="CASCADE"), nullable=False)
     criado_em = Column(DateTime, default=datetime.utcnow)
+
+# Adicionar ao modelo Usuario:
+# aceitou_termos = Column(Boolean, default=False)
+# aceitou_termos_em = Column(DateTime, nullable=True)

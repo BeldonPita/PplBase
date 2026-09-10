@@ -544,3 +544,55 @@ footer {
     background: #FFFFFF;
     border-color: rgba(43, 38, 33, 0.20);
 }
+
+/* ============================================================ */
+/* BOTÃO GOOGLE — CORES FIXAS */
+/* ============================================================ */
+
+.btn-google,
+button.btn-google {
+    background: #FFFFFF !important;
+    background-image: none !important;
+    color: #1A1D2E !important;
+    border: 2px solid var(--cor-borda) !important;
+    padding: 14px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    transition: all 0.3s !important;
+    text-decoration: none !important;
+}
+
+.btn-google:hover {
+    background: #F5F5F5 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-google svg {
+    width: 24px !important;
+    height: 24px !important;
+    flex-shrink: 0 !important;
+}
+
+.btn-google span {
+    color: #1A1D2E !important;
+}
+
+/* Light mode */
+[data-theme="light"] .btn-google,
+[data-theme="light"] button.btn-google {
+    background: #FFFFFF !important;
+    color: #2B2621 !important;
+    border-color: rgba(43, 38, 33, 0.15) !important;
+}
+
+[data-theme="light"] .btn-google span {
+    color: #2B2621 !important;
+}

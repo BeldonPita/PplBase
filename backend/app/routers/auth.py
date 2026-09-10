@@ -16,6 +16,8 @@ def register(usuario: UsuarioCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Email já está em uso")
     
     novo_usuario = Usuario(
+        aceitou_termos=True,
+        aceitou_termos_em=datetime.utcnow(),
         nome=usuario.nome,
         username=usuario.username,
         email=usuario.email,

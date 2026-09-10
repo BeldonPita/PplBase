@@ -25,7 +25,7 @@
             padding: 48px 40px;
             max-width: 440px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         .login-logo {
             display: flex;
@@ -48,7 +48,7 @@
             fill: none;
             stroke: var(--cor-primaria);
             stroke-width: 2;
-            opacity: 0.7;
+            opacity: 0.8;
         }
         .login-logo .logo-ring-2 {
             stroke: var(--cor-secundaria);
@@ -102,9 +102,9 @@
         .btn-google {
             width: 100%;
             padding: 14px;
-            background: #fff;
-            color: var(--cor-borda);
-            border: none;
+            background: #FFFFFF;
+            color: #1A1D2E;
+            border: 2px solid var(--cor-borda);
             border-radius: 12px;
             font-weight: 600;
             font-size: 16px;
@@ -117,11 +117,12 @@
             margin-bottom: 20px;
         }
         .btn-google:hover {
-            background: #f0f0f0;
+            background: #F5F5F5;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
         .btn-google svg { width: 24px; height: 24px; }
+        .btn-google span { color: #1A1D2E; }
 
         .divider {
             display: flex;
@@ -143,7 +144,7 @@
         .form-group label {
             display: block;
             font-weight: 500;
-            color: var(--cor-texto-secundario);
+            color: var(--cor-texto);
             font-size: 14px;
             margin-bottom: 4px;
         }
@@ -171,6 +172,13 @@
             align-items: flex-start;
             gap: 12px;
             margin: 16px 0 24px;
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .checkbox-group.destaque {
+            background: rgba(255, 139, 99, 0.10);
+            border: 1px solid var(--cor-primaria);
         }
         .checkbox-group input[type="checkbox"] {
             width: 20px;
@@ -184,10 +192,12 @@
             color: var(--cor-texto-secundario);
             font-size: 14px;
             line-height: 1.5;
+            cursor: pointer;
         }
         .checkbox-group label a {
             color: var(--cor-primaria);
             text-decoration: none;
+            font-weight: 600;
         }
         .checkbox-group label a:hover { text-decoration: underline; }
 
@@ -195,6 +205,7 @@
             width: 100%;
             padding: 14px;
             background: var(--cor-primaria);
+            background-image: none;
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -226,7 +237,7 @@
             text-align: center;
             font-size: 14px;
         }
-        .form-message.success { color: #4ADE80; }
+        .form-message.success { color: var(--cor-secundaria); }
         .form-message.error { color: #F87171; }
 
         @media (max-width: 480px) {
@@ -259,6 +270,16 @@
         <h1 class="login-title">Entrar no PplBase</h1>
         <p class="login-subtitle">A plataforma que liga pessoas, conhecimento e oportunidades</p>
 
+        <!-- TERMOS PRIMEIRO -->
+        <div class="checkbox-group destaque" id="termsGroup">
+            <input type="checkbox" id="termsCheck" />
+            <label for="termsCheck">
+                Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Condições</a> *
+            </label>
+        </div>
+        <p class="form-message error" id="termsMessage" style="display:none; margin-bottom: 16px;"></p>
+
+        <!-- BOTÃO GOOGLE -->
         <button class="btn-google" id="btnGoogleLogin">
             <svg viewBox="0 0 48 48">
                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
@@ -266,7 +287,7 @@
                 <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
                 <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
             </svg>
-            Entrar com Google
+            <span>Entrar com Google</span>
         </button>
 
         <div class="divider">ou</div>
@@ -281,13 +302,6 @@
                 <input type="password" id="loginSenha" placeholder="Tua senha" required />
             </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="termsCheck" required />
-                <label for="termsCheck">
-                    Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Condições</a>
-                </label>
-            </div>
-
             <button type="submit" class="btn-primary">Entrar</button>
             <p class="form-message" id="loginMessage"></p>
         </form>
@@ -300,9 +314,35 @@
     <script>
         const API_URL = 'https://pplbase.onrender.com';
 
+        // ===== VALIDAR TERMOS =====
+        function verificarTermos() {
+            const termsCheck = document.getElementById('termsCheck');
+            const termsGroup = document.getElementById('termsGroup');
+            const termsMessage = document.getElementById('termsMessage');
+
+            if (!termsCheck.checked) {
+                termsGroup.classList.add('destaque');
+                termsMessage.textContent = '⚠️ Aceite os Termos de Uso e Condições para continuar';
+                termsMessage.style.display = 'block';
+                return false;
+            }
+
+            termsMessage.style.display = 'none';
+            return true;
+        }
+
+        // ===== LOGIN COM GOOGLE =====
+        document.getElementById('btnGoogleLogin').addEventListener('click', function() {
+            if (!verificarTermos()) return;
+            // Redirecionar para o backend que inicia o fluxo OAuth do Google
+            window.location.href = 'https://pplbase.onrender.com/auth/google/login';
+        });
+
         // ===== LOGIN NORMAL =====
         document.getElementById('formLogin').addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            if (!verificarTermos()) return;
 
             const username = document.getElementById('loginUsername').value;
             const senha = document.getElementById('loginSenha').value;
@@ -313,14 +353,7 @@
 
             window.location.href = `loading.html?action=login&username=${encodeURIComponent(username)}&senha=${encodeURIComponent(senha)}&redirect=/inicio.html`;
         });
-
-        // ===== LOGIN COM GOOGLE =====
-        document.getElementById('btnGoogleLogin').addEventListener('click', function() {
-            // Redirecionar para o backend que inicia o fluxo OAuth do Google
-            window.location.href = 'https://pplbase.onrender.com/auth/google/login';
-        });
     </script>
 
-<script src="tema.js"></script>
 </body>
 </html>

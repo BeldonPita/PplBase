@@ -299,7 +299,13 @@
             const senha = document.getElementById('cadSenha').value;
             const localizacao = document.getElementById('cadLocalizacao').value;
             const message = document.getElementById('cadastroMessage');
-            const termsCheck = document.getElementById('termsCheck');
+            const termsCheck = document.getElementById("termsCheck");
+
+            if (!termsCheck.checked) {
+                message.textContent = "⚠️ Aceite os Termos de Uso e Condições";
+                message.className = "form-message error";
+                return;
+            }
 
             // Validações
             if (!nome || !username || !email || !senha) {
