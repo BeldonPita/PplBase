@@ -5,181 +5,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início - PplBase</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         .container-inicio { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
-        /* ===== NAVBAR ===== */
-        .navbar .container {
+        .banner {
+            background: var(--cor-primaria);
+            background-image: none;
+            border-radius: 16px;
+            padding: 40px;
+            color: #fff;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
             flex-wrap: wrap;
-            position: relative;
         }
-        .nav-links {
+        .banner .banner-content { flex: 1; min-width: 250px; }
+        .banner h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .banner p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            max-width: 600px;
+        }
+        .banner .banner-cta {
             display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .banner .banner-cta a,
+        .banner .banner-cta button {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
-            flex-wrap: wrap;
         }
-        .nav-links a {
-            color: var(--cor-texto-secundario);
-            text-decoration: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.2s;
+        .banner .banner-cta a:hover,
+        .banner .banner-cta button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--cor-texto);
-            background: var(--cor-borda);
-        }
-        .notification-icon {
-            position: relative;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--cor-texto-secundario);
-            transition: all 0.2s;
-        }
-        .notification-icon:hover { color: var(--cor-primaria); }
-        .notification-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: #EF4444;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--cor-texto-secundario);
-            border: 2px solid #2A2D3E;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-outline:hover {
-            border-color: var(--cor-primaria);
-            color: #fff;
+        .banner .banner-icon {
+            font-size: 64px;
+            opacity: 0.3;
+            flex-shrink: 0;
         }
 
-        /* ===== MENU 3 BARRAS ===== */
-        .side-menu {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
         }
-        .side-menu .menu-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--cor-primaria);
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(255, 139, 99, 0.4);
-            transition: all 0.3s;
-        }
-        .side-menu .menu-icon:hover { transform: scale(1.05); }
-        .side-menu .menu-dropdown {
-            position: absolute;
-            bottom: 60px;
-            left: 0;
+        .stat-card {
             background: var(--cor-cartao);
             border: 1px solid var(--cor-borda);
             border-radius: 12px;
-            padding: 8px;
-            min-width: 160px;
-            display: none;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            padding: 20px;
+            text-align: center;
         }
-        .side-menu .menu-dropdown.active { display: block; }
-        .side-menu .menu-dropdown button {
+        .stat-card .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+        .stat-card .label {
+            color: var(--cor-texto-secundario);
+            font-size: 14px;
+        }
+
+        .sugestoes, .atividades {
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .sugestoes h3, .atividades h3 {
+            color: var(--cor-texto);
+            margin-bottom: 16px;
+        }
+
+        .sugestao-item, .atividade-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--cor-borda);
+            gap: 12px;
+        }
+        .sugestao-item:last-child, .atividade-item:last-child {
+            border-bottom: none;
+        }
+        .sugestao-item .info, .atividade-item .info {
             display: flex;
             align-items: center;
             gap: 12px;
-            width: 100%;
-            padding: 10px 16px;
-            background: none;
-            border: none;
-            color: var(--cor-texto);
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
+            flex: 1;
         }
-        .side-menu .menu-dropdown button:hover { background: var(--cor-borda); }
-        .side-menu .menu-dropdown .divider { height: 1px; background: var(--cor-borda); margin: 6px 0; }
-
-        /* ===== BANNER ===== */
-        .banner {
+        .sugestao-item .avatar, .atividade-item .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             background: var(--cor-primaria);
-            border-radius: 16px;
-            padding: 30px;
+            background-image: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
-            margin-bottom: 30px;
+            font-weight: 700;
+            flex-shrink: 0;
         }
-        .banner h1 { font-size: 28px; margin-bottom: 4px; }
-        .banner p { opacity: 0.9; }
-
-        /* ===== RESPONSIVO ===== */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
+        .sugestao-item .nome, .atividade-item .nome {
             color: var(--cor-texto);
-            font-size: 24px;
+            font-weight: 600;
+        }
+        .sugestao-item .username, .atividade-item .username {
+            color: var(--cor-texto-secundario);
+            font-size: 13px;
+        }
+        .btn-seguir {
+            padding: 6px 16px;
+            background: var(--cor-primaria);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
-            padding: 8px;
+            font-size: 13px;
+            transition: all 0.3s;
+            flex-shrink: 0;
         }
-        .nav-links.mobile {
-            display: none;
-            flex-direction: column;
-            background: var(--cor-cartao);
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 16px;
-            position: absolute;
-            top: 60px;
-            right: 0;
-            z-index: 100;
-            min-width: 180px;
-            width: 100%;
-            max-width: 280px;
+        .btn-seguir:hover {
+            background: var(--cor-secundaria);
+            transform: scale(1.05);
         }
-        .nav-links.mobile.open { display: flex; }
-        .nav-links.mobile a { padding: 10px 12px; }
-        .nav-links.mobile .btn-outline { width: 100%; text-align: center; margin-top: 8px; }
+        .empty {
+            color: var(--cor-texto-secundario);
+            text-align: center;
+            padding: 20px 0;
+        }
 
         @media (max-width: 768px) {
-            .nav-links.desktop { display: none; }
-            .menu-toggle { display: block; }
-            .nav-links.mobile { max-width: 100%; right: 0; top: 60px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .banner { padding: 24px; }
             .banner h1 { font-size: 22px; }
-            .banner { padding: 20px; }
-        }
-        @media (max-width: 480px) {
-            .banner h1 { font-size: 18px; }
-            .container-inicio { padding: 12px; }
-            .logo-text { font-size: 18px; }
-            .logo-avatar { width: 32px; height: 32px; }
+            .banner .banner-icon { display: none; }
+            .sugestao-item { flex-wrap: wrap; }
+            .btn-seguir { width: 100%; }
         }
     </style>
 </head>
@@ -202,140 +189,89 @@
                 </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-            <button class="menu-toggle" id="menuToggle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-            </button>
-            <div class="nav-links desktop">
+            <div class="nav-links">
                 <a href="inicio.html" class="active">Início</a>
                 <a href="busca.html">Buscar</a>
                 <a href="dashboard.html">Dashboard</a>
-                <div class="notification-icon" id="notifIcon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                    </svg>
-                    <span class="notification-badge">3</span>
-                </div>
-                <button class="btn-outline" id="btnLogoutDesktop">Sair</button>
-            </div>
-            <div class="nav-links mobile" id="mobileMenu">
-                <a href="inicio.html" class="active">Início</a>
-                <a href="busca.html">Buscar</a>
-                <a href="dashboard.html">Dashboard</a>
-                <button class="btn-outline" id="btnLogoutMobile">Sair</button>
+                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+                <button class="toggle-tema" aria-label="Alternar tema"></button>
             </div>
         </div>
     </nav>
 
-    <!-- ===== MENU 3 BARRAS ===== -->
-    <div class="side-menu" id="sideMenu">
-        <button class="menu-icon" id="menuToggleSide">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <line x1="3" y1="12" x2="21" y2="12"/>
-                <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-        </button>
-        <div class="menu-dropdown" id="menuDropdown">
-            <button id="menuDashboard">📊 Dashboard</button>
-            <button id="menuAtividades">Atividades Recentes Atividades</button>
-            <div class="divider"></div>
-            <button id="menuDarkMode">🌙 Dark Mode</button>
-            <button id="menuLightMode">☀️ Light Mode</button>
-        </div>
-    </div>
-
-    <!-- ===== CONTEÚDO ===== -->
     <div class="container-inicio">
-        <div class="banner">
-            <h1>Bem-vindo Bem-vindo de volta, <span id="userName">Usuário</span>!</h1>
-            <p>Explore as últimas novidades e conecte-se com a comunidade.</p>
+        <!-- ===== BANNER DINÂMICO ===== -->
+        <div class="banner" id="banner">
+            <div class="banner-content">
+                <h1 id="bannerTitulo">Bem-vindo, <span id="userName">Usuário</span>!</h1>
+                <p id="bannerMensagem">Explore as últimas novidades e conecte-se com a comunidade.</p>
+                <div class="banner-cta" id="bannerCta" style="display:none;">
+                    <a href="dashboard.html">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Completar Perfil
+                    </a>
+                    <a href="busca.html">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        Encontrar Talentos
+                    </a>
+                </div>
+            </div>
+            <div class="banner-icon" id="bannerIcon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
         </div>
-        <div id="feedContent" style="color:var(--cor-texto-secundario); text-align:center; padding:40px 0;">
-            Carregando atividades...
+
+        <!-- ===== ESTATÍSTICAS ===== -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number" id="statSeguidores">0</div>
+                <div class="label">Seguidores</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statSeguindo">0</div>
+                <div class="label">Seguindo</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statHabilidades">0</div>
+                <div class="label">Habilidades</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="statExperiencias">0</div>
+                <div class="label">Experiências</div>
+            </div>
+        </div>
+
+        <!-- ===== SUGESTÕES ===== -->
+        <div class="sugestoes">
+            <h3>Pessoas para seguir</h3>
+            <div id="sugestoesContainer">
+                <div class="empty">Carregando...</div>
+            </div>
+        </div>
+
+        <!-- ===== ATIVIDADES ===== -->
+        <div class="atividades">
+            <h3>Últimas atividades</h3>
+            <div id="atividadesContainer">
+                <div class="empty">Carregando...</div>
+            </div>
         </div>
     </div>
 
-    <footer style="padding:40px 0; text-align:center; border-top:1px solid var(--cor-borda); color:var(--cor-texto-secundario);">
-        <div class="container"><p>&copy; 2026 PplBase</p></div>
-    </footer>
+    <footer><div class="container"><p>&copy; 2026 PplBase</p></div></footer>
 
-    <script>
-        // ===== MENU MOBILE =====
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('open');
-        });
-
-        // ===== MENU 3 BARRAS =====
-        document.getElementById('menuToggleSide').addEventListener('click', () => {
-            document.getElementById('menuDropdown').classList.toggle('active');
-        });
-        document.getElementById('menuDashboard').addEventListener('click', () => {
-            window.location.href = '/dashboard.html';
-        });
-        document.getElementById('menuAtividades').addEventListener('click', () => {
-            window.location.href = '/inicio.html';
-        });
-        document.getElementById('menuDarkMode').addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            document.getElementById('menuDropdown').classList.remove('active');
-        });
-        document.getElementById('menuLightMode').addEventListener('click', () => {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            document.getElementById('menuDropdown').classList.remove('active');
-        });
-
-        // ===== LOGOUT =====
-        function logout() {
-            localStorage.removeItem('pplbase_token');
-            window.location.href = '/';
-        }
-        document.getElementById('btnLogoutDesktop').addEventListener('click', logout);
-        document.getElementById('btnLogoutMobile').addEventListener('click', logout);
-
-        // ===== CARREGAR FEED =====
-        const API_URL = 'https://pplbase.onrender.com';
-        const token = localStorage.getItem('pplbase_token');
-        if (!token) window.location.href = '/';
-
-        async function carregarFeed() {
-            try {
-                const response = await fetch(`${API_URL}/pesquisa/pessoas`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (!response.ok) throw new Error('Erro');
-                const pessoas = await response.json();
-                const container = document.getElementById('feedContent');
-                if (!pessoas.length) {
-                    container.innerHTML = '<div style="text-align:center; color:var(--cor-texto-secundario); padding:20px;">Nenhuma atividade recente.</div>';
-                    return;
-                }
-                container.innerHTML = pessoas.slice(0, 5).map(p => `
-                    <div style="background:var(--cor-cartao); border:1px solid var(--cor-borda); border-radius:12px; padding:16px; margin-bottom:12px;">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--cor-primaria),var(--cor-secundaria)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">${p.nome?.charAt(0) || '?'}</div>
-                            <div>
-                                <div style="font-weight:600;">${p.nome || 'Usuário'}</div>
-                                <div style="color:var(--cor-texto-secundario); font-size:13px;">@${p.username}</div>
-                            </div>
-                        </div>
-                        <div style="margin-top:8px; color:var(--cor-texto-secundario);">${p.bio || 'Novo membro do PplBase!'}</div>
-                        ${p.localizacao ? `<div style="color:var(--cor-texto-secundario); font-size:12px; margin-top:4px;">📍 ${p.localizacao}</div>` : ''}
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Erro:', error);
-                document.getElementById('feedContent').innerHTML = '<div style="text-align:center; color:#EF4444; padding:20px;">Erro ao carregar feed.</div>';
-            }
-        }
-        carregarFeed();
-    </script>
-<script src="tema.js"></script>
+    <script src="tema.js"></script>
+    <script src="inicio.js"></script>
 </body>
 </html>
