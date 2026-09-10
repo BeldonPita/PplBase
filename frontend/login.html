@@ -34,70 +34,22 @@
             gap: 12px;
             margin-bottom: 32px;
         }
-        .login-logo .logo-avatar {
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-        }
-        .login-logo .logo-svg {
-            width: 100%;
-            height: 100%;
-            animation: girarLogo 8s linear infinite;
-        }
-        .login-logo .logo-ring {
-            fill: none;
-            stroke: var(--cor-primaria);
-            stroke-width: 2;
-            opacity: 0.8;
-        }
-        .login-logo .logo-ring-2 {
-            stroke: var(--cor-secundaria);
-            stroke-width: 1.5;
-            stroke-dasharray: 4 8;
-            animation: girarLogo 4s linear infinite reverse;
-        }
-        .login-logo .logo-dot {
-            fill: var(--cor-primaria);
-            animation: pulsarDot 2s ease-in-out infinite;
-        }
+        .login-logo .logo-avatar { width: 48px; height: 48px; flex-shrink: 0; }
+        .login-logo .logo-svg { width: 100%; height: 100%; animation: girarLogo 8s linear infinite; }
+        .login-logo .logo-ring { fill: none; stroke: var(--cor-primaria); stroke-width: 2; opacity: 0.8; }
+        .login-logo .logo-ring-2 { stroke: var(--cor-secundaria); stroke-width: 1.5; stroke-dasharray: 4 8; animation: girarLogo 4s linear infinite reverse; }
+        .login-logo .logo-dot { fill: var(--cor-primaria); animation: pulsarDot 2s ease-in-out infinite; }
         .login-logo .logo-dot:nth-child(3) { animation-delay: 0.5s; }
         .login-logo .logo-dot:nth-child(4) { animation-delay: 1s; }
         .login-logo .logo-dot:nth-child(5) { animation-delay: 1.5s; }
-        .login-logo .logo-letter {
-            fill: var(--cor-texto);
-            font-size: 32px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            text-anchor: middle;
-            dominant-baseline: central;
-        }
-        .login-logo .logo-text {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--cor-texto);
-        }
+        .login-logo .logo-letter { fill: var(--cor-texto); font-size: 32px; font-weight: 700; font-family: 'Inter', sans-serif; text-anchor: middle; dominant-baseline: central; }
+        .login-logo .logo-text { font-size: 28px; font-weight: 800; color: var(--cor-texto); }
         .login-logo .logo-text .highlight { color: var(--cor-primaria); }
-        @keyframes girarLogo {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes pulsarDot {
-            0%, 100% { opacity: 0.3; r: 3; }
-            50% { opacity: 1; r: 5; }
-        }
+        @keyframes girarLogo { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulsarDot { 0%, 100% { opacity: 0.3; r: 3; } 50% { opacity: 1; r: 5; } }
 
-        .login-title {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .login-subtitle {
-            text-align: center;
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
+        .login-title { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .login-subtitle { text-align: center; color: var(--cor-texto-secundario); font-size: 14px; margin-bottom: 28px; }
 
         .btn-google {
             width: 100%;
@@ -116,11 +68,7 @@
             transition: all 0.3s;
             margin-bottom: 20px;
         }
-        .btn-google:hover {
-            background: #F5F5F5;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-        }
+        .btn-google:hover { background: #F5F5F5; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); }
         .btn-google svg { width: 24px; height: 24px; }
         .btn-google span { color: #1A1D2E; }
 
@@ -133,21 +81,10 @@
             font-size: 13px;
         }
         .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--cor-borda);
-        }
+        .divider::after { content: ''; flex: 1; height: 1px; background: var(--cor-borda); }
 
         .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            font-weight: 500;
-            color: var(--cor-texto);
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
+        .form-group label { display: block; font-weight: 500; color: var(--cor-texto); font-size: 14px; margin-bottom: 4px; }
         .form-group input {
             width: 100%;
             padding: 14px 16px;
@@ -158,20 +95,31 @@
             font-size: 16px;
             transition: border-color 0.3s;
         }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--cor-primaria);
-        }
-        .form-group input::placeholder {
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-        }
+        .form-group input:focus { outline: none; border-color: var(--cor-primaria); }
+        .form-group input::placeholder { color: var(--cor-texto-secundario); font-size: 14px; }
 
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--cor-primaria);
+            background-image: none;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 16px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4); }
+
+        /* ===== TERMOS AGORA DEPOIS DO BOTÃO ENTRAR ===== */
         .checkbox-group {
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            margin: 16px 0 24px;
+            margin: 0 0 20px 0;
             padding: 12px;
             border-radius: 10px;
             transition: all 0.3s;
@@ -194,49 +142,14 @@
             line-height: 1.5;
             cursor: pointer;
         }
-        .checkbox-group label a {
-            color: var(--cor-primaria);
-            text-decoration: none;
-            font-weight: 600;
-        }
+        .checkbox-group label a { color: var(--cor-primaria); text-decoration: none; font-weight: 600; }
         .checkbox-group label a:hover { text-decoration: underline; }
 
-        .btn-primary {
-            width: 100%;
-            padding: 14px;
-            background: var(--cor-primaria);
-            background-image: none;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 20px;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
-        }
-
-        .login-footer {
-            text-align: center;
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-        }
-        .login-footer a {
-            color: var(--cor-primaria);
-            text-decoration: none;
-            font-weight: 600;
-        }
+        .login-footer { text-align: center; color: var(--cor-texto-secundario); font-size: 14px; }
+        .login-footer a { color: var(--cor-primaria); text-decoration: none; font-weight: 600; }
         .login-footer a:hover { text-decoration: underline; }
 
-        .form-message {
-            margin-top: 12px;
-            text-align: center;
-            font-size: 14px;
-        }
+        .form-message { margin-top: 12px; text-align: center; font-size: 14px; }
         .form-message.success { color: var(--cor-secundaria); }
         .form-message.error { color: #F87171; }
 
@@ -270,15 +183,6 @@
         <h1 class="login-title">Entrar no PplBase</h1>
         <p class="login-subtitle">A plataforma que liga pessoas, conhecimento e oportunidades</p>
 
-        <!-- TERMOS PRIMEIRO -->
-        <div class="checkbox-group destaque" id="termsGroup">
-            <input type="checkbox" id="termsCheck" />
-            <label for="termsCheck">
-                Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Condições</a> *
-            </label>
-        </div>
-        <p class="form-message error" id="termsMessage" style="display:none; margin-bottom: 16px;"></p>
-
         <!-- BOTÃO GOOGLE -->
         <button class="btn-google" id="btnGoogleLogin">
             <svg viewBox="0 0 48 48">
@@ -306,6 +210,15 @@
             <p class="form-message" id="loginMessage"></p>
         </form>
 
+        <!-- TERMOS AGORA AQUI (DEPOIS DO ENTRAR, ANTES DO CRIAR CONTA) -->
+        <div class="checkbox-group" id="termsGroup">
+            <input type="checkbox" id="termsCheck" />
+            <label for="termsCheck">
+                Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Condições</a> *
+            </label>
+        </div>
+        <p class="form-message error" id="termsMessage" style="display:none; margin-bottom: 16px;"></p>
+
         <div class="login-footer">
             <p>Não tem conta? <a href="cadastro.html">Crie uma agora</a></p>
         </div>
@@ -324,6 +237,7 @@
                 termsGroup.classList.add('destaque');
                 termsMessage.textContent = '⚠️ Aceite os Termos de Uso e Condições para continuar';
                 termsMessage.style.display = 'block';
+                termsGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return false;
             }
 
@@ -334,7 +248,6 @@
         // ===== LOGIN COM GOOGLE =====
         document.getElementById('btnGoogleLogin').addEventListener('click', function() {
             if (!verificarTermos()) return;
-            // Redirecionar para o backend que inicia o fluxo OAuth do Google
             window.location.href = 'https://pplbase.onrender.com/auth/google/login';
         });
 
