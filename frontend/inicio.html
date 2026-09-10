@@ -9,6 +9,99 @@
     <style>
         .container-inicio { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
+        /* ===== POPUP DE BOAS-VINDAS ===== */
+        .popup-boas-vindas {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
+            border-left: 4px solid var(--cor-primaria);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 380px;
+            width: calc(100% - 40px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            z-index: 9999;
+            transform: translateX(450px);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .popup-boas-vindas.ativo {
+            transform: translateX(0);
+        }
+
+        .popup-boas-vindas .popup-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cor-primaria);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #fff;
+        }
+
+        .popup-boas-vindas .popup-conteudo {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .popup-boas-vindas .popup-titulo {
+            font-weight: 700;
+            color: var(--cor-texto);
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .popup-boas-vindas .popup-mensagem {
+            color: var(--cor-texto-secundario);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .popup-boas-vindas .popup-fechar {
+            background: none;
+            border: none;
+            color: var(--cor-texto-secundario);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .popup-boas-vindas .popup-fechar:hover {
+            background: var(--cor-hover);
+            color: var(--cor-texto);
+        }
+
+        /* Barra de progresso do popup */
+        .popup-boas-vindas .popup-progresso {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--cor-primaria);
+            border-radius: 0 0 12px 12px;
+            animation: progresso 7s linear forwards;
+        }
+
+        @keyframes progresso {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+
         .banner {
             background: var(--cor-primaria);
             background-image: none;
@@ -23,43 +116,8 @@
             flex-wrap: wrap;
         }
         .banner .banner-content { flex: 1; min-width: 250px; }
-        .banner h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        .banner p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 16px;
-            max-width: 600px;
-        }
-        .banner .banner-cta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 16px;
-        }
-        .banner .banner-cta a,
-        .banner .banner-cta button {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .banner .banner-cta a:hover,
-        .banner .banner-cta button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
+        .banner h1 { font-size: 28px; margin-bottom: 8px; color: #fff; }
+        .banner p { color: rgba(255, 255, 255, 0.9); font-size: 16px; max-width: 600px; }
         .banner .banner-icon {
             font-size: 64px;
             opacity: 0.3;
@@ -79,15 +137,8 @@
             padding: 20px;
             text-align: center;
         }
-        .stat-card .number {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--cor-primaria);
-        }
-        .stat-card .label {
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-        }
+        .stat-card .number { font-size: 28px; font-weight: 700; color: var(--cor-primaria); }
+        .stat-card .label { color: var(--cor-texto-secundario); font-size: 14px; }
 
         .sugestoes, .atividades {
             background: var(--cor-cartao);
@@ -96,10 +147,7 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-        .sugestoes h3, .atividades h3 {
-            color: var(--cor-texto);
-            margin-bottom: 16px;
-        }
+        .sugestoes h3, .atividades h3 { color: var(--cor-texto); margin-bottom: 16px; }
 
         .sugestao-item, .atividade-item {
             display: flex;
@@ -109,21 +157,13 @@
             border-bottom: 1px solid var(--cor-borda);
             gap: 12px;
         }
-        .sugestao-item:last-child, .atividade-item:last-child {
-            border-bottom: none;
-        }
-        .sugestao-item .info, .atividade-item .info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-        }
+        .sugestao-item:last-child, .atividade-item:last-child { border-bottom: none; }
+        .sugestao-item .info, .atividade-item .info { display: flex; align-items: center; gap: 12px; flex: 1; }
         .sugestao-item .avatar, .atividade-item .avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             background: var(--cor-primaria);
-            background-image: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -131,14 +171,8 @@
             font-weight: 700;
             flex-shrink: 0;
         }
-        .sugestao-item .nome, .atividade-item .nome {
-            color: var(--cor-texto);
-            font-weight: 600;
-        }
-        .sugestao-item .username, .atividade-item .username {
-            color: var(--cor-texto-secundario);
-            font-size: 13px;
-        }
+        .sugestao-item .nome, .atividade-item .nome { color: var(--cor-texto); font-weight: 600; }
+        .sugestao-item .username, .atividade-item .username { color: var(--cor-texto-secundario); font-size: 13px; }
         .btn-seguir {
             padding: 6px 16px;
             background: var(--cor-primaria);
@@ -150,15 +184,8 @@
             transition: all 0.3s;
             flex-shrink: 0;
         }
-        .btn-seguir:hover {
-            background: var(--cor-secundaria);
-            transform: scale(1.05);
-        }
-        .empty {
-            color: var(--cor-texto-secundario);
-            text-align: center;
-            padding: 20px 0;
-        }
+        .btn-seguir:hover { background: var(--cor-secundaria); transform: scale(1.05); }
+        .empty { color: var(--cor-texto-secundario); text-align: center; padding: 20px 0; }
 
         @media (max-width: 768px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -167,10 +194,33 @@
             .banner .banner-icon { display: none; }
             .sugestao-item { flex-wrap: wrap; }
             .btn-seguir { width: 100%; }
+            .popup-boas-vindas {
+                top: 70px;
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ===== POPUP DE BOAS-VINDAS ===== -->
+    <div class="popup-boas-vindas" id="popupBoasVindas">
+        <div class="popup-icon" id="popupIcon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+        </div>
+        <div class="popup-conteudo">
+            <div class="popup-titulo" id="popupTitulo">Bem-vindo ao PplBase!</div>
+            <div class="popup-mensagem" id="popupMensagem">Que bom ter-te aqui. Completa o teu perfil para começar.</div>
+        </div>
+        <button class="popup-fechar" id="popupFechar" aria-label="Fechar">&times;</button>
+        <div class="popup-progresso" id="popupProgresso"></div>
+    </div>
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
@@ -200,29 +250,13 @@
     </nav>
 
     <div class="container-inicio">
-        <!-- ===== BANNER DINÂMICO ===== -->
-        <div class="banner" id="banner">
+        <!-- ===== BANNER ===== -->
+        <div class="banner">
             <div class="banner-content">
                 <h1 id="bannerTitulo">Bem-vindo, <span id="userName">Usuário</span>!</h1>
                 <p id="bannerMensagem">Explore as últimas novidades e conecte-se com a comunidade.</p>
-                <div class="banner-cta" id="bannerCta" style="display:none;">
-                    <a href="dashboard.html">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                        Completar Perfil
-                    </a>
-                    <a href="busca.html">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                        </svg>
-                        Encontrar Talentos
-                    </a>
-                </div>
             </div>
-            <div class="banner-icon" id="bannerIcon">
+            <div class="banner-icon">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                     <circle cx="9" cy="7" r="4"/>
