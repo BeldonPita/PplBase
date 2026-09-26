@@ -32,7 +32,24 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 480px) {
+            .login-logo {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .login-logo .logo-avatar {
+                width: 32px;
+                height: 32px;
+            }
+            .login-logo .logo-text {
+                font-size: 20px;
+            }
+            .login-logo .logo-letter {
+                font-size: 20px;
+            }
         }
         .login-logo .logo-avatar { width: 48px; height: 48px; flex-shrink: 0; }
         .login-logo .logo-svg { width: 100%; height: 100%; animation: girarLogo 8s linear infinite; }
@@ -181,7 +198,7 @@
         </div>
 
         <h1 class="login-title">Entrar no PplBase</h1>
-        <p class="login-subtitle">A plataforma que liga pessoas, conhecimento e oportunidades</p>
+        <p class="login-subtitle" id="subtituloAnimado"></p>
 
         <!-- BOTÃO GOOGLE -->
         <button class="btn-google" id="btnGoogleLogin">
@@ -268,5 +285,31 @@
         });
     </script>
 
+
+    <script>
+        // ===== TEXTO ANIMADO (TYPEWRITER) =====
+        const texto = "A plataforma que liga pessoas, conhecimento e oportunidades";
+        const elemento = document.getElementById('subtituloAnimado');
+        let i = 0;
+
+        function escrever() {
+            if (elemento && i < texto.length) {
+                elemento.textContent += texto.charAt(i);
+                i++;
+                setTimeout(escrever, 50);
+            }
+        }
+
+        if (elemento) {
+            if (window.innerWidth <= 480) {
+                elemento.textContent = '';
+                setTimeout(escrever, 500);
+            } else {
+                elemento.textContent = texto;
+            }
+        }
+    </script>
+
 </body>
 </html>
+

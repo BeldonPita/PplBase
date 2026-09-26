@@ -346,5 +346,31 @@
     </script>
 
 <script src="tema.js"></script>
+
+    <script>
+        // ===== TEXTO ANIMADO (TYPEWRITER) =====
+        const texto = "A plataforma que liga pessoas, conhecimento e oportunidades";
+        const elemento = document.getElementById('subtituloAnimado');
+        let i = 0;
+
+        function escrever() {
+            if (elemento && i < texto.length) {
+                elemento.textContent += texto.charAt(i);
+                i++;
+                setTimeout(escrever, 50);
+            }
+        }
+
+        if (elemento) {
+            if (window.innerWidth <= 480) {
+                elemento.textContent = '';
+                setTimeout(escrever, 500);
+            } else {
+                elemento.textContent = texto;
+            }
+        }
+    </script>
+
 </body>
 </html>
+
