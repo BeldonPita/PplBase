@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
@@ -270,7 +270,7 @@
                 </svg>
             </button>
             <div class="nav-links desktop">
-                <a href="inicio.html">Início</a>
+                <a href="inicio.html">InÃ­cio</a>
                 <a href="busca.html">Buscar</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
                 <div class="notification-icon" id="notifIcon">
@@ -283,7 +283,7 @@
                 <button class="btn-outline" id="btnLogoutDesktop">Sair</button>
             </div>
             <div class="nav-links mobile" id="mobileMenu">
-                <a href="inicio.html">Início</a>
+                <a href="inicio.html">InÃ­cio</a>
                 <a href="busca.html">Buscar</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
                 <button class="btn-outline" id="btnLogoutMobile">Sair</button>
@@ -301,11 +301,11 @@
             </svg>
         </button>
         <div class="menu-dropdown" id="menuDropdown">
-            <button id="menuDashboard">📊 Dashboard</button>
-            <button id="menuAtividades">📰 Atividades</button>
+            <button id="menuDashboard">ðŸ“Š Dashboard</button>
+            <button id="menuAtividades">ðŸ“° Atividades</button>
             <div class="divider"></div>
-            <button id="menuDarkMode">🌙 Dark Mode</button>
-            <button id="menuLightMode">☀️ Light Mode</button>
+            <button id="menuDarkMode">ðŸŒ™ Dark Mode</button>
+            <button id="menuLightMode">â˜€ï¸ Light Mode</button>
         </div>
     </div>
 
@@ -316,7 +316,17 @@
         <div class="card">
             <h3>Perfil</h3>
             <div class="profile-header">
-                <div class="profile-avatar" id="avatarContainer"><span id="avatarPlaceholder">P</span></div>
+                <div class="profile-avatar" id="avatarContainer" onclick="document.getElementById('avatarUpload').click()" style="cursor:pointer; position:relative; overflow:hidden;">
+                    <span id="avatarPlaceholder">P</span>
+                    <img id="avatarImage" style="display:none; width:100%; height:100%; object-fit:cover;" alt="Foto">
+                    <div style="position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                            <circle cx="12" cy="13" r="4"/>
+                        </svg>
+                    </div>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
+                </div>
                 <div id="profileInfo"><div class="empty">Carregando...</div></div>
             </div>
         </div>
@@ -331,8 +341,8 @@
                 </div>
             </div>
             <div class="card">
-                <h3>Experiências</h3>
-                <div id="experienciasList"><div class="empty">Nenhuma experiência</div></div>
+                <h3>ExperiÃªncias</h3>
+                <div id="experienciasList"><div class="empty">Nenhuma experiÃªncia</div></div>
                 <button class="btn-primary btn-small" id="btnAddExperiencia" style="margin-top:12px; width:100%;">+ Adicionar</button>
             </div>
         </div>
@@ -395,7 +405,7 @@
                     <p><strong>Nome:</strong> ${user.nome || '-'}</p>
                     <p><strong>Username:</strong> @${user.username}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>Localização:</strong> ${user.localizacao || 'Não definida'}</p>
+                    <p><strong>LocalizaÃ§Ã£o:</strong> ${user.localizacao || 'NÃ£o definida'}</p>
                     <p><strong>Bio:</strong> ${user.bio || 'Sem bio'}</p>
                 `;
                 const habList = document.getElementById('habilidadesList');
@@ -408,12 +418,12 @@
                 if (user.experiencias?.length) {
                     expList.innerHTML = user.experiencias.map(exp => `
                         <div class="exp-item">
-                            <div><strong>${exp.titulo}</strong> ${exp.empresa ? `- ${exp.empresa}` : ''} ${exp.localizacao ? `📍 ${exp.localizacao}` : ''}</div>
-                            <div class="exp-actions"><button onclick="removerExperiencia(${exp.id})">🗑️</button></div>
+                            <div><strong>${exp.titulo}</strong> ${exp.empresa ? `- ${exp.empresa}` : ''} ${exp.localizacao ? `ðŸ“ ${exp.localizacao}` : ''}</div>
+                            <div class="exp-actions"><button onclick="removerExperiencia(${exp.id})">ðŸ—‘ï¸</button></div>
                         </div>
                     `).join('');
                 } else {
-                    expList.innerHTML = '<div class="empty">Nenhuma experiência</div>';
+                    expList.innerHTML = '<div class="empty">Nenhuma experiÃªncia</div>';
                 }
                 window.usuarioAtual = user;
             } catch (error) {
@@ -423,7 +433,7 @@
         }
 
         window.removerExperiencia = async (id) => {
-            if (!confirm('Remover esta experiência?')) return;
+            if (!confirm('Remover esta experiÃªncia?')) return;
             try {
                 const response = await fetch(`${API_URL}/usuarios/experiencias/${id}`, {
                     method: 'DELETE',
@@ -451,11 +461,42 @@
         });
 
         document.getElementById('btnAddExperiencia').addEventListener('click', () => {
-            alert('🚧 Adicionar experiência em breve!');
+            alert('ðŸš§ Adicionar experiÃªncia em breve!');
         });
 
         carregarPerfil();
     </script>
 <script src="tema.js"></script>
+
+<!-- MODAL EDITAR EXPERIENCIA -->
+<div class="modal" id="modalEditarExperiencia">
+    <div class="modal-content">
+        <button class="modal-close" id="fecharModalEditarExp">&times;</button>
+        <h2 style="margin-bottom:20px;">Editar Experiencia</h2>
+        <form id="formEditarExperiencia">
+            <input type="hidden" id="editExpId">
+            <div class="form-group">
+                <label>Titulo</label>
+                <input type="text" id="editExpTitulo" required>
+            </div>
+            <div class="form-group">
+                <label>Empresa</label>
+                <input type="text" id="editExpEmpresa">
+            </div>
+            <div class="form-group">
+                <label>Descricao</label>
+                <input type="text" id="editExpDescricao">
+            </div>
+            <div class="form-group">
+                <label>Localizacao</label>
+                <input type="text" id="editExpLocalizacao">
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Salvar Alteracoes</button>
+            <p class="form-message" id="editExpMessage"></p>
+        </form>
+    </div>
+</div>
 </body>
 </html>
+
+
