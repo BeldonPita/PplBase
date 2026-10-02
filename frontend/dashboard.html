@@ -270,7 +270,7 @@
                 </svg>
             </button>
             <div class="nav-links desktop">
-                <a href="inicio.html">InÃ­cio</a>
+                <a href="inicio.html">Início</a>
                 <a href="busca.html">Buscar</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
                 <div class="notification-icon" id="notifIcon">
@@ -283,7 +283,7 @@
                 <button class="btn-outline" id="btnLogoutDesktop">Sair</button>
             </div>
             <div class="nav-links mobile" id="mobileMenu">
-                <a href="inicio.html">InÃ­cio</a>
+                <a href="inicio.html">Início</a>
                 <a href="busca.html">Buscar</a>
                 <a href="dashboard.html" class="active">Dashboard</a>
                 <button class="btn-outline" id="btnLogoutMobile">Sair</button>
@@ -341,8 +341,8 @@
                 </div>
             </div>
             <div class="card">
-                <h3>ExperiÃªncias</h3>
-                <div id="experienciasList"><div class="empty">Nenhuma experiÃªncia</div></div>
+                <h3>Experiências</h3>
+                <div id="experienciasList"><div class="empty">Nenhuma experiência</div></div>
                 <button class="btn-primary btn-small" id="btnAddExperiencia" style="margin-top:12px; width:100%;">+ Adicionar</button>
             </div>
         </div>
@@ -405,7 +405,7 @@
                     <p><strong>Nome:</strong> ${user.nome || '-'}</p>
                     <p><strong>Username:</strong> @${user.username}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>LocalizaÃ§Ã£o:</strong> ${user.localizacao || 'NÃ£o definida'}</p>
+                    <p><strong>Localização:</strong> ${user.localizacao || 'Não definida'}</p>
                     <p><strong>Bio:</strong> ${user.bio || 'Sem bio'}</p>
                 `;
                 const habList = document.getElementById('habilidadesList');
@@ -423,7 +423,7 @@
                         </div>
                     `).join('');
                 } else {
-                    expList.innerHTML = '<div class="empty">Nenhuma experiÃªncia</div>';
+                    expList.innerHTML = '<div class="empty">Nenhuma experiência</div>';
                 }
                 window.usuarioAtual = user;
             } catch (error) {
@@ -433,7 +433,7 @@
         }
 
         window.removerExperiencia = async (id) => {
-            if (!confirm('Remover esta experiÃªncia?')) return;
+            if (!confirm('Remover esta experiência?')) return;
             try {
                 const response = await fetch(`${API_URL}/usuarios/experiencias/${id}`, {
                     method: 'DELETE',
@@ -461,7 +461,7 @@
         });
 
         document.getElementById('btnAddExperiencia').addEventListener('click', () => {
-            alert('ðŸš§ Adicionar experiÃªncia em breve!');
+            alert('ðŸš§ Adicionar Experiência em breve!');
         });
 
         carregarPerfil();
@@ -498,5 +498,6 @@
 </div>
 </body>
 </html>
+
 
 

@@ -1,54 +1,85 @@
-﻿if (!token) {
-    window.location.href = '/';
+﻿const API_URL = 'https://pplbase.onrender.com';
+const token = localStorage.getItem('pplbase_token');
+
+if (!token) window.location.href = '/';
+
+function getHeaders() {
+    return { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
 }
 
-document.getElementById('btnLogout').addEventListener('click', () => {
-    localStorage.removeItem('pplbase_token');
-    window.location.href = '/';
-});
+// =========================================================
+// CARREGAR PERFIL
+// =========================================================
 
 async function carregarPerfil() {
     try {
-        const response = await fetch(`${API_URL}/usuarios/me`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const response = await fetch(`${API_URL}/usuarios/me`, { headers: getHeaders() });
+        if (!response.ok) throw new Error('Erro');
+        const user = await response.json();
 
-        if (!response.ok) {
-            if (response.status === 401) {
-                localStorage.removeItem('pplbase_token');
-                window.location.href = '/';
-            }
-            throw new Error('Erro ao carregar perfil');
+        // Foto
+        if (user.foto_url) {
+            document.getElementById('avatarPlaceholder').style.display = 'none';
+            const img = document.getElementById('avatarImage');
+            img.src = user.foto_url;
+            img.style.display = 'block';
         }
 
-        const user = await response.json();
-        
+        // Info
         document.getElementById('profileInfo').innerHTML = `
-            <div class="row"><span class="label">ðŸ‘¤ Nome</span><span class="value">${user.nome}</span></div>
-            <div class="row"><span class="label">ðŸ“› Username</span><span class="value">@${user.username}</span></div>
-            <div class="row"><span class="label">ðŸ“§ Email</span><span class="value">${user.email}</span></div>
-            <div class="row"><span class="label">ðŸ“ LocalizaÃ§Ã£o</span><span class="value">${user.localizacao || 'NÃ£o definida'}</span></div>
-            <div class="row"><span class="label">ðŸ“ Bio</span><span class="value">${user.bio || 'Sem bio cadastrada'}</span></div>
+            <p><strong>Nome:</strong> ${user.nome || '-'}</p>
+            <p><strong>Username:</strong> @${user.username}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <p><strong>Localização:</strong> ${user.localizacao || 'Não definida'}</p>
+            <p><strong>Bio:</strong> ${user.bio || 'Sem bio'}</p>
         `;
+
+        // Habilidades
+        const habList = document.getElementById('habilidadesList');
+        if (user.habilidades?.length) {
+            habList.innerHTML = user.habilidades.map(h => `<span class="tag">${h.nome}</span>`).join('');
+        } else {
+            habList.innerHTML = '<div class="empty">Nenhuma habilidade</div>';
+        }
+
+        // Experiências
+        const expList = document.getElementById('experienciasList');
+        if (user.experiencias?.length) {
+            expList.innerHTML = user.experiencias.map(exp => `
+                <div class="exp-item">
+                    <div class="info">
+                        <h4>${exp.titulo}</h4>
+                        ${exp.empresa ? `<p>${exp.empresa}${exp.localizacao ? ` · ${exp.localizacao}` : ''}</p>` : ''}
+                        ${exp.descricao ? `<p>${exp.descricao}</p>` : ''}
+                    </div>
+                    <div class="exp-actions">
+                        <button onclick="editarExperiencia(${exp.id})" title="Editar">✏️</button>
+                        <button onclick="removerExperiencia(${exp.id})" title="Remover">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            expList.innerHTML = '<div class="empty">Nenhuma experiência</div>';
+        }
 
         window.usuarioAtual = user;
 
     } catch (error) {
         console.error('Erro:', error);
+        document.getElementById('profileInfo').innerHTML = '<div class="empty">Erro ao carregar perfil</div>';
     }
 }
 
-carregarPerfil();
 // =========================================================
 // UPLOAD DE FOTO DE PERFIL
 // =========================================================
 
-document.getElementById('avatarUpload')?.addEventListener('change', async (e) => {
+document.getElementById('avatarUpload').addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     if (file.size > 5 * 1024 * 1024) {
-        alert('A imagem nao pode ter mais de 5MB');
+        alert('A imagem não pode ter mais de 5MB');
         return;
     }
 
@@ -70,12 +101,60 @@ document.getElementById('avatarUpload')?.addEventListener('change', async (e) =>
             alert(data.detail || 'Erro ao enviar foto');
         }
     } catch (error) {
-        alert('Erro de conexao');
+        alert('Erro de conexão');
     }
 });
 
 // =========================================================
-// EDITAR EXPERIENCIA
+// ADICIONAR EXPERIÊNCIA
+// =========================================================
+
+document.getElementById('btnAddExperiencia').addEventListener('click', () => {
+    document.getElementById('modalExpTitle').textContent = 'Adicionar Experiência';
+    document.getElementById('expId').value = '';
+    document.getElementById('expTitulo').value = '';
+    document.getElementById('expEmpresa').value = '';
+    document.getElementById('expDescricao').value = '';
+    document.getElementById('expLocalizacao').value = '';
+    document.getElementById('modalExperiencia').classList.add('active');
+});
+
+document.getElementById('fecharModalExp').addEventListener('click', () => {
+    document.getElementById('modalExperiencia').classList.remove('active');
+});
+
+document.getElementById('formExperiencia').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('expId').value;
+    const titulo = document.getElementById('expTitulo').value;
+    const empresa = document.getElementById('expEmpresa').value;
+    const descricao = document.getElementById('expDescricao').value;
+    const localizacao = document.getElementById('expLocalizacao').value;
+    const message = document.getElementById('expMessage');
+
+    const url = id ? `${API_URL}/usuarios/experiencias/${id}` : `${API_URL}/usuarios/experiencias`;
+    const method = id ? 'PUT' : 'POST';
+
+    try {
+        const response = await fetch(url, {
+            method,
+            headers: getHeaders(),
+            body: JSON.stringify({ titulo, empresa, descricao, localizacao })
+        });
+        if (response.ok) {
+            document.getElementById('modalExperiencia').classList.remove('active');
+            await carregarPerfil();
+        } else {
+            const data = await response.json();
+            message.textContent = data.detail || 'Erro';
+        }
+    } catch (error) {
+        message.textContent = 'Erro de conexão';
+    }
+});
+
+// =========================================================
+// EDITAR EXPERIÊNCIA
 // =========================================================
 
 window.editarExperiencia = async (id) => {
@@ -85,46 +164,104 @@ window.editarExperiencia = async (id) => {
         const exp = user.experiencias.find(e => e.id === id);
         if (!exp) return;
 
-        document.getElementById('editExpId').value = id;
-        document.getElementById('editExpTitulo').value = exp.titulo || '';
-        document.getElementById('editExpEmpresa').value = exp.empresa || '';
-        document.getElementById('editExpDescricao').value = exp.descricao || '';
-        document.getElementById('editExpLocalizacao').value = exp.localizacao || '';
-        document.getElementById('modalEditarExperiencia').classList.add('active');
+        document.getElementById('modalExpTitle').textContent = 'Editar Experiência';
+        document.getElementById('expId').value = id;
+        document.getElementById('expTitulo').value = exp.titulo || '';
+        document.getElementById('expEmpresa').value = exp.empresa || '';
+        document.getElementById('expDescricao').value = exp.descricao || '';
+        document.getElementById('expLocalizacao').value = exp.localizacao || '';
+        document.getElementById('modalExperiencia').classList.add('active');
     } catch (error) {
         console.error('Erro:', error);
     }
 };
 
-document.getElementById('fecharModalEditarExp')?.addEventListener('click', () => {
-    document.getElementById('modalEditarExperiencia').classList.remove('active');
-});
-
-document.getElementById('formEditarExperiencia')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const id = document.getElementById('editExpId').value;
-    const titulo = document.getElementById('editExpTitulo').value;
-    const empresa = document.getElementById('editExpEmpresa').value;
-    const descricao = document.getElementById('editExpDescricao').value;
-    const localizacao = document.getElementById('editExpLocalizacao').value;
-    const message = document.getElementById('editExpMessage');
-
+window.removerExperiencia = async (id) => {
+    if (!confirm('Remover esta experiência?')) return;
     try {
         const response = await fetch(`${API_URL}/usuarios/experiencias/${id}`, {
-            method: 'PUT',
-            headers: getHeaders(),
-            body: JSON.stringify({ titulo, empresa, descricao, localizacao })
+            method: 'DELETE',
+            headers: getHeaders()
         });
+        if (response.ok) await carregarPerfil();
+    } catch (error) {
+        console.error('Erro:', error);
+    }
+};
 
+// =========================================================
+// HABILIDADES
+// =========================================================
+
+document.getElementById('btnAddHabilidade').addEventListener('click', async () => {
+    const input = document.getElementById('novaHabilidade');
+    const nome = input.value.trim();
+    if (!nome) return;
+
+    try {
+        const response = await fetch(`${API_URL}/usuarios/habilidades`, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: JSON.stringify({ nome })
+        });
         if (response.ok) {
-            document.getElementById('modalEditarExperiencia').classList.remove('active');
+            input.value = '';
             await carregarPerfil();
-        } else {
-            const data = await response.json();
-            message.textContent = data.detail || 'Erro ao editar';
         }
     } catch (error) {
-        message.textContent = 'Erro de conexao';
+        console.error('Erro:', error);
     }
 });
 
+// =========================================================
+// EDITAR PERFIL
+// =========================================================
+
+document.getElementById('btnEditarPerfil').addEventListener('click', () => {
+    const user = window.usuarioAtual;
+    if (!user) return;
+    document.getElementById('editNome').value = user.nome || '';
+    document.getElementById('editBio').value = user.bio || '';
+    document.getElementById('editLocalizacao').value = user.localizacao || '';
+    document.getElementById('modalEditarPerfil').classList.add('active');
+});
+
+document.getElementById('fecharModalEditar').addEventListener('click', () => {
+    document.getElementById('modalEditarPerfil').classList.remove('active');
+});
+
+document.getElementById('formEditarPerfil').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nome = document.getElementById('editNome').value;
+    const bio = document.getElementById('editBio').value;
+    const localizacao = document.getElementById('editLocalizacao').value;
+
+    try {
+        const response = await fetch(`${API_URL}/usuarios/me`, {
+            method: 'PUT',
+            headers: getHeaders(),
+            body: JSON.stringify({ nome, bio, localizacao })
+        });
+        if (response.ok) {
+            document.getElementById('modalEditarPerfil').classList.remove('active');
+            await carregarPerfil();
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+    }
+});
+
+// =========================================================
+// LOGOUT
+// =========================================================
+
+document.getElementById('btnLogout').addEventListener('click', () => {
+    localStorage.removeItem('pplbase_token');
+    window.location.href = '/';
+});
+
+// =========================================================
+// INICIALIZAR
+// =========================================================
+
+carregarPerfil();
