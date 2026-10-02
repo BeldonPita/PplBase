@@ -157,10 +157,10 @@
         <form id="formCadastro">
             <div class="form-group">
                 <label>Nome completo</label>
-                <input type="text" id="cadNome" placeholder="Ex: JoÃ£o Silva" required />
+                <input type="text" id="cadNome" placeholder="Ex: João Silva" required />
             </div>
             <div class="form-group">
-                <label>UsuÃ¡rio</label>
+                <label>Usuário</label>
                 <input type="text" id="cadUsername" placeholder="Escolha um username" required />
             </div>
             <div class="form-group">
@@ -169,19 +169,20 @@
             </div>
             <div class="form-group">
                 <label>Senha</label>
-                <input type="password" id="cadSenha" placeholder="MÃnimo 6 caracteres" required />
+                <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" required />
             </div>
             <div class="form-group">
-                <label>LocalizaÃ§Ã£o</label>
+                <label>Localização</label>
                 <select id="cadLocalizacao">
-                    <option value="">Selecione sua provÃncia</option>
+                    <option value="">Selecione sua província</option>
                     <option value="Maputo">Maputo</option>
+                    <option value="Maputo-Cidade">Maputo-Cidade</option>
                     <option value="Gaza">Gaza</option>
                     <option value="Inhambane">Inhambane</option>
                     <option value="Sofala">Sofala</option>
                     <option value="Manica">Manica</option>
                     <option value="Tete">Tete</option>
-                    <option value="Zambezia">ZambÃ©zia</option>
+                    <option value="Zambezia">Zambézia</option>
                     <option value="Nampula">Nampula</option>
                     <option value="Cabo-Delgado">Cabo Delgado</option>
                     <option value="Niassa">Niassa</option>
@@ -191,7 +192,7 @@
             <div class="checkbox-group" id="termsGroup">
                 <input type="checkbox" id="termsCheck" />
                 <label for="termsCheck">
-                    Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e CondiÃ§Ãµes</a> *
+                    Li e concordo com os <a href="termos.html" target="_blank">Termos de Uso e Condições</a> *
                 </label>
             </div>
             <p class="form-message error" id="termsMessage" style="display:none; margin-bottom: 16px;"></p>
@@ -201,7 +202,7 @@
         </form>
 
         <div class="login-footer">
-            <p>JÃ¡ tem conta? <a href="login.html">Entrar</a></p>
+            <p>Já tem conta? <a href="login.html">Entrar</a></p>
         </div>
     </div>
 
@@ -215,7 +216,7 @@
 
             if (!termsCheck.checked) {
                 termsGroup.classList.add('destaque');
-                termsMessage.textContent = 'Aceite os Termos de Uso e CondiÃ§Ãµes para continuar';
+                termsMessage.textContent = 'Aceite os Termos de Uso e Condições para continuar';
                 termsMessage.style.display = 'block';
                 termsGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return false;
@@ -236,7 +237,7 @@
             const message = document.getElementById('cadastroMessage');
 
             if (senha.length < 6) {
-                message.textContent = 'A senha deve ter no mÃnimo 6 caracteres';
+                message.textContent = 'A senha deve ter no mínimo 6 caracteres';
                 message.className = 'form-message error';
                 return;
             }
@@ -248,26 +249,25 @@
         });
 
         // TEXTO ANIMADO
-        const texto = "Comece a conectar-se com pessoas e oportunidades";
-        const elemento = document.getElementById('subtituloAnimado');
-        let i = 0;
+        document.addEventListener('DOMContentLoaded', function() {
+            const texto = "Comece a conectar-se com pessoas e oportunidades";
+            const elemento = document.getElementById('subtituloAnimado');
 
-        function escrever() {
-            if (elemento && i < texto.length) {
-                elemento.textContent += texto.charAt(i);
-                i++;
-                setTimeout(escrever, 50);
-            }
-        }
+            if (!elemento) return;
 
-        if (elemento) {
-            if (window.innerWidth <= 480) {
-                elemento.textContent = '';
-                setTimeout(escrever, 500);
-            } else {
-                elemento.textContent = texto;
+            let i = 0;
+            elemento.textContent = '';
+
+            function escrever() {
+                if (i < texto.length) {
+                    elemento.textContent += texto.charAt(i);
+                    i++;
+                    setTimeout(escrever, 50);
+                }
             }
-        }
+
+            escrever();
+        });
     </script>
 
 </body>
