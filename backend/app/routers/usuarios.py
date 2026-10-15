@@ -1,15 +1,16 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime
+import uuid
+import os
 
 from app.database import get_db
 from app.models import Usuario, Habilidade, Experiencia
 from app.schemas import (
-    UsuarioResponse, 
-    UsuarioUpdate, 
-    HabilidadeCreate, 
-    HabilidadeResponse,
+    UsuarioResponse,
+    UsuarioUpdate,
+    HabilidadeCreate,
     ExperienciaCreate,
     ExperienciaResponse
 )
@@ -18,12 +19,11 @@ from app.auth import get_usuario_atual
 router = APIRouter()
 
 # =========================================================
-# PERFIL DO USUÁRIO
+# PERFIL
 # =========================================================
 
 @router.get("/me", response_model=UsuarioResponse)
 def get_me(usuario_atual: Usuario = Depends(get_usuario_atual)):
-    """Obter perfil do usuário logado"""
     return usuario_atual
 
 @router.put("/me", response_model=UsuarioResponse)
@@ -32,118 +32,53 @@ def update_me(
     usuario_atual: Usuario = Depends(get_usuario_atual),
     db: Session = Depends(get_db)
 ):
-    """Atualizar perfil do usuário logado"""
-    
     for key, value in usuario_update.dict(exclude_unset=True).items():
         setattr(usuario_atual, key, value)
-    
     db.commit()
     db.refresh(usuario_atual)
     return usuario_atual
 
 @router.get("/{username}", response_model=UsuarioResponse)
 def get_usuario_publico(username: str, db: Session = Depends(get_db)):
-    """Ver perfil público de qualquer usuário"""
     usuario = db.query(Usuario).filter(Usuario.username == username).first()
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
     return usuario
 
 # =========================================================
-# CRUD DE HABILIDADES
+# UPLOAD DE FOTO
 # =========================================================
 
-@router.post("/habilidades", response_model=dict)
-def adicionar_habilidade(
-    habilidade: HabilidadeCreate,
+@router.post("/upload-foto")
+async def upload_foto(
+    foto: UploadFile = File(...),
     db: Session = Depends(get_db),
     usuario_atual: Usuario = Depends(get_usuario_atual)
 ):
-    """Adicionar uma habilidade ao perfil do usuário"""
+    if not foto.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="O ficheiro deve ser uma imagem")
     
-    # Verificar se a habilidade já existe no banco
-    hab = db.query(Habilidade).filter(Habilidade.nome == habilidade.nome).first()
-    if not hab:
-        hab = Habilidade(nome=habilidade.nome, descricao=habilidade.descricao)
-        db.add(hab)
-        db.commit()
-        db.refresh(hab)
+    conteudo = await foto.read()
+    if len(conteudo) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="A imagem não pode ter mais de 5MB")
     
-    # Verificar se o usuário já tem essa habilidade
-    if hab in usuario_atual.habilidades:
-        raise HTTPException(status_code=400, detail="Você já possui esta habilidade")
+    extensao = foto.filename.split(".")[-1]
+    nome_ficheiro = f"{usuario_atual.id}_{uuid.uuid4().hex}.{extensao}"
+    caminho = f"uploads/fotos/{nome_ficheiro}"
     
-    usuario_atual.habilidades.append(hab)
+    with open(caminho, "wb") as buffer:
+        buffer.write(conteudo)
+    
+    foto_url = f"https://pplbase.onrender.com/uploads/fotos/{nome_ficheiro}"
+    usuario_atual.foto_url = foto_url
     db.commit()
-    return {"message": "Habilidade adicionada com sucesso", "habilidade": hab.nome}
-
-@router.delete("/habilidades/{habilidade_id}", response_model=dict)
-def remover_habilidade(
-    habilidade_id: int,
-    db: Session = Depends(get_db),
-    usuario_atual: Usuario = Depends(get_usuario_atual)
-):
-    """Remover uma habilidade do perfil do usuário"""
+    db.refresh(usuario_atual)
     
-    hab = db.query(Habilidade).filter(Habilidade.id == habilidade_id).first()
-    if not hab:
-        raise HTTPException(status_code=404, detail="Habilidade não encontrada")
-    
-    if hab not in usuario_atual.habilidades:
-        raise HTTPException(status_code=400, detail="Você não possui esta habilidade")
-    
-    usuario_atual.habilidades.remove(hab)
-    db.commit()
-    return {"message": "Habilidade removida com sucesso"}
+    return {"message": "Foto atualizada com sucesso", "foto_url": foto_url}
 
 # =========================================================
-# CRUD DE EXPERIÊNCIAS
+# HABILIDADES
 # =========================================================
-
-@router.post("/experiencias", response_model=ExperienciaResponse)
-def adicionar_experiencia(
-    experiencia: ExperienciaCreate,
-    db: Session = Depends(get_db),
-    usuario_atual: Usuario = Depends(get_usuario_atual)
-):
-    """Adicionar uma experiência ao perfil do usuário"""
-    
-    nova_exp = Experiencia(
-        usuario_id=usuario_atual.id,
-        titulo=experiencia.titulo,
-        empresa=experiencia.empresa,
-        descricao=experiencia.descricao,
-        localizacao=experiencia.localizacao,
-        data_inicio=experiencia.data_inicio,
-        data_fim=experiencia.data_fim,
-        atual=experiencia.atual
-    )
-    db.add(nova_exp)
-    db.commit()
-    db.refresh(nova_exp)
-    return nova_exp
-
-@router.delete("/experiencias/{experiencia_id}", response_model=dict)
-def remover_experiencia(
-    experiencia_id: int,
-    db: Session = Depends(get_db),
-    usuario_atual: Usuario = Depends(get_usuario_atual)
-):
-    """Remover uma experiência do perfil do usuário"""
-    
-    exp = db.query(Experiencia).filter(
-        Experiencia.id == experiencia_id,
-        Experiencia.usuario_id == usuario_atual.id
-    ).first()
-    
-    if not exp:
-        raise HTTPException(status_code=404, detail="Experiência não encontrada")
-    
-    db.delete(exp)
-    db.commit()
-    return {"message": "Experiência removida com sucesso"}
-
-# ===== CRUD DE HABILIDADES =====
 
 @router.post("/habilidades")
 def adicionar_habilidade(
@@ -151,7 +86,6 @@ def adicionar_habilidade(
     db: Session = Depends(get_db),
     usuario_atual: Usuario = Depends(get_usuario_atual)
 ):
-    # Verificar se a habilidade já existe
     hab = db.query(Habilidade).filter(Habilidade.nome == habilidade.nome).first()
     if not hab:
         hab = Habilidade(nome=habilidade.nome, descricao=habilidade.descricao)
@@ -159,13 +93,12 @@ def adicionar_habilidade(
         db.commit()
         db.refresh(hab)
     
-    # Verificar se o usuário já tem essa habilidade
     if hab in usuario_atual.habilidades:
-        raise HTTPException(status_code=400, detail="Você já possui esta habilidade")
+        raise HTTPException(status_code=400, detail="Já possui esta habilidade")
     
     usuario_atual.habilidades.append(hab)
     db.commit()
-    return {"message": "Habilidade adicionada com sucesso"}
+    return {"message": "Habilidade adicionada", "habilidade": hab.nome}
 
 @router.delete("/habilidades/{habilidade_id}")
 def remover_habilidade(
@@ -174,19 +107,17 @@ def remover_habilidade(
     usuario_atual: Usuario = Depends(get_usuario_atual)
 ):
     hab = db.query(Habilidade).filter(Habilidade.id == habilidade_id).first()
-    if not hab:
+    if not hab or hab not in usuario_atual.habilidades:
         raise HTTPException(status_code=404, detail="Habilidade não encontrada")
-    
-    if hab not in usuario_atual.habilidades:
-        raise HTTPException(status_code=400, detail="Você não possui esta habilidade")
-    
     usuario_atual.habilidades.remove(hab)
     db.commit()
-    return {"message": "Habilidade removida com sucesso"}
+    return {"message": "Habilidade removida"}
 
-# ===== CRUD DE EXPERIÊNCIAS =====
+# =========================================================
+# EXPERIÊNCIAS
+# =========================================================
 
-@router.post("/experiencias")
+@router.post("/experiencias", response_model=ExperienciaResponse)
 def adicionar_experiencia(
     experiencia: ExperienciaCreate,
     db: Session = Depends(get_db),
@@ -206,6 +137,33 @@ def adicionar_experiencia(
     db.commit()
     db.refresh(nova_exp)
     return nova_exp
+
+@router.put("/experiencias/{experiencia_id}", response_model=ExperienciaResponse)
+def editar_experiencia(
+    experiencia_id: int,
+    experiencia: ExperienciaCreate,
+    db: Session = Depends(get_db),
+    usuario_atual: Usuario = Depends(get_usuario_atual)
+):
+    exp = db.query(Experiencia).filter(
+        Experiencia.id == experiencia_id,
+        Experiencia.usuario_id == usuario_atual.id
+    ).first()
+    
+    if not exp:
+        raise HTTPException(status_code=404, detail="Experiência não encontrada")
+    
+    exp.titulo = experiencia.titulo
+    exp.empresa = experiencia.empresa
+    exp.descricao = experiencia.descricao
+    exp.localizacao = experiencia.localizacao
+    exp.data_inicio = experiencia.data_inicio
+    exp.data_fim = experiencia.data_fim
+    exp.atual = experiencia.atual
+    
+    db.commit()
+    db.refresh(exp)
+    return exp
 
 @router.delete("/experiencias/{experiencia_id}")
 def remover_experiencia(
@@ -217,10 +175,8 @@ def remover_experiencia(
         Experiencia.id == experiencia_id,
         Experiencia.usuario_id == usuario_atual.id
     ).first()
-    
     if not exp:
         raise HTTPException(status_code=404, detail="Experiência não encontrada")
-    
     db.delete(exp)
     db.commit()
-    return {"message": "Experiência removida com sucesso"}
+    return {"message": "Experiência removida"}
