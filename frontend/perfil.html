@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
@@ -7,163 +7,36 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .perfil-container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: var(--cor-cartao);
-            border-radius: 16px;
-            border: 1px solid var(--cor-borda);
-            padding: 40px;
-        }
-        
-        .perfil-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: var(--cor-primaria);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            margin: 0 auto 16px;
-        }
-        
-        .perfil-nome {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
-        }
-        
-        .perfil-username {
-            text-align: center;
-            color: var(--cor-primaria);
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        
-        .perfil-localizacao {
-            text-align: center;
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-            margin-bottom: 16px;
-        }
-        
-        .perfil-bio {
-            text-align: center;
-            color: var(--cor-texto-secundario);
-            font-size: 15px;
-            max-width: 500px;
-            margin: 0 auto 24px;
-        }
-        
-        .perfil-section {
-            margin-top: 24px;
-        }
-        
-        .perfil-section h3 {
-            color: #fff;
-            font-size: 18px;
-            margin-bottom: 12px;
-            border-bottom: 1px solid var(--cor-borda);
-            padding-bottom: 8px;
-        }
-        
-        .perfil-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .perfil-tags .tag {
-            background: var(--cor-borda);
-            color: var(--cor-primaria);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        
-        .perfil-exp-item {
-            background: var(--cor-fundo);
-            padding: 16px;
-            border-radius: 12px;
-            border-left: 3px solid var(--cor-primaria);
-            margin-bottom: 12px;
-        }
-        
-        .perfil-exp-item .titulo {
-            color: #fff;
-            font-weight: 600;
-        }
-        
-        .perfil-exp-item .empresa {
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-        }
-        
-        .perfil-exp-item .desc {
-            color: var(--cor-texto-secundario);
-            font-size: 14px;
-            margin-top: 4px;
-        }
-        
-        .btn-conectar {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 24px auto 0;
-            padding: 14px;
-            background: var(--cor-primaria);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-conectar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 139, 99, 0.4);
-        }
-        
-        .loading-perfil {
-            text-align: center;
-            padding: 60px 0;
-            color: var(--cor-texto-secundario);
-        }
-        
-        .loading-perfil .big-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
-        .erro-perfil {
-            text-align: center;
-            padding: 60px 0;
-            color: #f87171;
-        }
-        
-        .erro-perfil .big-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        
-        .voltar-link {
-            display: inline-block;
-            margin-top: 16px;
-            color: var(--cor-primaria);
-            text-decoration: none;
-        }
-        
-        .voltar-link:hover {
-            text-decoration: underline;
-        }
+        .perfil-container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .perfil-header { background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+        .perfil-avatar { width: 120px; height: 120px; border-radius: 50%; background: var(--cor-primaria); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 700; color: white; margin: 0 auto 16px; overflow: hidden; }
+        .perfil-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .perfil-nome { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+        .perfil-username { color: var(--cor-primaria); font-size: 15px; margin-bottom: 8px; }
+        .perfil-local { color: var(--cor-texto-secundario); font-size: 14px; margin-bottom: 12px; }
+        .perfil-bio { color: var(--cor-texto-secundario); max-width: 600px; margin: 0 auto 20px; line-height: 1.6; }
+        .perfil-stats { display: flex; justify-content: center; gap: 40px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--cor-borda); }
+        .perfil-stats .stat { text-align: center; }
+        .perfil-stats .num { font-size: 22px; font-weight: 700; color: var(--cor-primaria); }
+        .perfil-stats .lbl { font-size: 13px; color: var(--cor-texto-secundario); }
+        .btn-seguir { display: inline-block; margin-top: 16px; padding: 10px 32px; background: var(--cor-primaria); color: white; border: none; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s; }
+        .btn-seguir:hover { opacity: 0.9; }
+        .btn-seguir.seguindo { background: transparent; color: var(--cor-primaria); border: 2px solid var(--cor-primaria); }
+        .perfil-section { background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .perfil-section h2 { font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .perfil-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .perfil-tags .tag { background: var(--cor-fundo); color: var(--cor-primaria); padding: 6px 16px; border-radius: 20px; font-size: 13px; border: 1px solid var(--cor-borda); }
+        .exp-item { background: var(--cor-fundo); border-left: 3px solid var(--cor-primaria); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+        .exp-item .titulo { font-weight: 600; margin-bottom: 2px; }
+        .exp-item .empresa { color: var(--cor-texto-secundario); font-size: 14px; }
+        .exp-item .desc { color: var(--cor-texto-secundario); font-size: 13px; margin-top: 4px; }
+        .empty { color: var(--cor-texto-secundario); text-align: center; padding: 40px 0; }
+        .voltar-link { display: inline-block; margin-bottom: 16px; color: var(--cor-primaria); text-decoration: none; font-size: 14px; }
+        .voltar-link:hover { text-decoration: underline; }
+        @media (max-width: 768px) { .perfil-stats { gap: 20px; } .perfil-nome { font-size: 22px; } }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -178,33 +51,26 @@
                         <text class="logo-letter" x="50" y="58" text-anchor="middle">P</text>
                     </svg>
                 </div>
-                <div class="logo-avatar"><svg class="logo-svg" viewBox="0 0 100 100"><circle class="logo-ring" cx="50" cy="50" r="42" /><circle class="logo-ring logo-ring-2" cx="50" cy="50" r="30" /><circle class="logo-dot" cx="50" cy="8" r="4" /><circle class="logo-dot" cx="50" cy="92" r="4" /><circle class="logo-dot" cx="8" cy="50" r="4" /><circle class="logo-dot" cx="92" cy="50" r="4" /><text class="logo-letter" x="50" y="58" text-anchor="middle">P</text></svg></div><span class="logo-text">Ppl<span class="highlight">Base</span></span>
+                <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-           <div class="nav-links">
-    <a href="inicio.html">Início</a>
-    <a href="busca.html">🔍 Buscar</a>
-    <a href="dashboard.html">Dashboard</a>
-    <button class="btn btn-outline" id="btnLogout">Sair</button>
-</div>
+            <div class="nav-links">
+                <a href="inicio.html">Início</a>
+                <a href="busca.html">Buscar</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        <div id="perfilContainer">
-            <div class="loading-perfil">
-                <div class="big-icon">⏳</div>
-                <p>Carregando perfil...</p>
-            </div>
-        </div>
+    <div class="perfil-container">
+        <a href="javascript:history.back()" class="voltar-link">← Voltar</a>
+        <div id="perfilContent"><div class="empty">A carregar perfil...</div></div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 PplBase - Todos os direitos reservados.</p>
-        </div>
+    <footer style="padding:40px 0; text-align:center; border-top:1px solid var(--cor-borda); color:var(--cor-texto-secundario);">
+        <div class="container"><p>&copy; 2026 PplBase</p></div>
     </footer>
 
     <script src="perfil.js"></script>
-<script src="tema.js"></script>
 </body>
 </html>

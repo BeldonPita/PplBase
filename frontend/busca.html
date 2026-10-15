@@ -1,165 +1,41 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar - PplBase</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .busca-container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
-        .input-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-        .input-row input {
-            flex: 1;
-            padding: 12px 16px;
-            background: var(--cor-fundo);
-            border: 2px solid var(--cor-borda);
-            border-radius: 8px;
-            color: var(--cor-texto);
-            font-size: 16px;
-            min-width: 200px;
-        }
-        .input-row input:focus { outline: none; border-color: var(--cor-primaria); }
-        .btn-primary {
-            padding: 12px 24px;
-            background: var(--cor-primaria);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,139,99,0.4); }
-        .result-item {
-            background: var(--cor-cartao);
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-        .result-item h3 { margin-bottom: 4px; }
-        .result-item p { color: var(--cor-texto-secundario); font-size: 14px; }
-        .result-item .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-        .result-item .tag {
-            background: var(--cor-fundo);
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            color: var(--cor-primaria);
-            border: 1px solid var(--cor-borda);
-        }
-        .empty { color: var(--cor-texto-secundario); text-align: center; padding: 40px 0; }
-
-        /* ===== NAVBAR ===== */
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            position: relative;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .nav-links a {
-            color: var(--cor-texto-secundario);
-            text-decoration: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--cor-texto);
-            background: var(--cor-borda);
-        }
-        .notification-icon {
-            position: relative;
-            cursor: pointer;
-            padding: 8px;
-            color: var(--cor-texto-secundario);
-            transition: all 0.2s;
-        }
-        .notification-icon:hover { color: var(--cor-primaria); }
-        .notification-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: #EF4444;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--cor-texto-secundario);
-            border: 2px solid #2A2D3E;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-outline:hover {
-            border-color: var(--cor-primaria);
-            color: #fff;
-        }
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--cor-texto);
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-        }
-        .nav-links.mobile {
-            display: none;
-            flex-direction: column;
-            background: var(--cor-cartao);
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 16px;
-            position: absolute;
-            top: 60px;
-            right: 0;
-            z-index: 100;
-            min-width: 180px;
-            width: 100%;
-            max-width: 280px;
-        }
-        .nav-links.mobile.open { display: flex; }
-        .nav-links.mobile a { padding: 10px 12px; }
-        .nav-links.mobile .btn-outline { width: 100%; text-align: center; margin-top: 8px; }
-
-        @media (max-width: 768px) {
-            .nav-links.desktop { display: none; }
-            .menu-toggle { display: block; }
-            .nav-links.mobile { max-width: 100%; right: 0; top: 60px; }
-            .busca-container { padding: 0 12px; margin: 16px auto; }
-        }
-        @media (max-width: 480px) {
-            .input-row input { font-size: 14px; padding: 10px 14px; }
-            .btn-primary { padding: 10px 18px; font-size: 14px; }
-            .logo-text { font-size: 18px; }
-            .logo-avatar { width: 32px; height: 32px; }
-        }
+        .busca-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .busca-header { margin-bottom: 24px; }
+        .busca-header h1 { font-size: 28px; margin-bottom: 8px; }
+        .busca-header p { color: var(--cor-texto-secundario); }
+        .filtros-box { background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+        .filtros-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+        .filtros-grid input, .filtros-grid select { width: 100%; padding: 12px 14px; background: var(--cor-fundo); border: 2px solid var(--cor-borda); border-radius: 10px; color: var(--cor-texto); font-size: 14px; }
+        .filtros-grid input:focus, .filtros-grid select:focus { outline: none; border-color: var(--cor-primaria); }
+        .filtros-grid label { display: block; font-size: 12px; color: var(--cor-texto-secundario); margin-bottom: 4px; font-weight: 500; }
+        .btn-buscar { padding: 12px 24px; background: var(--cor-primaria); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 14px; }
+        .btn-buscar:hover { opacity: 0.9; }
+        .resultados-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; color: var(--cor-texto-secundario); font-size: 14px; }
+        .resultados-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .user-card { background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 12px; padding: 20px; transition: all 0.3s; text-align: center; }
+        .user-card:hover { border-color: var(--cor-primaria); transform: translateY(-4px); }
+        .user-card .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--cor-primaria); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700; margin: 0 auto 12px; }
+        .user-card h3 { font-size: 16px; margin-bottom: 4px; }
+        .user-card .username { color: var(--cor-primaria); font-size: 13px; margin-bottom: 8px; }
+        .user-card .local { color: var(--cor-texto-secundario); font-size: 13px; margin-bottom: 8px; }
+        .user-card .bio { color: var(--cor-texto-secundario); font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
+        .user-card .tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-bottom: 12px; }
+        .user-card .tag { background: var(--cor-fundo); color: var(--cor-primaria); padding: 3px 10px; border-radius: 12px; font-size: 11px; border: 1px solid var(--cor-borda); }
+        .user-card .btn-ver { display: inline-block; padding: 8px 20px; background: transparent; color: var(--cor-primaria); border: 1px solid var(--cor-primaria); border-radius: 8px; font-size: 13px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+        .user-card .btn-ver:hover { background: var(--cor-primaria); color: white; }
+        .empty { color: var(--cor-texto-secundario); text-align: center; padding: 60px 0; }
+        @media (max-width: 768px) { .filtros-grid { grid-template-columns: 1fr; } .resultados-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-    <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -176,100 +52,39 @@
                 </div>
                 <span class="logo-text">Ppl<span class="highlight">Base</span></span>
             </div>
-            <button class="menu-toggle" id="menuToggle">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-            </button>
-            <div class="nav-links desktop">
+            <div class="nav-links">
                 <a href="inicio.html">Início</a>
                 <a href="busca.html" class="active">Buscar</a>
                 <a href="dashboard.html">Dashboard</a>
-                <div class="notification-icon" id="notifIcon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                    </svg>
-                    <span class="notification-badge">3</span>
-                </div>
-                <button class="btn-outline" id="btnLogoutDesktop">Sair</button>
-            </div>
-            <div class="nav-links mobile" id="mobileMenu">
-                <a href="inicio.html">Início</a>
-                <a href="busca.html" class="active">Buscar</a>
-                <a href="dashboard.html">Dashboard</a>
-                <button class="btn-outline" id="btnLogoutMobile">Sair</button>
+                <button class="btn btn-outline btn-small" id="btnLogout">Sair</button>
             </div>
         </div>
     </nav>
 
-    <!-- ===== CONTEÚDO ===== -->
     <div class="busca-container">
-        <h1 style="margin-bottom:20px;">Buscar Pessoas Buscar Pessoas</h1>
-        <div class="input-row">
-            <input type="text" id="searchInput" placeholder="Digite um nome, habilidade ou localização...">
-            <button class="btn-primary" id="btnBuscar">Buscar</button>
+        <div class="busca-header">
+            <h1>🔍 Buscar Pessoas</h1>
+            <p>Encontre profissionais por nome, habilidade ou localização</p>
         </div>
-        <div id="resultsContainer"><div class="empty">Digite algo para buscar</div></div>
+
+        <div class="filtros-box">
+            <div class="filtros-grid">
+                <div><label>Termo de busca</label><input type="text" id="searchInput" placeholder="Nome, username, bio..."></div>
+                <div><label>Habilidade</label><select id="searchHabilidade"><option value="">Todas</option></select></div>
+                <div><label>Localização</label><select id="searchLocalizacao"><option value="">Todas</option></select></div>
+                <div><label>Ordenar por</label><select id="searchOrdenar"><option value="relevancia">Relevância</option><option value="nome">Nome</option><option value="recente">Mais recente</option><option value="localizacao">Localização</option></select></div>
+                <div><button class="btn-buscar" id="btnBuscar">Buscar</button></div>
+            </div>
+        </div>
+
+        <div class="resultados-header"><span id="resultCount">A carregar...</span></div>
+        <div id="resultsContainer"><div class="empty">A carregar...</div></div>
     </div>
 
     <footer style="padding:40px 0; text-align:center; border-top:1px solid var(--cor-borda); color:var(--cor-texto-secundario);">
         <div class="container"><p>&copy; 2026 PplBase</p></div>
     </footer>
 
-    <script>
-        // ===== MENU MOBILE =====
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('open');
-        });
-
-        // ===== LOGOUT =====
-        function logout() {
-            localStorage.removeItem('pplbase_token');
-            window.location.href = '/';
-        }
-        document.getElementById('btnLogoutDesktop').addEventListener('click', logout);
-        document.getElementById('btnLogoutMobile').addEventListener('click', logout);
-
-        // ===== BUSCA =====
-        const API_URL = 'https://pplbase.onrender.com';
-        const token = localStorage.getItem('pplbase_token');
-        if (!token) window.location.href = '/';
-
-        document.getElementById('btnBuscar').addEventListener('click', async () => {
-            const query = document.getElementById('searchInput').value.trim();
-            if (!query) return;
-            const container = document.getElementById('resultsContainer');
-            container.innerHTML = '<div style="text-align:center; color:var(--cor-texto-secundario); padding:20px;">Buscando...</div>';
-            try {
-                const response = await fetch(`${API_URL}/pesquisa/pessoas?q=${encodeURIComponent(query)}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (!response.ok) throw new Error('Erro');
-                const data = await response.json();
-                if (!data.length) {
-                    container.innerHTML = '<div class="empty">Nenhum resultado encontrado.</div>';
-                    return;
-                }
-                container.innerHTML = data.map(p => `
-                    <div class="result-item">
-                        <h3>${p.nome || 'Usuário'}</h3>
-                        <p>@${p.username} ${p.localizacao ? `📍 ${p.localizacao}` : ''}</p>
-                        <p>${p.bio || 'Sem bio'}</p>
-                        ${p.habilidades?.length ? `<div class="tags">${p.habilidades.map(h => `<span class="tag">${h.nome}</span>`).join('')}</div>` : ''}
-                    </div>
-                `).join('');
-            } catch (error) {
-                container.innerHTML = '<div class="empty">Erro ao buscar.</div>';
-            }
-        });
-
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') document.getElementById('btnBuscar').click();
-        });
-    </script>
-<script src="tema.js"></script>
+    <script src="busca.js"></script>
 </body>
 </html>

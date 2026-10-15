@@ -1,8 +1,76 @@
-const API_URL = 'https://pplbase.onrender.com';
+﻿const API_URL = 'https://pplbase.onrender.com';
 const token = localStorage.getItem('pplbase_token');
 
-if (!token) {
-    window.location.href = '/';
+if (!token) window.location.href = '/';
+
+function getUsername() {
+    return new URLSearchParams(window.location.search).get('username');
+}
+
+async function carregarPerfil() {
+    const username = getUsername();
+    const container = document.getElementById('perfilContent');
+    if (!username) {
+        container.innerHTML = '<div class="empty">❌ Utilizador não especificado</div>';
+        return;
+    }
+    try {
+        const response = await fetch(`${API_URL}/usuarios/${username}`, { headers: { 'Authorization': `Bearer ${token}` } });
+        if (!response.ok) {
+            container.innerHTML = '<div class="empty">❌ Utilizador não encontrado</div>';
+            return;
+        }
+        const user = await response.json();
+        renderPerfil(user);
+    } catch (error) {
+        container.innerHTML = '<div class="empty">❌ Erro ao carregar perfil</div>';
+    }
+}
+
+function renderPerfil(user) {
+    const container = document.getElementById('perfilContent');
+    const avatar = user.foto_url ? `<img src="${user.foto_url}" alt="${user.nome}">` : (user.nome ? user.nome.charAt(0).toUpperCase() : '?');
+    const habilidades = user.habilidades || [];
+    const experiencias = user.experiencias || [];
+
+    container.innerHTML = `
+        <div class="perfil-header">
+            <div class="perfil-avatar">${avatar}</div>
+            <div class="perfil-nome">${user.nome || 'Utilizador'}</div>
+            <div class="perfil-username">@${user.username}</div>
+            ${user.localizacao ? `<div class="perfil-local">📍 ${user.localizacao}</div>` : ''}
+            ${user.bio ? `<div class="perfil-bio">${user.bio}</div>` : ''}
+            <button class="btn-seguir" id="btnSeguir" data-username="${user.username}">Seguir</button>
+            <div class="perfil-stats">
+                <div class="stat"><div class="num">${habilidades.length}</div><div class="lbl">Habilidades</div></div>
+                <div class="stat"><div class="num">${experiencias.length}</div><div class="lbl">Experiências</div></div>
+            </div>
+        </div>
+        <div class="perfil-section">
+            <h2>🧠 Habilidades</h2>
+            ${habilidades.length > 0 ? `<div class="perfil-tags">${habilidades.map(h => `<span class="tag">${h.nome}</span>`).join('')}</div>` : '<div class="empty">Nenhuma habilidade cadastrada</div>'}
+        </div>
+        <div class="perfil-section">
+            <h2>💼 Experiências</h2>
+            ${experiencias.length > 0 ? experiencias.map(e => `<div class="exp-item"><div class="titulo">${e.titulo}</div>${e.empresa ? `<div class="empresa">${e.empresa}${e.localizacao ? ` · ${e.localizacao}` : ''}</div>` : ''}${e.descricao ? `<div class="desc">${e.descricao}</div>` : ''}</div>`).join('') : '<div class="empty">Nenhuma experiência cadastrada</div>'}
+        </div>
+    `;
+    document.getElementById('btnSeguir').addEventListener('click', seguir);
+}
+
+async function seguir() {
+    const btn = document.getElementById('btnSeguir');
+    const username = btn.dataset.username;
+    try {
+        const response = await fetch(`${API_URL}/conexoes/seguir/${username}`, { method: 'POST', headers: { 'Authorization': `Bearer ${token}` } });
+        if (response.ok) {
+            btn.textContent = 'A seguir ✓';
+            btn.classList.add('seguindo');
+        } else {
+            const data = await response.json();
+            alert(data.detail || 'Erro ao seguir');
+        }
+    } catch (error) { alert('Erro de conexão'); }
 }
 
 document.getElementById('btnLogout').addEventListener('click', () => {
@@ -10,107 +78,4 @@ document.getElementById('btnLogout').addEventListener('click', () => {
     window.location.href = '/';
 });
 
-function getUsernameFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('username');
-}
-
-async function carregarPerfilPublico() {
-    const username = getUsernameFromURL();
-    const container = document.getElementById('perfilContainer');
-    
-    if (!username) {
-        container.innerHTML = `
-            <div class="erro-perfil">
-                <div class="big-icon">❌</div>
-                <h2>Usuário não especificado</h2>
-                <p>Nenhum usuário foi selecionado.</p>
-                <a href="busca.html" class="voltar-link">← Voltar para a busca</a>
-            </div>
-        `;
-        return;
-    }
-
-    try {
-        const response = await fetch(`${API_URL}/usuarios/${username}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error('Usuário não encontrado');
-            }
-            if (response.status === 401) {
-                localStorage.removeItem('pplbase_token');
-                window.location.href = '/';
-            }
-            throw new Error('Erro ao carregar perfil');
-        }
-
-        const user = await response.json();
-        renderPerfil(user, container);
-
-    } catch (error) {
-        console.error('Erro:', error);
-        container.innerHTML = `
-            <div class="erro-perfil">
-                <div class="big-icon">❌</div>
-                <h2>${error.message || 'Erro ao carregar perfil'}</h2>
-                <p>Não foi possível encontrar o perfil solicitado.</p>
-                <a href="busca.html" class="voltar-link">← Voltar para a busca</a>
-            </div>
-        `;
-    }
-}
-
-function renderPerfil(user, container) {
-    const avatar = user.nome ? user.nome.charAt(0).toUpperCase() : '?';
-    
-    const habilidadesHTML = user.habilidades && user.habilidades.length > 0
-        ? user.habilidades.map(h => `<span class="tag">${h.nome}</span>`).join('')
-        : '<p style="color: #5a5e72;">Nenhuma habilidade cadastrada</p>';
-    
-    let experienciasHTML = '';
-    if (user.experiencias && user.experiencias.length > 0) {
-        experienciasHTML = user.experiencias.map(exp => `
-            <div class="perfil-exp-item">
-                <div class="titulo">${exp.titulo}</div>
-                ${exp.empresa ? `<div class="empresa">${exp.empresa} ${exp.localizacao ? `- ${exp.localizacao}` : ''}</div>` : ''}
-                ${exp.descricao ? `<div class="desc">${exp.descricao}</div>` : ''}
-            </div>
-        `).join('');
-    } else {
-        experienciasHTML = '<p style="color: #5a5e72;">Nenhuma experiência cadastrada</p>';
-    }
-
-    container.innerHTML = `
-        <div class="perfil-container">
-            <div class="perfil-avatar">${avatar}</div>
-            <div class="perfil-nome">${user.nome || 'Usuário'}</div>
-            <div class="perfil-username">@${user.username}</div>
-            ${user.localizacao ? `<div class="perfil-localizacao">📍 ${user.localizacao}</div>` : ''}
-            ${user.bio ? `<div class="perfil-bio">${user.bio}</div>` : ''}
-            
-            <div class="perfil-section">
-                <h3>🧠 Habilidades</h3>
-                <div class="perfil-tags">${habilidadesHTML}</div>
-            </div>
-            
-            <div class="perfil-section">
-                <h3>💼 Experiências</h3>
-                ${experienciasHTML}
-            </div>
-            
-            <button class="btn-conectar" onclick="alert('🚧 Função de conexão em breve!')">
-                🤝 Conectar
-            </button>
-        </div>
-    `;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    carregarPerfilPublico();
-});
-
-console.log('👤 PplBase Perfil Público carregado!');
-console.log('📌 API:', API_URL);
+document.addEventListener('DOMContentLoaded', carregarPerfil);
