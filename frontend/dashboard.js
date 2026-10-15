@@ -265,3 +265,80 @@ document.getElementById('btnLogout').addEventListener('click', () => {
 // =========================================================
 
 carregarPerfil();
+const API_URL = 'https://pplbase.onrender.com';
+const token = localStorage.getItem('pplbase_token');
+if (!token) window.location.href = '/';
+
+// Funções existentes (carregarPerfil, etc.) mantidas do teu ficheiro actual.
+
+// =========================================================
+// RENDERIZAR PERFIL ESTILO LINKEDIN
+// =========================================================
+
+function renderPerfilLinkedIn(user) {
+    const avatar = user.foto_url
+        ? `<img src="${user.foto_url}" alt="${user.nome}">`
+        : (user.nome ? user.nome.charAt(0).toUpperCase() : '?');
+
+    const habilidades = user.habilidades || [];
+    const experiencias = user.experiencias || [];
+
+    document.getElementById('profileInfo').innerHTML = `
+        <!-- CAPA -->
+        <div style="position:relative; margin-bottom:80px;">
+            <div style="height:140px; background:linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); border-radius:16px 16px 0 0;"></div>
+            <div style="position:absolute; bottom:-70px; left:32px; width:140px; height:140px; border-radius:50%; background:var(--cor-primaria); border:4px solid var(--cor-cartao); display:flex; align-items:center; justify-content:center; font-size:52px; font-weight:700; color:white; overflow:hidden;">
+                ${avatar}
+            </div>
+        </div>
+
+        <!-- INFO PRINCIPAL -->
+        <div style="padding:0 32px 32px;">
+            <h1 style="font-size:26px; margin-bottom:4px;">${user.nome || 'Utilizador'}</h1>
+            <p style="color:var(--cor-primaria); font-size:15px; margin-bottom:8px;">@${user.username}</p>
+            ${user.localizacao ? `<p style="color:var(--cor-texto-secundario); font-size:14px; margin-bottom:12px;">📍 ${user.localizacao}</p>` : ''}
+            ${user.bio ? `<p style="color:var(--cor-texto-secundario); line-height:1.6; margin-bottom:16px;">${user.bio}</p>` : ''}
+            <button class="btn-primary btn-small" id="btnEditarPerfil" style="margin-top:8px;">✏️ Editar Perfil</button>
+        </div>
+
+        <!-- ESTATÍSTICAS -->
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; padding:0 32px 32px;">
+            <div style="text-align:center; padding:16px; background:var(--cor-fundo); border-radius:12px; border:1px solid var(--cor-borda);">
+                <div style="font-size:22px; font-weight:700; color:var(--cor-primaria);">${habilidades.length}</div>
+                <div style="font-size:12px; color:var(--cor-texto-secundario);">Habilidades</div>
+            </div>
+            <div style="text-align:center; padding:16px; background:var(--cor-fundo); border-radius:12px; border:1px solid var(--cor-borda);">
+                <div style="font-size:22px; font-weight:700; color:var(--cor-primaria);">${experiencias.length}</div>
+                <div style="font-size:12px; color:var(--cor-texto-secundario);">Experiências</div>
+            </div>
+            <div style="text-align:center; padding:16px; background:var(--cor-fundo); border-radius:12px; border:1px solid var(--cor-borda);">
+                <div style="font-size:22px; font-weight:700; color:var(--cor-primaria);">0</div>
+                <div style="font-size:12px; color:var(--cor-texto-secundario);">Seguidores</div>
+            </div>
+            <div style="text-align:center; padding:16px; background:var(--cor-fundo); border-radius:12px; border:1px solid var(--cor-borda);">
+                <div style="font-size:22px; font-weight:700; color:var(--cor-primaria);">0</div>
+                <div style="font-size:12px; color:var(--cor-texto-secundario);">A seguir</div>
+            </div>
+        </div>
+
+        <!-- HABILIDADES -->
+        <div style="padding:0 32px 24px;">
+            <h2 style="font-size:18px; margin-bottom:16px;">🧠 Habilidades</h2>
+            <div id="habilidadesList" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+            <div style="display:flex; gap:8px; margin-top:12px;">
+                <input type="text" id="novaHabilidade" placeholder="Ex: Python" style="flex:1; padding:10px 14px; background:var(--cor-fundo); border:1px solid var(--cor-borda); border-radius:8px; color:var(--cor-texto);">
+                <button class="btn-primary btn-small" id="btnAddHabilidade">+</button>
+            </div>
+        </div>
+
+        <!-- EXPERIÊNCIAS -->
+        <div style="padding:0 32px 32px;">
+            <h2 style="font-size:18px; margin-bottom:16px;">💼 Experiências</h2>
+            <div id="experienciasList"></div>
+            <button class="btn-primary btn-small" id="btnAddExperiencia" style="margin-top:12px; width:100%;">+ Adicionar Experiência</button>
+        </div>
+    `;
+
+    // Reattach dos eventos
+    carregarPerfil();
+}
