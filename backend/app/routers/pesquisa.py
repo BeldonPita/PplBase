@@ -2,6 +2,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, and_, desc, func
 from typing import Optional, List
+from difflib import get_close_matches
 
 from app.database import get_db
 from app.models import Usuario, Habilidade
@@ -9,6 +10,28 @@ from app.schemas import UsuarioResponse
 from app.auth import get_usuario_atual
 
 router = APIRouter()
+
+# =========================================================
+# PROVÍNCIAS DE MOÇAMBIQUE (com capitais)
+# =========================================================
+
+PROVINCIAS_MOCAMBIQUE = [
+    "Cabo Delgado (Pemba)",
+    "Gaza (Xai-Xai)",
+    "Inhambane (Inhambane)",
+    "Manica (Chimoio)",
+    "Maputo Província (Matola)",
+    "Maputo Cidade (Maputo)",
+    "Nampula (Nampula)",
+    "Niassa (Lichinga)",
+    "Sofala (Beira)",
+    "Tete (Tete)",
+    "Zambézia (Quelimane)",
+]
+
+# =========================================================
+# BUSCA DE PESSOAS
+# =========================================================
 
 @router.get("/pessoas", response_model=List[UsuarioResponse])
 def buscar_pessoas(
@@ -21,6 +44,10 @@ def buscar_pessoas(
     db: Session = Depends(get_db),
     usuario_atual: Usuario = Depends(get_usuario_atual)
 ):
+    # Se não houver termo de busca, retorna vazio
+    if not q and not habilidade and not localizacao:
+        return []
+    
     query = db.query(Usuario).filter(
         Usuario.ativo == True,
         Usuario.id != usuario_atual.id
@@ -38,8 +65,10 @@ def buscar_pessoas(
         )
     
     if habilidade:
+        # Correção ortográfica automática
+        habilidade_corrigida = sugerir_habilidade(habilidade, db)
         query = query.filter(
-            Usuario.habilidades.any(Habilidade.nome.ilike(f"%{habilidade}%"))
+            Usuario.habilidades.any(Habilidade.nome.ilike(f"%{habilidade_corrigida}%"))
         )
     
     if localizacao:
@@ -55,21 +84,64 @@ def buscar_pessoas(
     resultados = query.offset(offset).limit(limit).all()
     return resultados
 
+# =========================================================
+# CORREÇÃO ORTOGRÁFICA DE HABILIDADES
+# =========================================================
+
+def sugerir_habilidade(termo: str, db: Session) -> str:
+    """Sugere a habilidade mais próxima ortograficamente"""
+    todas = [h[0] for h in db.query(Habilidade.nome).all()]
+    
+    if not todas:
+        return termo
+    
+    # Procura matches exatos primeiro
+    matches = get_close_matches(termo, todas, n=1, cutoff=0.6)
+    
+    if matches:
+        return matches[0]
+    
+    return termo
+
+@router.get("/sugerir-habilidade")
+def sugerir_habilidade_endpoint(
+    termo: str = Query(..., min_length=1),
+    db: Session = Depends(get_db)
+):
+    """Sugere habilidades com base no termo digitado"""
+    todas = [h[0] for h in db.query(Habilidade.nome).all()]
+    
+    if not todas:
+        return {"sugestoes": []}
+    
+    # Match exato parcial (contém)
+    parciais = [h for h in todas if termo.lower() in h.lower()]
+    
+    # Match por semelhança ortográfica
+    proximos = get_close_matches(termo, todas, n=5, cutoff=0.4)
+    
+    # Combinar e remover duplicados
+    sugestoes = list(dict.fromkeys(parciais + proximos))[:8]
+    
+    return {"sugestoes": sugestoes}
+
+# =========================================================
+# LISTAR HABILIDADES E LOCALIZAÇÕES
+# =========================================================
+
 @router.get("/habilidades", response_model=List[str])
 def listar_habilidades(db: Session = Depends(get_db)):
     habilidades = db.query(Habilidade.nome).order_by(Habilidade.nome).all()
     return [h[0] for h in habilidades]
 
 @router.get("/localizacoes", response_model=List[str])
-def listar_localizacoes(db: Session = Depends(get_db)):
-    localizacoes = (
-        db.query(Usuario.localizacao)
-        .filter(Usuario.localizacao.isnot(None))
-        .distinct()
-        .order_by(Usuario.localizacao)
-        .all()
-    )
-    return [l[0] for l in localizacoes if l[0]]
+def listar_localizacoes():
+    """Lista todas as províncias de Moçambique com capitais"""
+    return PROVINCIAS_MOCAMBIQUE
+
+# =========================================================
+# RECOMENDAÇÕES DE PERFIS
+# =========================================================
 
 @router.get("/recomendacoes", response_model=List[UsuarioResponse])
 def recomendacoes(
@@ -78,14 +150,12 @@ def recomendacoes(
     usuario_atual: Usuario = Depends(get_usuario_atual)
 ):
     minhas_habilidades = {h.nome for h in usuario_atual.habilidades}
-    seguindo = {u.id for u in usuario_atual.seguindo} if hasattr(usuario_atual, 'seguindo') else set()
     
     candidatos = (
         db.query(Usuario)
         .filter(
             Usuario.ativo == True,
-            Usuario.id != usuario_atual.id,
-            ~Usuario.id.in_(seguindo) if seguindo else True
+            Usuario.id != usuario_atual.id
         )
         .limit(50)
         .all()
