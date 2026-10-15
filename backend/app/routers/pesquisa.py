@@ -1,6 +1,6 @@
 ﻿from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from sqlalchemy import or_, and_, desc, func
+from sqlalchemy import or_, desc
 from typing import Optional, List
 from difflib import get_close_matches
 
@@ -11,23 +11,74 @@ from app.auth import get_usuario_atual
 
 router = APIRouter()
 
-PROVINCIAS_MOCAMBIQUE = [
-    "Cabo Delgado (Pemba)",
-    "Gaza (Xai-Xai)",
-    "Inhambane (Inhambane)",
-    "Manica (Chimoio)",
-    "Maputo Província (Matola)",
-    "Maputo Cidade (Maputo)",
-    "Nampula (Nampula)",
-    "Niassa (Lichinga)",
-    "Sofala (Beira)",
-    "Tete (Tete)",
-    "Zambézia (Quelimane)",
+# =========================================================
+# LISTA FIXA DE HABILIDADES COMUNS (para autocomplete)
+# =========================================================
+
+HABILIDADES_COMUNS = [
+    # Programação
+    "Python", "JavaScript", "TypeScript", "Java", "C++", "C#", "PHP", "Ruby", "Go", "Rust",
+    "HTML", "CSS", "React", "Vue", "Angular", "Node.js", "Django", "Flask", "FastAPI",
+    "SQL", "PostgreSQL", "MySQL", "MongoDB", "Redis", "Docker", "Kubernetes",
+    "Git", "GitHub", "Linux", "AWS", "Azure", "Google Cloud", "DevOps",
+    
+    # Design
+    "Design Gráfico", "UI/UX", "Figma", "Photoshop", "Illustrator", "Canva",
+    "Design de Produto", "Design de Marca", "Motion Design",
+    
+    # Marketing
+    "Marketing Digital", "SEO", "SEM", "Redes Sociais", "Copywriting",
+    "Email Marketing", "Google Ads", "Facebook Ads", "Marketing de Conteúdo",
+    
+    # Gestão
+    "Gestão de Projetos", "Scrum", "Agile", "Product Management", "Liderança",
+    "Gestão Financeira", "Recursos Humanos", "Vendas", "Atendimento ao Cliente",
+    
+    # Dados
+    "Análise de Dados", "Data Science", "Machine Learning", "Inteligência Artificial",
+    "Power BI", "Tableau", "Excel", "Estatística", "Big Data",
+    
+    # Idiomas
+    "Inglês", "Espanhol", "Francês", "Português", "Alemão",
+    
+    # Outros
+    "Fotografia", "Vídeo", "Edição de Vídeo", "Redação", "Tradução",
+    "Contabilidade", "Direito", "Medicina", "Educação", "Engenharia",
 ]
+
+@router.get("/sugerir-habilidade")
+def sugerir_habilidade_endpoint(
+    termo: str = Query(..., min_length=1),
+    db: Session = Depends(get_db)
+):
+    """Sugere habilidades com base no termo digitado (funciona mesmo sem base de dados)"""
+    
+    termo_lower = termo.lower()
+    
+    # 1. Habilidades já registadas na base
+    da_base = [h[0] for h in db.query(Habilidade.nome).all()]
+    
+    # 2. Combinar lista fixa + base (sem duplicados)
+    todas = list(dict.fromkeys(HABILIDADES_COMUNS + da_base))
+    
+    # 3. Filtrar por match parcial (contém o termo)
+    parciais = [h for h in todas if termo_lower in h.lower()]
+    
+    # 4. Match ortográfico (correção de erros)
+    proximos = get_close_matches(termo, todas, n=5, cutoff=0.4)
+    
+    # 5. Combinar e remover duplicados
+    sugestoes = list(dict.fromkeys(parciais + proximos))[:8]
+    
+    return {"sugestoes": sugestoes}
+
+# =========================================================
+# BUSCAR PESSOAS
+# =========================================================
 
 @router.get("/pessoas", response_model=List[UsuarioResponse])
 def buscar_pessoas(
-    q: Optional[str] = Query(None, description="Nome ou username do agente"),
+    q: Optional[str] = Query(None),
     habilidade: Optional[str] = Query(None),
     localizacao: Optional[str] = Query(None),
     ordenar: Optional[str] = Query("relevancia"),
@@ -52,9 +103,8 @@ def buscar_pessoas(
         ))
     
     if habilidade:
-        habilidade_corrigida = sugerir_habilidade(habilidade, db)
         query = query.filter(
-            Usuario.habilidades.any(Habilidade.nome.ilike(f"%{habilidade_corrigida}%"))
+            Usuario.habilidades.any(Habilidade.nome.ilike(f"%{habilidade}%"))
         )
     
     if localizacao:
@@ -69,35 +119,28 @@ def buscar_pessoas(
     
     return query.offset(offset).limit(limit).all()
 
-def sugerir_habilidade(termo: str, db: Session) -> str:
-    todas = [h[0] for h in db.query(Habilidade.nome).all()]
-    if not todas:
-        return termo
-    matches = get_close_matches(termo, todas, n=1, cutoff=0.6)
-    return matches[0] if matches else termo
-
-@router.get("/sugerir-habilidade")
-def sugerir_habilidade_endpoint(
-    termo: str = Query(..., min_length=1),
-    db: Session = Depends(get_db)
-):
-    todas = [h[0] for h in db.query(Habilidade.nome).all()]
-    if not todas:
-        return {"sugestoes": []}
-    # Match parcial (contém)
-    parciais = [h for h in todas if termo.lower() in h.lower()]
-    # Match ortográfico
-    proximos = get_close_matches(termo, todas, n=5, cutoff=0.4)
-    sugestoes = list(dict.fromkeys(parciais + proximos))[:8]
-    return {"sugestoes": sugestoes}
-
 @router.get("/habilidades", response_model=List[str])
 def listar_habilidades(db: Session = Depends(get_db)):
-    return [h[0] for h in db.query(Habilidade.nome).order_by(Habilidade.nome).all()]
+    """Lista todas as habilidades disponíveis"""
+    da_base = [h[0] for h in db.query(Habilidade.nome).all()]
+    todas = list(dict.fromkeys(HABILIDADES_COMUNS + da_base))
+    return sorted(todas)
 
 @router.get("/localizacoes", response_model=List[str])
 def listar_localizacoes():
-    return PROVINCIAS_MOCAMBIQUE
+    return [
+        "Cabo Delgado (Pemba)",
+        "Gaza (Xai-Xai)",
+        "Inhambane (Inhambane)",
+        "Manica (Chimoio)",
+        "Maputo Província (Matola)",
+        "Maputo Cidade (Maputo)",
+        "Nampula (Nampula)",
+        "Niassa (Lichinga)",
+        "Sofala (Beira)",
+        "Tete (Tete)",
+        "Zambézia (Quelimane)",
+    ]
 
 @router.get("/recomendacoes", response_model=List[UsuarioResponse])
 def recomendacoes(
