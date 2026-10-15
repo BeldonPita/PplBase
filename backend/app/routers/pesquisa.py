@@ -27,7 +27,7 @@ PROVINCIAS_MOCAMBIQUE = [
 
 @router.get("/pessoas", response_model=List[UsuarioResponse])
 def buscar_pessoas(
-    q: Optional[str] = Query(None),
+    q: Optional[str] = Query(None, description="Nome ou username do agente"),
     habilidade: Optional[str] = Query(None),
     localizacao: Optional[str] = Query(None),
     ordenar: Optional[str] = Query("relevancia"),
@@ -48,9 +48,7 @@ def buscar_pessoas(
         search_term = f"%{q}%"
         query = query.filter(or_(
             Usuario.nome.ilike(search_term),
-            Usuario.username.ilike(search_term),
-            Usuario.bio.ilike(search_term),
-            Usuario.localizacao.ilike(search_term)
+            Usuario.username.ilike(search_term)
         ))
     
     if habilidade:
@@ -86,7 +84,9 @@ def sugerir_habilidade_endpoint(
     todas = [h[0] for h in db.query(Habilidade.nome).all()]
     if not todas:
         return {"sugestoes": []}
+    # Match parcial (contém)
     parciais = [h for h in todas if termo.lower() in h.lower()]
+    # Match ortográfico
     proximos = get_close_matches(termo, todas, n=5, cutoff=0.4)
     sugestoes = list(dict.fromkeys(parciais + proximos))[:8]
     return {"sugestoes": sugestoes}

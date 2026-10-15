@@ -11,31 +11,173 @@
         .busca-header { margin-bottom: 24px; }
         .busca-header h1 { font-size: 28px; margin-bottom: 8px; }
         .busca-header p { color: var(--cor-texto-secundario); }
-        .filtros-box { background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
-        .filtros-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
-        .filtros-grid input, .filtros-grid select { width: 100%; padding: 12px 14px; background: var(--cor-fundo); border: 2px solid var(--cor-borda); border-radius: 10px; color: var(--cor-texto); font-size: 14px; }
-        .filtros-grid input:focus, .filtros-grid select:focus { outline: none; border-color: var(--cor-primaria); }
-        .filtros-grid label { display: block; font-size: 12px; color: var(--cor-texto-secundario); margin-bottom: 4px; font-weight: 500; }
-        .btn-buscar { padding: 12px 24px; background: var(--cor-primaria); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 14px; }
-        .btn-buscar:hover { opacity: 0.9; }
-        .resultados-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; color: var(--cor-texto-secundario); font-size: 14px; }
-        .resultados-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .user-card { background: var(--cor-cartao); border: 1px solid var(--cor-borda); border-radius: 12px; padding: 20px; transition: all 0.3s; text-align: center; }
-        .user-card:hover { border-color: var(--cor-primaria); transform: translateY(-4px); }
-        .user-card .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--cor-primaria); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700; margin: 0 auto 12px; }
+
+        .filtros-box {
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .filtros-grid {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+            gap: 12px;
+            align-items: end;
+        }
+        .filtros-grid input,
+        .filtros-grid select {
+            width: 100%;
+            padding: 12px 14px;
+            background: var(--cor-fundo);
+            border: 2px solid var(--cor-borda);
+            border-radius: 10px;
+            color: var(--cor-texto);
+            font-size: 14px;
+        }
+        .filtros-grid input:focus,
+        .filtros-grid select:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+        }
+        .filtros-grid label {
+            display: block;
+            font-size: 12px;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .filtros-grid > div { position: relative; }
+
+        /* Lista de sugestões de habilidades */
+        .sugestoes-lista {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            margin-top: 4px;
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .sugestoes-lista .item {
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--cor-texto);
+            border-bottom: 1px solid var(--cor-borda);
+            transition: background 0.2s;
+        }
+        .sugestoes-lista .item:last-child { border-bottom: none; }
+        .sugestoes-lista .item:hover,
+        .sugestoes-lista .item.ativo {
+            background: var(--cor-hover);
+            color: var(--cor-primaria);
+        }
+        .sugestoes-lista .item .match {
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .resultados-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            color: var(--cor-texto-secundario);
+            font-size: 14px;
+        }
+        .resultados-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .user-card {
+            background: var(--cor-cartao);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .user-card:hover {
+            border-color: var(--cor-primaria);
+            transform: translateY(-4px);
+        }
+        .user-card .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--cor-primaria);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 12px;
+            overflow: hidden;
+        }
+        .user-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
         .user-card h3 { font-size: 16px; margin-bottom: 4px; }
         .user-card .username { color: var(--cor-primaria); font-size: 13px; margin-bottom: 8px; }
         .user-card .local { color: var(--cor-texto-secundario); font-size: 13px; margin-bottom: 8px; }
-        .user-card .bio { color: var(--cor-texto-secundario); font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
-        .user-card .tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-bottom: 12px; }
-        .user-card .tag { background: var(--cor-fundo); color: var(--cor-primaria); padding: 3px 10px; border-radius: 12px; font-size: 11px; border: 1px solid var(--cor-borda); }
-        .user-card .btn-ver { display: inline-block; padding: 8px 20px; background: transparent; color: var(--cor-primaria); border: 1px solid var(--cor-primaria); border-radius: 8px; font-size: 13px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+        .user-card .bio {
+            color: var(--cor-texto-secundario);
+            font-size: 13px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .user-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .user-card .tag {
+            background: var(--cor-fundo);
+            color: var(--cor-primaria);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            border: 1px solid var(--cor-borda);
+        }
+        .user-card .btn-ver {
+            display: inline-block;
+            padding: 8px 20px;
+            background: transparent;
+            color: var(--cor-primaria);
+            border: 1px solid var(--cor-primaria);
+            border-radius: 8px;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
         .user-card .btn-ver:hover { background: var(--cor-primaria); color: white; }
-        .empty { color: var(--cor-texto-secundario); text-align: center; padding: 60px 0; }
-        @media (max-width: 768px) { .filtros-grid { grid-template-columns: 1fr; } .resultados-grid { grid-template-columns: 1fr; } }
+
+        .empty {
+            color: var(--cor-texto-secundario);
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        @media (max-width: 768px) {
+            .filtros-grid { grid-template-columns: 1fr; }
+            .resultados-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="container">
             <div class="logo">
@@ -63,22 +205,49 @@
 
     <div class="busca-container">
         <div class="busca-header">
-            <h1>🔍 Buscar Pessoas</h1>
-            <p>Encontre profissionais por nome, habilidade ou localização</p>
+            <h1>🔍 Buscar Agentes</h1>
+            <p>Encontre pessoas por nome, habilidade ou localização</p>
         </div>
 
         <div class="filtros-box">
             <div class="filtros-grid">
-                <div><label>Termo de busca</label><input type="text" id="searchInput" placeholder="Nome, username, bio..."></div>
-                <div><label>Habilidade</label><input type="text" id="searchHabilidade" placeholder="Ex: Python, Marketing..." autocomplete="off"></div>
-                <div><label>Localização</label><select id="searchLocalizacao"><option value="">Todas</option></select></div>
-                <div><label>Ordenar por</label><select id="searchOrdenar"><option value="relevancia">Relevância</option><option value="nome">Nome</option><option value="recente">Mais recente</option><option value="localizacao">Localização</option></select></div>
-                <div><button class="btn-buscar" id="btnBuscar">Buscar</button></div>
+                <div>
+                    <label>Agente</label>
+                    <input type="text" id="searchAgente" placeholder="Nome ou username..." autocomplete="off">
+                </div>
+                <div>
+                    <label>Habilidade</label>
+                    <input type="text" id="searchHabilidade" placeholder="Ex: Python..." autocomplete="off">
+                </div>
+                <div>
+                    <label>Localização</label>
+                    <select id="searchLocalizacao">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Ordenar</label>
+                    <select id="searchOrdenar">
+                        <option value="relevancia">Relevância</option>
+                        <option value="nome">Nome</option>
+                        <option value="recente">Recente</option>
+                        <option value="localizacao">Localização</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <div class="resultados-header"><span id="resultCount">A carregar...</span></div>
-        <div id="resultsContainer"><div class="empty">A carregar...</div></div>
+        <div class="resultados-header">
+            <span id="resultCount"></span>
+        </div>
+
+        <div id="resultsContainer">
+            <div class="empty">
+                <div style="font-size:48px; margin-bottom:16px;">🔍</div>
+                <p>Comece a digitar para buscar agentes</p>
+                <p style="font-size:13px; margin-top:8px; opacity:0.7;">Por nome, habilidade ou localização</p>
+            </div>
+        </div>
     </div>
 
     <footer style="padding:40px 0; text-align:center; border-top:1px solid var(--cor-borda); color:var(--cor-texto-secundario);">
@@ -88,5 +257,3 @@
     <script src="busca.js"></script>
 </body>
 </html>
-
-
